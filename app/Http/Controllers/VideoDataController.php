@@ -21,12 +21,14 @@ class VideoDataController extends Controller
     {
         request()->validate([
             'videoId' => 'required',
-            'questions' => 'required'
+            'creator' => 'required',
+            'data' => 'required'
         ]);
 
         return VideoData::create([
             'videoId' => request('videoId'),
-            'questions' => request('questions')
+            'creator' => request('creator'),
+            'data' => request('data')
         ]);
     }
 

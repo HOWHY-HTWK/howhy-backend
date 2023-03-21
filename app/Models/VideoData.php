@@ -7,6 +7,11 @@ use Illuminate\Database\Eloquent\Model;
 
 class VideoData extends Model
 {
-    protected $fillable = ['videoId', 'questions', 'creator', 'data' ];
+    protected $fillable = ['videoId', 'creator', 'data' ];
+
+    protected $casts = [
+        'data' => 'array'
+    ];
+    
     use HasFactory;
 }
