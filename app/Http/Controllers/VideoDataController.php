@@ -22,16 +22,19 @@ class VideoDataController extends Controller
         request()->validate([
             'videoId' => 'required',
             'creator' => 'required',
-            'data' => 'required'
+            'data' => 'required',
+            'correctAnswerIndexes' => 'required'
         ]);
 
         return VideoData::create([
             'videoId' => request('videoId'),
             'creator' => request('creator'),
-            'data' => request('data')
+            'data' => request('data'),
+            'correctAnswerIndexes' => request('correctAnswerIndexes')
         ]);
     }
 
+    //TODO not done
     public function update(VideoData $videoData)
     {
         request()->validate([

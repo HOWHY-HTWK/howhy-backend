@@ -12,7 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('video_data', function (Blueprint $table) {
-            //
+            $table->json('correctAnswerIndexes');
         });
     }
 
