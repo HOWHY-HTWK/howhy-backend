@@ -14,5 +14,8 @@ class VideoData extends Model
         'correctAnswerIndexes' => 'array'
     ];
 
+    // protected $hidden = ['correctAnswerIndexes'];
+
+
     use HasFactory;
 }
