@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class VideoData extends Model
 {
-    protected $fillable = ['videoId', 'creator', 'data' , 'correctAnswerIdexes'];
+    protected $fillable = ['videoId', 'creator', 'data' , 'correctAnswerIndexes'];
 
     protected $casts = [
         'data' => 'array',
