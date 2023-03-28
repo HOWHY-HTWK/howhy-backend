@@ -18,8 +18,10 @@ class VideoDataController extends Controller
 
     public function showByVideoId($videoId)
     {
-        $response = VideoData::where('videoId', $videoId)->latest()->first();
-        $response->makeHidden(['correctAnswerIndexes']);
+        $response = VideoData::where('videoId', $videoId)->latest()->firstOrFail();
+        //TODO dont comment in production
+        // $response->makeHidden(['correctAnswerIndexes']);
+
         return $response;
     }
     public function checkAnswers($videoId)
@@ -34,7 +36,7 @@ class VideoDataController extends Controller
 
         $success = false;
 
-        if($correctAnswers[0][json_decode(request('questionIndex'))] === request('answers')){
+        if($correctAnswers[json_decode(request('questionIndex'))] == request('answers')){
             $success = true;
         } else {
             $success = false;
@@ -56,7 +58,7 @@ class VideoDataController extends Controller
             'correctAnswerIndexes' => 'required'
         ]);
 
-        if(VideoData::where('videoId', request('videoId'))->first()==null ){
+        // if(VideoData::where('videoId', request('videoId'))->first()==null ){
             return VideoData::create([
                 'videoId' => request('videoId'),
                 'creator' => request('creator'),
@@ -64,11 +66,11 @@ class VideoDataController extends Controller
                 'correctAnswerIndexes' => request('correctAnswerIndexes')
             ]);
             
-        } else{
-            return [
-                'error' => "videoId already exits"
-            ];
-        }
+        // } else{
+        //     return [
+        //         'error' => "videoId already exits"
+        //     ];
+        // }
 
     }
 
@@ -91,10 +93,9 @@ class VideoDataController extends Controller
 
     }
 
-    public function delete(Request $request, $id)
+    public function delete(Request $request, $videoId)
     {
-        $article = VideoData::findOrFail($id);
-        $article->delete();
+        VideoData::where('videoId', $videoId)->delete();
 
         return 204;
     }
