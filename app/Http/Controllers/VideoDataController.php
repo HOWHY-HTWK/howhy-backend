@@ -18,13 +18,13 @@ class VideoDataController extends Controller
 
     public function showByVideoId($videoId)
     {
-        $response = VideoData::where('videoId', $videoId)->first();
+        $response = VideoData::where('videoId', $videoId)->latest()->first();
         $response->makeHidden(['correctAnswerIndexes']);
         return $response;
     }
     public function checkAnswers($videoId)
     {
-        $videoData = VideoData::where('videoId', $videoId)->first()->pluck('correctAnswerIndexes');
+        $videoData = VideoData::where('videoId', $videoId)->latest()->first()->pluck('correctAnswerIndexes');
         $correctAnswers = json_decode($videoData);
 
         request()->validate([
