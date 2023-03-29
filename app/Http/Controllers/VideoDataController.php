@@ -26,8 +26,7 @@ class VideoDataController extends Controller
     }
     public function checkAnswers($videoId)
     {
-        $videoData = VideoData::where('videoId', $videoId)->latest()->first()->pluck('correctAnswerIndexes');
-        $correctAnswers = json_decode($videoData);
+        $correctAnswers = VideoData::where('videoId', $videoId)->latest()->first()->correctAnswerIndexes;
 
         request()->validate([
             'questionIndex' => 'required',
@@ -75,14 +74,14 @@ class VideoDataController extends Controller
     }
 
     //TODO not done
-    public function update(VideoData $videoData)
+    public function update(VideoData $correctAnswerIndexes)
     {
         request()->validate([
             'videoId' => 'required', 
             'questions' => 'required'
         ]);
 
-        $success = $videoData->update([
+        $success = $correctAnswerIndexes->update([
             'videoId' => request('videoId'),
             'questions' => request('questions') 
         ]);
