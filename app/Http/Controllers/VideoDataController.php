@@ -53,8 +53,8 @@ class VideoDataController extends Controller
         request()->validate([
             'videoId' => 'required',
             'creator' => 'required',
-            'data' => 'required',
-            'correctAnswerIndexes' => 'required'
+            'data' => 'present|array',
+            'correctAnswerIndexes' => 'present|array'
         ]);
 
         // if(VideoData::where('videoId', request('videoId'))->first()==null ){
