@@ -16,11 +16,7 @@ class VideoDataController extends Controller
     {
         $response = VideoData::all()->pluck('videoId');
 
-        $success = true;
-        return [
-            'success' => $success,
-            'list' => $response,
-        ];
+        return $response;
     }
 
     public function showByVideoId($videoId)
