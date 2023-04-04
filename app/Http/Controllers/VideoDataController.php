@@ -30,7 +30,7 @@ class VideoDataController extends Controller
 
     public function checkAnswers($videoId)
     {
-        $correctAnswers = VideoData::where('videoId', $videoId)->correctAnswerIndexes;
+        $correctAnswers = VideoData::where('videoId', $videoId)->first()->correctAnswerIndexes;
 
         request()->validate([
             'questionIndex' => 'required',
