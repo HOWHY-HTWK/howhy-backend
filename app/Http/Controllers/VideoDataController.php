@@ -21,7 +21,7 @@ class VideoDataController extends Controller
 
     public function showByVideoId($videoId)
     {
-        $response = VideoData::where('videoId', $videoId)->get();
+        $response = VideoData::where('videoId', $videoId)->firstOrFail();
         //TODO dont comment in production
         // $response->makeHidden(['correctAnswerIndexes']);
 
