@@ -4,10 +4,12 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class VideoData extends Model
 {
-    protected $fillable = ['videoId', 'creator', 'data' , 'correctAnswerIndexes'];
+    use SoftDeletes;
+    protected $fillable = ['videoId', 'creator', 'data', 'correctAnswerIndexes'];
 
     protected $casts = [
         'data' => 'array',
