@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\VideoData;
+use Illuminate\Support\Arr;
+use Psy\Readline\Hoa\Console;
 
 class VideoDataController extends Controller
 {
@@ -30,16 +32,26 @@ class VideoDataController extends Controller
 
     public function checkAnswers($videoId)
     {
-        $correctAnswers = VideoData::where('videoId', $videoId)->first()->correctAnswerIndexes;
-
         request()->validate([
-            'questionIndex' => 'required',
+            'questionId' => 'required',
             'answers' => 'required'
         ]);
 
-        $success = false;
+        $questions = VideoData::where('videoId', $videoId)->first()->data;
 
-        if ($correctAnswers[json_decode(request('questionIndex'))] == request('answers')) {
+        function findObjectById($array, $id)
+        {
+            foreach ($array as $element) {
+                if ($id == $element['id']) {
+                    return $element;
+                }
+            }
+            return false;
+        }
+
+        $correctAnswers = findObjectById($questions, request('questionId'))['correctAnswers'];
+
+        if ($correctAnswers == request('answers')) {
             $success = true;
         } else {
             $success = false;
@@ -49,6 +61,7 @@ class VideoDataController extends Controller
             'success' => $success
         ];
     }
+
 
 
     public function store()
