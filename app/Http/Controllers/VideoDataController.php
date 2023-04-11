@@ -70,7 +70,6 @@ class VideoDataController extends Controller
             'videoId' => 'required',
             'creator' => 'required',
             'data' => 'present|array',
-            'correctAnswerIndexes' => 'present|array'
         ]);
 
         VideoData::where('videoId', request('videoId'))->delete();
@@ -79,7 +78,6 @@ class VideoDataController extends Controller
             'videoId' => request('videoId'),
             'creator' => request('creator'),
             'data' => request('data'),
-            'correctAnswerIndexes' => request('correctAnswerIndexes')
         ]);
     }
 
