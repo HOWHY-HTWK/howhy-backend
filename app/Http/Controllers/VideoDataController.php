@@ -30,6 +30,10 @@ class VideoDataController extends Controller
         return $response;
     }
 
+    public function check(){
+        return true;
+    }
+
     public function checkAnswers($videoId)
     {
         request()->validate([
