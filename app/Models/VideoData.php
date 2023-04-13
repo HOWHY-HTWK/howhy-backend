@@ -9,11 +9,10 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class VideoData extends Model
 {
     use SoftDeletes;
-    protected $fillable = ['videoId', 'creator', 'data', 'correctAnswerIndexes'];
+    protected $fillable = ['videoId', 'creator', 'data'];
 
     protected $casts = [
         'data' => 'array',
-        'correctAnswerIndexes' => 'array'
     ];
 
     // protected $hidden = ['correctAnswerIndexes'];

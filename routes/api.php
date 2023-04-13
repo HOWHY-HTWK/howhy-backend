@@ -16,14 +16,21 @@ use App\Http\Controllers\VideoDataController;
 |
 */
 
+//public
 Route::get('videoDatas', [VideoDataController::class, 'index']);
 Route::get('videoDatas/byVideoId/{id}', [VideoDataController::class, 'showByVideoId']);
 Route::post('videoDatas/checkAnswers/{id}', [VideoDataController::class, 'checkAnswers']);
 
+//editor
 Route::middleware('auth:sanctum')->get('check', [VideoDataController::class, 'check']);
 // Route::middleware('auth:sanctum')->get('videoDatas/list/', [VideoDataController::class, 'getVideoList']);
 Route::get('videoDatas/list/', [VideoDataController::class, 'getVideoList']);
 Route::middleware('auth:sanctum')->post('videoDatas', [VideoDataController::class, 'store']);
+
+//admin
+// Route::middleware('auth:sanctum')->get('allowed_email', [VideoDataController::class, 'getAllowedEmail']);
+Route::get('allowed_email', [VideoDataController::class, 'getAllowedEmail']);
+Route::middleware('auth:sanctum')->post('allowed_email', [VideoDataController::class, 'setAllowedEmail']);
 
 // Route::put('videoDatas/{id}', [VideoDataController::class, 'update']);
 Route::middleware('auth:sanctum')->delete('videoDatas/{id}', [VideoDataController::class, 'delete']);

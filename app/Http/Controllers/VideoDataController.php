@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\VideoData;
+use App\Models\AllowedEmail;
 use Illuminate\Support\Arr;
 use Psy\Readline\Hoa\Console;
 
@@ -85,6 +86,27 @@ class VideoDataController extends Controller
         ]);
     }
 
+    public function delete(Request $request, $videoId)
+    {
+        VideoData::where('videoId', $videoId)->delete();
+
+        // $keep = VideoData::where('videoId', $videoId)
+        //     ->latest()
+        //     ->take(1)
+        //     ->pluck('id');
+
+        //     VideoData::where('videoId', $videoId)
+        //     ->whereNotIn('id', $keep)
+        //     ->delete();
+
+        return 204;
+    }
+
+    public function getAllowedEmail(Request $request)
+    {
+        return AllowedEmail::all();
+    }
+
     //TODO not done
     // public function update(VideoData $correctAnswerIndexes)
     // {
@@ -102,20 +124,4 @@ class VideoDataController extends Controller
     //         'success' => $success
     //     ];
     // }
-
-    public function delete(Request $request, $videoId)
-    {
-        VideoData::where('videoId', $videoId)->delete();
-
-        // $keep = VideoData::where('videoId', $videoId)
-        //     ->latest()
-        //     ->take(1)
-        //     ->pluck('id');
-
-        //     VideoData::where('videoId', $videoId)
-        //     ->whereNotIn('id', $keep)
-        //     ->delete();
-
-        return 204;
-    }
 }
