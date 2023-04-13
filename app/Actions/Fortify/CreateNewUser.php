@@ -19,6 +19,8 @@ class CreateNewUser implements CreatesNewUsers
      */
     public function create(array $input): User
     {
+        $allowed_emails = ['test@test.test'];
+
         Validator::make($input, [
             'name' => ['required', 'string', 'max:255'],
             'email' => [
@@ -26,6 +28,7 @@ class CreateNewUser implements CreatesNewUsers
                 'string',
                 'email',
                 'max:255',
+                Rule::in($allowed_emails),
                 Rule::unique(User::class),
             ],
             'password' => $this->passwordRules(),
