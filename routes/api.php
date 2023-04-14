@@ -29,8 +29,9 @@ Route::middleware('auth:sanctum')->post('videoDatas', [VideoDataController::clas
 
 //admin
 // Route::middleware('auth:sanctum')->get('allowed_email', [VideoDataController::class, 'getAllowedEmail']);
-Route::get('allowed_email', [VideoDataController::class, 'getAllowedEmail']);
-Route::middleware('auth:sanctum')->post('allowed_email', [VideoDataController::class, 'setAllowedEmail']);
+Route::middleware('auth:sanctum')->get('allowed-email', [VideoDataController::class, 'getAllowedEmail']);
+Route::middleware('auth:sanctum')->post('allowed-email', [VideoDataController::class, 'setAllowedEmail']);
+Route::middleware('auth:sanctum')->delete('allowed-email/{id}', [VideoDataController::class, 'deleteAllowedEmail']);
 
 // Route::put('videoDatas/{id}', [VideoDataController::class, 'update']);
 Route::middleware('auth:sanctum')->delete('videoDatas/{id}', [VideoDataController::class, 'delete']);

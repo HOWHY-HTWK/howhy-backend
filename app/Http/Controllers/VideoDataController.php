@@ -31,7 +31,8 @@ class VideoDataController extends Controller
         return $response;
     }
 
-    public function check(){
+    public function check()
+    {
         return true;
     }
 
@@ -106,6 +107,26 @@ class VideoDataController extends Controller
     {
         return AllowedEmail::all();
     }
+
+    public function setAllowedEmail(Request $request)
+    {
+        request()->validate([
+            'email' => 'required',
+        ]);
+
+        AllowedEmail::create([
+            'email' => request('email'),
+
+        ]);
+
+        return AllowedEmail::all();
+    }
+
+    public function deleteAllowedEmail($id){
+        AllowedEmail::destroy($id);
+        return AllowedEmail::all();
+    }
+
 
     //TODO not done
     // public function update(VideoData $correctAnswerIndexes)
