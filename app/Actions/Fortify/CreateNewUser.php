@@ -2,6 +2,7 @@
 
 namespace App\Actions\Fortify;
 
+use App\Models\AllowedEmail;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
@@ -19,7 +20,7 @@ class CreateNewUser implements CreatesNewUsers
      */
     public function create(array $input): User
     {
-        $allowed_emails = ['test@test.test'];
+        $allowed_emails = AllowedEmail::pluck('email')->toArray();
 
         Validator::make($input, [
             'name' => ['required', 'string', 'max:255'],
