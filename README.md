@@ -1,3 +1,14 @@
+## Instructions to run this project
+
+- Run composer install
+- run "cp .env.example .env."
+- set the database password in the .env file and in the docker compose file
+- start the database with "docker compose up"
+- Run php artisan key:generate
+- Run "php artisan migrate"
+- Run php artisan serve
+
+
 <p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
 
 <p align="center">
