@@ -20,11 +20,14 @@ use App\Http\Controllers\VideoDataController;
 Route::get('videoDatas', [VideoDataController::class, 'index']);
 Route::get('videoDatas/byVideoId/{id}', [VideoDataController::class, 'showByVideoId']);
 Route::post('videoDatas/checkAnswers/{id}', [VideoDataController::class, 'checkAnswers']);
+//TODO new method that filters list
+Route::get('videoDatas/list/', [VideoDataController::class, 'getVideoList']);
+
 
 //editor
-Route::middleware('auth:sanctum')->get('check', [VideoDataController::class, 'check']);
+Route::middleware('auth:sanctum')->middleware('isCreator')->get('check', [VideoDataController::class, 'check']);
 // Route::middleware('auth:sanctum')->get('videoDatas/list/', [VideoDataController::class, 'getVideoList']);
-Route::get('videoDatas/list/', [VideoDataController::class, 'getVideoList']);
+Route::middleware('auth:sanctum')->get('videoDatas/all/', [VideoDataController::class, 'getVideoList']);
 Route::middleware('auth:sanctum')->post('videoDatas', [VideoDataController::class, 'store']);
 
 //admin
