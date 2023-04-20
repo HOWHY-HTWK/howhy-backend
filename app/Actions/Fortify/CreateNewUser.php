@@ -29,16 +29,27 @@ class CreateNewUser implements CreatesNewUsers
                 'string',
                 'email',
                 'max:255',
-                Rule::in($allowed_emails),
                 Rule::unique(User::class),
             ],
             'password' => $this->passwordRules(),
+            'editor' => ['boolean'],
         ])->validate();
+
+        $role = 'enduser';
+
+        if($input['editor']) {
+            if(in_array( $input['email'], $allowed_emails)){
+                $role = 'creator';
+            } else{
+                abort(402, 'Für ihre E-mail adresse sind keine Bearbeitungsrechte erlaubt!');
+            }
+        }
 
         return User::create([
             'name' => $input['name'],
             'email' => $input['email'],
             'password' => Hash::make($input['password']),
+            'role' => $role,
         ]);
     }
 }
