@@ -33,7 +33,9 @@ class VideoDataController extends Controller
 
     public function check()
     {
-        return true;
+        return [
+            'success' => true
+        ] ;
     }
 
     public function checkAnswers($videoId)
