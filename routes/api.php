@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\QuestionController;
+use App\Http\Controllers\UserController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Models\VideoData;
@@ -22,6 +24,11 @@ Route::get('videoDatas/byVideoId/{id}', [VideoDataController::class, 'showByVide
 Route::post('videoDatas/checkAnswers/{id}', [VideoDataController::class, 'checkAnswers']);
 //TODO new method that filters list
 Route::get('videoDatas/list/', [VideoDataController::class, 'getVideoList']);
+
+
+//test new database structure
+Route::post('storeQuestion', [QuestionController::class, 'storeQuestion']);
+Route::post('user-answer', [UserController::class, 'storeUserAnswer']);
 
 
 //editor

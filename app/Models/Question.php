@@ -26,5 +26,9 @@ class Question extends Model
         return $this->belongsTo(Video::class);
     }
 
+    public function users(){
+        return $this->belongsToMany(User::class);
+    }
+
     use HasFactory;
 }

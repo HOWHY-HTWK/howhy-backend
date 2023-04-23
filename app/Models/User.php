@@ -42,4 +42,8 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function questions(){
+        return $this->belongsToMany(Question::class)->withPivot('data');
+    }
 }

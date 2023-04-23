@@ -5,12 +5,13 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Video extends Model
 {
     use SoftDeletes;
-    protected $fillable = ['videoId', 'creator'];
+    protected $fillable = ['videoId'];
 
     // protected $casts = [
     //     'data' => 'array',
@@ -18,6 +19,10 @@ class Video extends Model
 
     public function questions(): HasMany{
         return $this->hasMany(Question::class);
+    }
+
+    public function user(): HasOne{
+        return $this->hasOne(User::class);
     }
     use HasFactory;
 }
