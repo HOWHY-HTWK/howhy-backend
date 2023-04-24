@@ -44,6 +44,6 @@ class User extends Authenticatable
     ];
 
     public function questions(){
-        return $this->belongsToMany(Question::class)->withPivot('data');
+        return $this->belongsToMany(Question::class)->using(QuestionUser::class)->withTimestamps();
     }
 }
