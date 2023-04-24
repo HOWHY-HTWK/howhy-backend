@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Question extends Model
@@ -12,10 +13,10 @@ class Question extends Model
 
     use SoftDeletes;
 
-    protected $fillable = ['creator', 'data', 'correctAnswers'];
+    protected $fillable = ['questionText', 'timecode', 'data', 'type', 'correctAnswers', 'answers'];
 
     protected $casts = [
-        'data' => 'json',
+        'data' => 'array',
         'correctAnswers' => 'array',
     ];
 
@@ -26,7 +27,8 @@ class Question extends Model
         return $this->belongsTo(Video::class);
     }
 
-    public function users(){
+    public function users(): BelongsToMany
+    {
         return $this->belongsToMany(User::class)->using(QuestionUser::class)->withTimestamps();
     }
 
