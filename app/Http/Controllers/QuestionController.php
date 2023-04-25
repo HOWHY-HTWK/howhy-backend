@@ -47,7 +47,6 @@ class QuestionController extends Controller
             'type' => 'required',
             'correctAnswers' => 'required',
             'answers' => 'required',
-            'creatorId' => 'required',
         ]);
 
         $video = Video::where('videoId', request('videoId'))->first();
@@ -57,7 +56,8 @@ class QuestionController extends Controller
                 'videoId' => request('videoId'),
                 'user_id' => request('creatorId'),
             ]);
-            $video->user()->associate(User::find(request('creatorId')));
+            $user = Auth::user();
+            $video->user()->associate($user);
             $video->save();
         }
 
