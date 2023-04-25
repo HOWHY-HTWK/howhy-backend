@@ -25,7 +25,7 @@ class QuestionController extends Controller
             'answers' => 'required'
         ]);
         $question = Question::find($id);
-    
+
         if ($question->correctAnswers == request('answers')) {
             $success = true;
             if ($user) {
@@ -40,6 +40,7 @@ class QuestionController extends Controller
     public function storeQuestion()
     {
         request()->validate([
+            'questionId' => 'nullable|integer',
             'videoId' => 'required',
             'questionText' => 'required',
             'timecode' => 'required',
@@ -49,7 +50,7 @@ class QuestionController extends Controller
             'creatorId' => 'required',
         ]);
 
-        $video = (Video::where('videoId', request('videoId'))->first());
+        $video = Video::where('videoId', request('videoId'))->first();
 
         if (!$video) {
             $video = new Video([
@@ -58,6 +59,10 @@ class QuestionController extends Controller
             ]);
             $video->user()->associate(User::find(request('creatorId')));
             $video->save();
+        }
+
+        if (request('questionId')) {
+            Question::find(request('questionId'))->delete();
         }
 
         $question =  new Question([
@@ -78,11 +83,20 @@ class QuestionController extends Controller
         ];
     }
 
+    public function deleteQuestion()
+    {
+        request()->validate([
+            'questionId' => 'required|integer',
+        ]);
+        Question::find(request('questionId'))->delete();
+    }
+
 
     //just for changing the table once
-    public function fixJsonInTable(){
+    public function fixJsonInTable()
+    {
         $questions = Question::all();
-        foreach($questions as $question){
+        foreach ($questions as $question) {
             $question->answers = json_decode($question->answers);
             $question->save();
         }

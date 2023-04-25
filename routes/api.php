@@ -45,7 +45,8 @@ Route::get('timecodes/{videoId}', [VideoController::class, 'timecodes']);       
 //questionController
 Route::get('question/{id}', [QuestionController::class, 'getById']);                        //tested
 Route::post('question/checkAnswers/{id}', [QuestionController::class, 'checkAnswers']);     //tested but not with user
-Route::post('storeQuestion', [QuestionController::class, 'storeQuestion']);                 
+Route::post('storeQuestion', [QuestionController::class, 'storeQuestion']);       
+Route::post('deleteQuestion/', [QuestionController::class, 'deleteQuestion']);       
 
 //admin
 Route::middleware('auth:sanctum')->get('allowed-email', [VideoDataController::class, 'getAllowedEmail']);
