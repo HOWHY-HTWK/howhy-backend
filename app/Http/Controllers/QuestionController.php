@@ -28,10 +28,12 @@ class QuestionController extends Controller
 
         if ($question->correctAnswers == request('answers')) {
             $success = true;
-            if ($user) {
-                $question->users()->attach($user, ['data' => true]);
-            }
+          
         }
+        if ($user) {
+            $question->users()->attach($user, ['data' => $success]);
+        }
+        
         return [
             'success' => $success,
         ];
@@ -40,8 +42,9 @@ class QuestionController extends Controller
     public function storeQuestion()
     {
         request()->validate([
-            'questionId' => 'nullable|integer',
-            'videoId' => 'required',
+            'id' => 'nullable|integer',     //null if question is new
+            'videoId' => 'nullable|string', //null if question is old
+            'video_id' => 'nullable',       //null if question is new
             'questionText' => 'required',
             'timecode' => 'required',
             'type' => 'required',
@@ -49,9 +52,20 @@ class QuestionController extends Controller
             'answers' => 'required',
         ]);
 
-        $video = Video::where('videoId', request('videoId'))->first();
+        $video = null;
 
-        if (!$video) {
+        //find video for old question
+        if(request('video_id') != null ){
+            $video = Video::find(request('video_id'));
+        }
+
+        //find video for new question
+        if(request('videoId') != null){
+            $video =  Video::where('videoId', request('videoId'))->first();
+        }
+
+        //if video is not yet in the database make a new entry
+        if ($video == null) {
             $video = new Video([
                 'videoId' => request('videoId'),
                 'user_id' => request('creatorId'),
@@ -61,14 +75,15 @@ class QuestionController extends Controller
             $video->save();
         }
 
-        if (request('questionId')) {
-            Question::find(request('questionId'))->delete();
+        //if question already exists softdelete to be able to retrieve old data
+        if (request('id')) {
+            Question::find(request('id'))->delete();
         }
 
         $question =  new Question([
             'questionText' => request('questionText'),
             'timecode' => request('timecode'),
-            'data' => request('data'),
+            'data' => request('answers'),
             'type' => request('type'),
             'correctAnswers' => request('correctAnswers'),
             'answers' => request('answers'),
@@ -78,17 +93,17 @@ class QuestionController extends Controller
         $question->save();
 
         return [
-            'video' => $video,
-            'question' => $question,
+            'success' => true,
         ];
     }
 
-    public function deleteQuestion()
+    public function deleteQuestion($id)
     {
-        request()->validate([
-            'questionId' => 'required|integer',
-        ]);
-        Question::find(request('questionId'))->delete();
+        Question::find($id)->delete();
+        
+        return [
+            'success' => true,
+        ];
     }
 
 

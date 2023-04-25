@@ -36,6 +36,14 @@ class VideoController extends Controller
         return $timecodes;
     }
 
+    public function questions($videoId)
+    {
+        $video = Video::where('videoId', $videoId)->firstOrFail();
+        $questions = $video->questions()->get();
+        
+        return $questions;
+    }
+
     public function getUserAnswers($videoId)
     {
         $user = Auth::user();

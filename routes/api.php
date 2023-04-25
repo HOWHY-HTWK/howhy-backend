@@ -41,12 +41,13 @@ Route::middleware('auth:sanctum')->middleware('isCreator')->get('check', [VideoD
 Route::get('videos', [VideoController::class, 'index']);                                    //tested
 Route::get('video/{videoId}', [VideoController::class, 'getById']);                         //tested
 Route::get('timecodes/{videoId}', [VideoController::class, 'timecodes']);                   //tested
+Route::get('questions/{videoId}', [VideoController::class, 'questions']);                   //tested
 
 //questionController
 Route::get('question/{id}', [QuestionController::class, 'getById']);                        //tested
 Route::post('question/checkAnswers/{id}', [QuestionController::class, 'checkAnswers']);     //tested but not with user
-Route::post('storeQuestion', [QuestionController::class, 'storeQuestion']);       
-Route::post('deleteQuestion/', [QuestionController::class, 'deleteQuestion']);       
+Route::post('question', [QuestionController::class, 'storeQuestion']);       
+Route::post('deleteQuestion/{id}', [QuestionController::class, 'deleteQuestion']);       
 
 //admin
 Route::middleware('auth:sanctum')->get('allowed-email', [VideoDataController::class, 'getAllowedEmail']);

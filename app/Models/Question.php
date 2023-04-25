@@ -18,6 +18,7 @@ class Question extends Model
     protected $casts = [
         'data' => 'array',
         'correctAnswers' => 'array',
+        'answers' => 'array'
     ];
 
     // protected $hidden = ['correctAnswerIndexes'];
