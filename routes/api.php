@@ -36,27 +36,27 @@ Route::middleware('auth:sanctum')->post('videoDatas', [VideoDataController::clas
 //general
 Route::middleware('auth:sanctum')->middleware('isCreator')->get('check', [VideoDataController::class, 'check']);
 
-
 //videoController
 Route::get('videos', [VideoController::class, 'index']);                                    //tested
 Route::get('video/{videoId}', [VideoController::class, 'getById']);                         //tested
 Route::get('timecodes/{videoId}', [VideoController::class, 'timecodes']);                   //tested
-Route::get('questions/{videoId}', [VideoController::class, 'questions']);                   //tested
+Route::middleware('auth:sanctum')->middleware('isCreator')->get('questions/{videoId}', [VideoController::class, 'questions']);                   //tested
 
 //questionController
 Route::get('question/{id}', [QuestionController::class, 'getById']);                        //tested
 Route::post('question/checkAnswers/{id}', [QuestionController::class, 'checkAnswers']);     //tested but not with user
-Route::post('question', [QuestionController::class, 'storeQuestion']);       
-Route::post('deleteQuestion/{id}', [QuestionController::class, 'deleteQuestion']);       
+
+Route::middleware('auth:sanctum')->middleware('isCreator')->post('question', [QuestionController::class, 'storeQuestion']);       
+Route::middleware('auth:sanctum')->middleware('isCreator')->post('deleteQuestion/{id}', [QuestionController::class, 'deleteQuestion']);       
 
 //admin
-Route::middleware('auth:sanctum')->get('allowed-email', [VideoDataController::class, 'getAllowedEmail']);
-Route::middleware('auth:sanctum')->post('allowed-email', [VideoDataController::class, 'setAllowedEmail']);
-Route::middleware('auth:sanctum')->delete('allowed-email/{id}', [VideoDataController::class, 'deleteAllowedEmail']);
+Route::middleware('auth:sanctum')->middleware('isCreator')->get('allowed-email', [VideoDataController::class, 'getAllowedEmail']);
+Route::middleware('auth:sanctum')->middleware('isCreator')->post('allowed-email', [VideoDataController::class, 'setAllowedEmail']);
+Route::middleware('auth:sanctum')->middleware('isCreator')->delete('allowed-email/{id}', [VideoDataController::class, 'deleteAllowedEmail']);
 
 //old
 // Route::post('user-answer', [UserController::class, 'storeUserAnswer']);
 
 //temp
 // Route::get('transfer', [VideoController::class, 'transferScript']);
-Route::get('fix', [QuestionController::class, 'fixJsonInTable']);
+// Route::get('fix', [QuestionController::class, 'fixJsonInTable']);
