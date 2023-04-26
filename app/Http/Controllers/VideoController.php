@@ -13,7 +13,31 @@ class VideoController extends Controller
 {
     public function index()
     {
-        return Video::all();
+        $videos = Video::all();
+
+        $videosWithUserProgress = $videos->map(function ($video) {
+            $video['success'] = $this->getUserProgress($video);
+            return $video;
+        });
+
+        return $videosWithUserProgress;
+    }
+
+    private function getUserProgress($video)
+    {
+        $user = Auth::user();
+        $questions = $video->questions();
+        $correctCount = 0;
+        if ($user) {
+            $correctCount = Question::whereHas('users', function ($query) use ($user){
+                $query->where('user_id', $user->id)
+                      ->where('correct', true);
+            })->where('video_id', $video->id)->get()->count();
+        }
+        return [
+            'questionCount' => $questions->count(),
+            'correctCount' => $correctCount,
+        ];
     }
 
     public function getById($videoId)
@@ -30,13 +54,12 @@ class VideoController extends Controller
         $timecodes = [];
 
         $user = Auth::user();
-        if($user){
-
+        if ($user) {
         }
 
         foreach ($questions as $question) {
             $correct = null;
-            if($question->users->find($user->id)){
+            if ($question->users->find($user->id)) {
                 $correct = $question->users->find($user->id)->pivot->correct;
             }
             array_push($timecodes, ['id' => $question->id, 'timecode' => $question->timecode, 'correct' => $correct]);
@@ -80,7 +103,7 @@ class VideoController extends Controller
             ]);
 
             $user = User::where('id', $oldVideo->creator)->first();
-            if($user){
+            if ($user) {
                 $video->user()->associate($user);
             } else {
                 $video->user()->associate(User::find(1)->first());
@@ -96,7 +119,7 @@ class VideoController extends Controller
                     'data' => json_encode($oldQuestion['answers']),
                     'answers' =>  json_encode($oldQuestion['answers']),
                     'timecode' => $oldQuestion['timecode'],
-                    'correctAnswers' => json_encode( $oldQuestion['correctAnswers']),
+                    'correctAnswers' => json_encode($oldQuestion['correctAnswers']),
                 ]);
 
                 // $question->video()->save($video);

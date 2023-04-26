@@ -45,9 +45,11 @@ Route::middleware('auth:sanctum')->middleware('isCreator')->get('questions/{vide
 //questionController
 Route::get('question/{id}', [QuestionController::class, 'getById']);                        //tested
 Route::post('question/checkAnswers/{id}', [QuestionController::class, 'checkAnswers']);     //tested but not with user
-
 Route::middleware('auth:sanctum')->middleware('isCreator')->post('question', [QuestionController::class, 'storeQuestion']);       
 Route::middleware('auth:sanctum')->middleware('isCreator')->post('deleteQuestion/{id}', [QuestionController::class, 'deleteQuestion']);       
+
+//score
+Route::get('score/', [QuestionController::class, 'score']);       
 
 //admin
 Route::middleware('auth:sanctum')->middleware('isCreator')->get('allowed-email', [VideoDataController::class, 'getAllowedEmail']);

@@ -34,7 +34,7 @@ class QuestionController extends Controller
         if ($user) {
             //check if answer is already stored
             if ($question->users->find($user->id)) {
-                //if previous answer was correct, do nothing else update 
+                //if previous answer was correct, do nothing else update
                 if ($question->users()->find($user->id)->pivot->correct) {
                 } else {
                     $question->users()->find($user->id)->pivot->delete();
@@ -43,6 +43,8 @@ class QuestionController extends Controller
             } else {
                 $question->users()->attach($user, ['correct' => $success]);
             }
+            $user->score = $user->score + 100;
+            $user->save();
         }
 
         return [
@@ -114,6 +116,18 @@ class QuestionController extends Controller
 
         return [
             'success' => true,
+        ];
+    }
+
+    public function score()
+    {
+        $score = 0;
+        $user = Auth::user();
+        if ($user) {
+            $score = Auth::user()->score;
+        }
+        return [
+            'score' => $score,
         ];
     }
 
