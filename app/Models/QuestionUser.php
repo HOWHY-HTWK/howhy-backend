@@ -11,7 +11,11 @@ class QuestionUser extends Pivot
 {
     protected $table = 'question_user';
 
-    protected $fillable = ['data'];
+    protected $fillable = ['correct'];
+
+    protected $casts = [
+        'correct' => 'boolean',
+    ];
 
     public function user(): HasOne{
         return $this->hasOne(User::class);

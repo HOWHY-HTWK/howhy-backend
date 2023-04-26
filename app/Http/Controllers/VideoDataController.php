@@ -70,8 +70,6 @@ class VideoDataController extends Controller
         ];
     }
 
-
-
     public function store()
     {
         request()->validate([

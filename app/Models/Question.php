@@ -30,7 +30,7 @@ class Question extends Model
 
     public function users(): BelongsToMany
     {
-        return $this->belongsToMany(User::class)->using(QuestionUser::class)->withTimestamps();
+        return $this->belongsToMany(User::class)->using(QuestionUser::class)->withPivot('correct')->withTimestamps();
     }
 
     use HasFactory;

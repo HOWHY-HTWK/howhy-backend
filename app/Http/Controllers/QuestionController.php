@@ -28,12 +28,23 @@ class QuestionController extends Controller
 
         if ($question->correctAnswers == request('answers')) {
             $success = true;
-          
         }
+
+        //store question result if user is logged in
         if ($user) {
-            $question->users()->attach($user, ['data' => $success]);
+            //check if answer is already stored
+            if ($question->users->find($user->id)) {
+                //if previous answer was correct, do nothing else update 
+                if ($question->users()->find($user->id)->pivot->correct) {
+                } else {
+                    $question->users()->find($user->id)->pivot->delete();
+                    $question->users()->attach($user, ['correct' => $success]);
+                }
+            } else {
+                $question->users()->attach($user, ['correct' => $success]);
+            }
         }
-        
+
         return [
             'success' => $success,
         ];
@@ -55,12 +66,12 @@ class QuestionController extends Controller
         $video = null;
 
         //find video for old question
-        if(request('video_id') != null ){
+        if (request('video_id') != null) {
             $video = Video::find(request('video_id'));
         }
 
         //find video for new question
-        if(request('videoId') != null){
+        if (request('videoId') != null) {
             $video =  Video::where('videoId', request('videoId'))->first();
         }
 
@@ -100,7 +111,7 @@ class QuestionController extends Controller
     public function deleteQuestion($id)
     {
         Question::find($id)->delete();
-        
+
         return [
             'success' => true,
         ];

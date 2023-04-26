@@ -29,8 +29,17 @@ class VideoController extends Controller
 
         $timecodes = [];
 
+        $user = Auth::user();
+        if($user){
+
+        }
+
         foreach ($questions as $question) {
-            array_push($timecodes, ['id' => $question->id, 'timecode' => $question->timecode]);
+            $correct = null;
+            if($question->users->find($user->id)){
+                $correct = $question->users->find($user->id)->pivot->correct;
+            }
+            array_push($timecodes, ['id' => $question->id, 'timecode' => $question->timecode, 'correct' => $correct]);
         }
 
         return $timecodes;
@@ -40,7 +49,7 @@ class VideoController extends Controller
     {
         $video = Video::where('videoId', $videoId)->firstOrFail();
         $questions = $video->questions()->get();
-        
+
         return $questions;
     }
 

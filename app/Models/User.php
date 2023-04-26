@@ -46,6 +46,6 @@ class User extends Authenticatable
 
     public function questions(): BelongsToMany
     {
-        return $this->belongsToMany(Question::class)->using(QuestionUser::class)->withTimestamps();
+        return $this->belongsToMany(Question::class)->using(QuestionUser::class)->withPivot('correct')->withTimestamps();
     }
 }
