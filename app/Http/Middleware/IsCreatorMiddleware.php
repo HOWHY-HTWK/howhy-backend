@@ -16,9 +16,14 @@ class IsCreatorMiddleware
      */
     public function handle(Request $request, Closure $next): Response
     {
-        if(Auth::user()->role == 'creator'){
+        if(Auth::user()){
+            if(Auth::user()->role == 'creator'){
+                return $next($request);
+            } else {
+                abort(403, 'Sie besitzen keine ausreichenden Zugriffsrechte');
+            }
+        } else {
             return $next($request);
         }
-        abort(403, 'Sie besitzen keine ausreichenden Zugriffsrechte');
     }
 }
