@@ -35,7 +35,7 @@ class VideoDataController extends Controller
     {
         return [
             'success' => true
-        ] ;
+        ];
     }
 
     public function checkAnswers($videoId)
@@ -69,8 +69,6 @@ class VideoDataController extends Controller
             'success' => $success
         ];
     }
-
-
 
     public function store()
     {
@@ -124,27 +122,10 @@ class VideoDataController extends Controller
         return AllowedEmail::all();
     }
 
-    public function deleteAllowedEmail($id){
+    public function deleteAllowedEmail($id)
+    {
         AllowedEmail::destroy($id);
         return AllowedEmail::all();
     }
 
-
-    //TODO not done
-    // public function update(VideoData $correctAnswerIndexes)
-    // {
-    //     request()->validate([
-    //         'videoId' => 'required',
-    //         'questions' => 'required'
-    //     ]);
-
-    //     $success = $correctAnswerIndexes->update([
-    //         'videoId' => request('videoId'),
-    //         'questions' => request('questions')
-    //     ]);
-
-    //     return [
-    //         'success' => $success
-    //     ];
-    // }
 }

@@ -1,5 +1,8 @@
 <?php
 
+use App\Http\Controllers\QuestionController;
+use App\Http\Controllers\UserController;
+use App\Http\Controllers\VideoController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Models\VideoData;
@@ -16,25 +19,44 @@ use App\Http\Controllers\VideoDataController;
 |
 */
 
-//public
-Route::get('videoDatas', [VideoDataController::class, 'index']);
-Route::get('videoDatas/byVideoId/{id}', [VideoDataController::class, 'showByVideoId']);
-Route::post('videoDatas/checkAnswers/{id}', [VideoDataController::class, 'checkAnswers']);
-//TODO new method that filters list
-Route::get('videoDatas/list/', [VideoDataController::class, 'getVideoList']);
+//old database design
 
+//public
+Route::get('videoDatas', [VideoDataController::class, 'index']);                              //replaced
+Route::get('videoDatas/byVideoId/{id}', [VideoDataController::class, 'showByVideoId']);       //replaced 
+Route::post('videoDatas/checkAnswers/{id}', [VideoDataController::class, 'checkAnswers']);    //replaced 
+Route::get('videoDatas/list/', [VideoDataController::class, 'getVideoList']);                 //replaced
 
 //editor
+Route::middleware('auth:sanctum')->get('videoDatas/all/', [VideoDataController::class, 'getVideoList']);    //replaced
+Route::middleware('auth:sanctum')->post('videoDatas', [VideoDataController::class, 'store']);               //replaced
+
+//------------ New Database Design
+
+//general
 Route::middleware('auth:sanctum')->middleware('isCreator')->get('check', [VideoDataController::class, 'check']);
-// Route::middleware('auth:sanctum')->get('videoDatas/list/', [VideoDataController::class, 'getVideoList']);
-Route::middleware('auth:sanctum')->get('videoDatas/all/', [VideoDataController::class, 'getVideoList']);
-Route::middleware('auth:sanctum')->post('videoDatas', [VideoDataController::class, 'store']);
+
+//videoController
+Route::get('videos', [VideoController::class, 'index']);                                    //tested
+Route::get('video/{videoId}', [VideoController::class, 'getById']);                         //tested
+Route::get('timecodes/{videoId}', [VideoController::class, 'timecodes']);                   //tested
+Route::middleware('auth:sanctum')->middleware('isCreator')->get('questions/{videoId}', [VideoController::class, 'questions']);                   //tested
+
+//questionController
+Route::get('question/{id}', [QuestionController::class, 'getById']);                        //tested
+Route::post('question/checkAnswers/{id}', [QuestionController::class, 'checkAnswers']);     //tested but not with user
+
+Route::middleware('auth:sanctum')->middleware('isCreator')->post('question', [QuestionController::class, 'storeQuestion']);       
+Route::middleware('auth:sanctum')->middleware('isCreator')->post('deleteQuestion/{id}', [QuestionController::class, 'deleteQuestion']);       
 
 //admin
-// Route::middleware('auth:sanctum')->get('allowed_email', [VideoDataController::class, 'getAllowedEmail']);
-Route::middleware('auth:sanctum')->get('allowed-email', [VideoDataController::class, 'getAllowedEmail']);
-Route::middleware('auth:sanctum')->post('allowed-email', [VideoDataController::class, 'setAllowedEmail']);
-Route::middleware('auth:sanctum')->delete('allowed-email/{id}', [VideoDataController::class, 'deleteAllowedEmail']);
+Route::middleware('auth:sanctum')->middleware('isCreator')->get('allowed-email', [VideoDataController::class, 'getAllowedEmail']);
+Route::middleware('auth:sanctum')->middleware('isCreator')->post('allowed-email', [VideoDataController::class, 'setAllowedEmail']);
+Route::middleware('auth:sanctum')->middleware('isCreator')->delete('allowed-email/{id}', [VideoDataController::class, 'deleteAllowedEmail']);
 
-// Route::put('videoDatas/{id}', [VideoDataController::class, 'update']);
-Route::middleware('auth:sanctum')->delete('videoDatas/{id}', [VideoDataController::class, 'delete']);
+//old
+// Route::post('user-answer', [UserController::class, 'storeUserAnswer']);
+
+//temp
+// Route::get('transfer', [VideoController::class, 'transferScript']);
+// Route::get('fix', [QuestionController::class, 'fixJsonInTable']);
