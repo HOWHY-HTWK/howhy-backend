@@ -10,7 +10,7 @@
     ],
     "info": {
         "name": "Laravel",
-        "_postman_id": "ebfa65ff-d6b0-486b-8527-418dfd712154",
+        "_postman_id": "f01dbf21-d4e5-46a7-b187-c8e415fe9ec2",
         "description": "",
         "schema": "https:\/\/schema.getpostman.com\/json\/collection\/v2.1.0\/collection.json"
     },
@@ -19,294 +19,6 @@
             "name": "Endpoints",
             "description": "",
             "item": [
-                {
-                    "name": "GET api\/videoDatas",
-                    "request": {
-                        "url": {
-                            "host": "{{baseUrl}}",
-                            "path": "api\/videoDatas",
-                            "query": [],
-                            "raw": "{{baseUrl}}\/api\/videoDatas"
-                        },
-                        "method": "GET",
-                        "header": [
-                            {
-                                "key": "Content-Type",
-                                "value": "application\/json"
-                            },
-                            {
-                                "key": "Accept",
-                                "value": "application\/json"
-                            }
-                        ],
-                        "body": null,
-                        "description": "",
-                        "auth": {
-                            "type": "noauth"
-                        }
-                    },
-                    "response": [
-                        {
-                            "header": [
-                                {
-                                    "key": "cache-control",
-                                    "value": "no-cache, private"
-                                },
-                                {
-                                    "key": "content-type",
-                                    "value": "application\/json"
-                                },
-                                {
-                                    "key": "x-ratelimit-limit",
-                                    "value": "60"
-                                },
-                                {
-                                    "key": "x-ratelimit-remaining",
-                                    "value": "59"
-                                },
-                                {
-                                    "key": "vary",
-                                    "value": "Origin"
-                                }
-                            ],
-                            "code": 200,
-                            "body": "[{\"id\":56,\"created_at\":\"2023-04-17T13:44:47.000000Z\",\"updated_at\":\"2023-04-17T13:44:47.000000Z\",\"videoId\":\"v1266420c88afou4upfb\",\"creator\":\"alex\",\"data\":[{\"id\":1,\"type\":\"multiplechoice\",\"answers\":[{\"id\":0,\"text\":\"Antwort 1 falsch\"},{\"id\":1,\"text\":\"Antwort 2 richtig\"},{\"id\":2,\"text\":\"falsch\"}],\"question\":\"Was ist die richtige Antwort?\",\"timecode\":1,\"correctAnswers\":[{\"id\":0,\"correct\":false},{\"id\":1,\"correct\":true},{\"id\":2,\"correct\":false}]},{\"id\":2,\"type\":\"multiplechoice\",\"answers\":[{\"id\":0,\"text\":\"richtig\"},{\"id\":1,\"text\":\"flasch\"}],\"question\":\"frage 2\",\"timecode\":60,\"correctAnswers\":[{\"id\":0,\"correct\":true},{\"id\":1,\"correct\":false}]},{\"id\":4,\"type\":\"multiplechoice\",\"answers\":[{\"id\":0,\"text\":\"Antwort 1 falschfffffffffffffffffffff\"},{\"id\":1,\"text\":\"Antwort 2 richtig was passiert wenn ich hier einen sehr langen text schereib und der dann inmmer l\\u00f6nger wirnndrrrrrrrrrrrrr\"},{\"id\":2,\"text\":\"nnn\"}],\"question\":\"Was ist die rirchtige Antwort? fffffffdffffhfhfhhfhfhhfh fhfhhhfhfhhfhfhhfh fhfhfhhfhfhhfhfhfhhfhfhf\",\"timecode\":180,\"correctAnswers\":[{\"id\":0,\"correct\":false},{\"id\":1,\"correct\":true},{\"id\":2,\"correct\":false}]},{\"id\":3,\"type\":\"multiplechoice\",\"answers\":[{\"id\":0,\"text\":\"Antwort 1 falschfffffffffffffffffffff\"},{\"id\":1,\"text\":\"Antwort 2 richtig was passiert wenn ich hier einen sehr langen text schereib und der dann inmmer l\\u00f6nger wird\"}],\"question\":\"Was ist die richtige Antwort? fffffffdffffhfhfhhfhfhhfhfhfhhhfhf hhfhfhhfhfhfhf hhfhfhhfhfhfhhfhfhfhhfhfhfh\",\"timecode\":270,\"correctAnswers\":[{\"id\":0,\"correct\":false},{\"id\":1,\"correct\":true}]}],\"deleted_at\":null},{\"id\":57,\"created_at\":\"2023-04-17T16:22:43.000000Z\",\"updated_at\":\"2023-04-17T16:22:43.000000Z\",\"videoId\":\"v1266421de9fbadwozcp\",\"creator\":\"10\",\"data\":[{\"id\":0,\"type\":\"multiplechoice\",\"answers\":[{\"id\":0,\"text\":\"1\"}],\"question\":\"1\",\"timecode\":82,\"correctAnswers\":[{\"id\":0,\"correct\":true}]}],\"deleted_at\":null},{\"id\":58,\"created_at\":\"2023-04-17T16:22:56.000000Z\",\"updated_at\":\"2023-04-17T16:22:56.000000Z\",\"videoId\":\"v1266421de987iu6uywq\",\"creator\":\"10\",\"data\":[{\"id\":0,\"type\":\"multiplechoice\",\"answers\":[{\"id\":0,\"text\":\"1\"}],\"question\":\"1\",\"timecode\":170,\"correctAnswers\":[{\"id\":0,\"correct\":true}]}],\"deleted_at\":null},{\"id\":59,\"created_at\":\"2023-04-17T16:23:12.000000Z\",\"updated_at\":\"2023-04-17T16:23:12.000000Z\",\"videoId\":\"v1266421da9565ehxjh4\",\"creator\":\"10\",\"data\":[{\"id\":0,\"type\":\"multiplechoice\",\"answers\":[{\"id\":0,\"text\":\"1\"}],\"question\":\"1\",\"timecode\":123,\"correctAnswers\":[{\"id\":0,\"correct\":true}]}],\"deleted_at\":null},{\"id\":60,\"created_at\":\"2023-04-17T16:23:28.000000Z\",\"updated_at\":\"2023-04-17T16:23:28.000000Z\",\"videoId\":\"v1266421da774qtqlg5z\",\"creator\":\"10\",\"data\":[{\"id\":0,\"type\":\"multiplechoice\",\"answers\":[{\"id\":0,\"text\":\"1\"}],\"question\":\"1\",\"timecode\":300,\"correctAnswers\":[{\"id\":0,\"correct\":true}]}],\"deleted_at\":null},{\"id\":61,\"created_at\":\"2023-04-17T16:26:02.000000Z\",\"updated_at\":\"2023-04-17T16:26:02.000000Z\",\"videoId\":\"v1266421da849hynlri2\",\"creator\":\"10\",\"data\":[{\"id\":0,\"type\":\"multiplechoice\",\"answers\":[{\"id\":0,\"text\":\"1\"}],\"question\":\"1\",\"timecode\":120,\"correctAnswers\":[{\"id\":0,\"correct\":true}]}],\"deleted_at\":null},{\"id\":62,\"created_at\":\"2023-04-17T16:26:33.000000Z\",\"updated_at\":\"2023-04-17T16:26:33.000000Z\",\"videoId\":\"v1266421dc2c9nk3866x\",\"creator\":\"10\",\"data\":[{\"id\":0,\"type\":\"multiplechoice\",\"answers\":[{\"id\":0,\"text\":\"1\"}],\"question\":\"1\",\"timecode\":108,\"correctAnswers\":[{\"id\":0,\"correct\":true}]}],\"deleted_at\":null},{\"id\":63,\"created_at\":\"2023-04-20T14:37:31.000000Z\",\"updated_at\":\"2023-04-20T14:37:31.000000Z\",\"videoId\":\"v12663da4960dj8ld74u\",\"creator\":\"alex\",\"data\":[{\"id\":0,\"type\":\"multiplechoice\",\"answers\":[{\"id\":0,\"text\":\"Antwort 1 lautet falsch\"},{\"id\":1,\"text\":\"Die zweite Antwort ist richtig! d\"},{\"id\":2,\"text\":\"diese Antwort ist falsch\"}],\"question\":\"Hier ist eine Frage: Wie lautet die richtige Antwort?\",\"timecode\":74,\"correctAnswers\":[{\"id\":0,\"correct\":false},{\"id\":1,\"correct\":true},{\"id\":2,\"correct\":false}]},{\"id\":1,\"type\":\"multiplechoice\",\"answers\":[{\"id\":0,\"text\":\"richtig\"}],\"question\":\"noch eine frage\",\"timecode\":120,\"correctAnswers\":[{\"id\":0,\"correct\":true}]}],\"deleted_at\":null}]",
-                            "name": ""
-                        }
-                    ]
-                },
-                {
-                    "name": "GET api\/videoDatas\/byVideoId\/{id}",
-                    "request": {
-                        "url": {
-                            "host": "{{baseUrl}}",
-                            "path": "api\/videoDatas\/byVideoId\/:id",
-                            "query": [],
-                            "raw": "{{baseUrl}}\/api\/videoDatas\/byVideoId\/:id",
-                            "variable": [
-                                {
-                                    "id": "id",
-                                    "key": "id",
-                                    "value": "accusantium",
-                                    "description": "The ID of the byVideoId."
-                                }
-                            ]
-                        },
-                        "method": "GET",
-                        "header": [
-                            {
-                                "key": "Content-Type",
-                                "value": "application\/json"
-                            },
-                            {
-                                "key": "Accept",
-                                "value": "application\/json"
-                            }
-                        ],
-                        "body": null,
-                        "description": "",
-                        "auth": {
-                            "type": "noauth"
-                        }
-                    },
-                    "response": [
-                        {
-                            "header": [
-                                {
-                                    "key": "cache-control",
-                                    "value": "no-cache, private"
-                                },
-                                {
-                                    "key": "content-type",
-                                    "value": "application\/json"
-                                },
-                                {
-                                    "key": "x-ratelimit-limit",
-                                    "value": "60"
-                                },
-                                {
-                                    "key": "x-ratelimit-remaining",
-                                    "value": "58"
-                                },
-                                {
-                                    "key": "vary",
-                                    "value": "Origin"
-                                }
-                            ],
-                            "code": 404,
-                            "body": "{\n    \"message\": \"No query results for model [App\\\\Models\\\\VideoData].\",\n    \"exception\": \"Symfony\\\\Component\\\\HttpKernel\\\\Exception\\\\NotFoundHttpException\",\n    \"file\": \"\/Users\/alexanderbonin\/Development\/HOWHY\/howhy-backend\/vendor\/laravel\/framework\/src\/Illuminate\/Foundation\/Exceptions\/Handler.php\",\n    \"line\": 408,\n    \"trace\": [\n        {\n            \"file\": \"\/Users\/alexanderbonin\/Development\/HOWHY\/howhy-backend\/vendor\/laravel\/framework\/src\/Illuminate\/Foundation\/Exceptions\/Handler.php\",\n            \"line\": 384,\n            \"function\": \"prepareException\",\n            \"class\": \"Illuminate\\\\Foundation\\\\Exceptions\\\\Handler\",\n            \"type\": \"->\"\n        },\n        {\n            \"file\": \"\/Users\/alexanderbonin\/Development\/HOWHY\/howhy-backend\/vendor\/nunomaduro\/collision\/src\/Adapters\/Laravel\/ExceptionHandler.php\",\n            \"line\": 54,\n            \"function\": \"render\",\n            \"class\": \"Illuminate\\\\Foundation\\\\Exceptions\\\\Handler\",\n            \"type\": \"->\"\n        },\n        {\n            \"file\": \"\/Users\/alexanderbonin\/Development\/HOWHY\/howhy-backend\/vendor\/laravel\/framework\/src\/Illuminate\/Routing\/Pipeline.php\",\n            \"line\": 51,\n            \"function\": \"render\",\n            \"class\": \"NunoMaduro\\\\Collision\\\\Adapters\\\\Laravel\\\\ExceptionHandler\",\n            \"type\": \"->\"\n        },\n        {\n            \"file\": \"\/Users\/alexanderbonin\/Development\/HOWHY\/howhy-backend\/vendor\/laravel\/framework\/src\/Illuminate\/Pipeline\/Pipeline.php\",\n            \"line\": 143,\n            \"function\": \"handleException\",\n            \"class\": \"Illuminate\\\\Routing\\\\Pipeline\",\n            \"type\": \"->\"\n        },\n        {\n            \"file\": \"\/Users\/alexanderbonin\/Development\/HOWHY\/howhy-backend\/vendor\/laravel\/framework\/src\/Illuminate\/Routing\/Middleware\/SubstituteBindings.php\",\n            \"line\": 50,\n            \"function\": \"Illuminate\\\\Pipeline\\\\{closure}\",\n            \"class\": \"Illuminate\\\\Pipeline\\\\Pipeline\",\n            \"type\": \"->\"\n        },\n        {\n            \"file\": \"\/Users\/alexanderbonin\/Development\/HOWHY\/howhy-backend\/vendor\/laravel\/framework\/src\/Illuminate\/Pipeline\/Pipeline.php\",\n            \"line\": 180,\n            \"function\": \"handle\",\n            \"class\": \"Illuminate\\\\Routing\\\\Middleware\\\\SubstituteBindings\",\n            \"type\": \"->\"\n        },\n        {\n            \"file\": \"\/Users\/alexanderbonin\/Development\/HOWHY\/howhy-backend\/vendor\/laravel\/framework\/src\/Illuminate\/Routing\/Middleware\/ThrottleRequests.php\",\n            \"line\": 152,\n            \"function\": \"Illuminate\\\\Pipeline\\\\{closure}\",\n            \"class\": \"Illuminate\\\\Pipeline\\\\Pipeline\",\n            \"type\": \"->\"\n        },\n        {\n            \"file\": \"\/Users\/alexanderbonin\/Development\/HOWHY\/howhy-backend\/vendor\/laravel\/framework\/src\/Illuminate\/Routing\/Middleware\/ThrottleRequests.php\",\n            \"line\": 118,\n            \"function\": \"handleRequest\",\n            \"class\": \"Illuminate\\\\Routing\\\\Middleware\\\\ThrottleRequests\",\n            \"type\": \"->\"\n        },\n        {\n            \"file\": \"\/Users\/alexanderbonin\/Development\/HOWHY\/howhy-backend\/vendor\/laravel\/framework\/src\/Illuminate\/Routing\/Middleware\/ThrottleRequests.php\",\n            \"line\": 80,\n            \"function\": \"handleRequestUsingNamedLimiter\",\n            \"class\": \"Illuminate\\\\Routing\\\\Middleware\\\\ThrottleRequests\",\n            \"type\": \"->\"\n        },\n        {\n            \"file\": \"\/Users\/alexanderbonin\/Development\/HOWHY\/howhy-backend\/vendor\/laravel\/framework\/src\/Illuminate\/Pipeline\/Pipeline.php\",\n            \"line\": 180,\n            \"function\": \"handle\",\n            \"class\": \"Illuminate\\\\Routing\\\\Middleware\\\\ThrottleRequests\",\n            \"type\": \"->\"\n        },\n        {\n            \"file\": \"\/Users\/alexanderbonin\/Development\/HOWHY\/howhy-backend\/vendor\/laravel\/sanctum\/src\/Http\/Middleware\/EnsureFrontendRequestsAreStateful.php\",\n            \"line\": 25,\n            \"function\": \"Illuminate\\\\Pipeline\\\\{closure}\",\n            \"class\": \"Illuminate\\\\Pipeline\\\\Pipeline\",\n            \"type\": \"->\"\n        },\n        {\n            \"file\": \"\/Users\/alexanderbonin\/Development\/HOWHY\/howhy-backend\/vendor\/laravel\/framework\/src\/Illuminate\/Pipeline\/Pipeline.php\",\n            \"line\": 141,\n            \"function\": \"Laravel\\\\Sanctum\\\\Http\\\\Middleware\\\\{closure}\",\n            \"class\": \"Laravel\\\\Sanctum\\\\Http\\\\Middleware\\\\EnsureFrontendRequestsAreStateful\",\n            \"type\": \"->\"\n        },\n        {\n            \"file\": \"\/Users\/alexanderbonin\/Development\/HOWHY\/howhy-backend\/vendor\/laravel\/framework\/src\/Illuminate\/Pipeline\/Pipeline.php\",\n            \"line\": 116,\n            \"function\": \"Illuminate\\\\Pipeline\\\\{closure}\",\n            \"class\": \"Illuminate\\\\Pipeline\\\\Pipeline\",\n            \"type\": \"->\"\n        },\n        {\n            \"file\": \"\/Users\/alexanderbonin\/Development\/HOWHY\/howhy-backend\/vendor\/laravel\/sanctum\/src\/Http\/Middleware\/EnsureFrontendRequestsAreStateful.php\",\n            \"line\": 24,\n            \"function\": \"then\",\n            \"class\": \"Illuminate\\\\Pipeline\\\\Pipeline\",\n            \"type\": \"->\"\n        },\n        {\n            \"file\": \"\/Users\/alexanderbonin\/Development\/HOWHY\/howhy-backend\/vendor\/laravel\/framework\/src\/Illuminate\/Pipeline\/Pipeline.php\",\n            \"line\": 180,\n            \"function\": \"handle\",\n            \"class\": \"Laravel\\\\Sanctum\\\\Http\\\\Middleware\\\\EnsureFrontendRequestsAreStateful\",\n            \"type\": \"->\"\n        },\n        {\n            \"file\": \"\/Users\/alexanderbonin\/Development\/HOWHY\/howhy-backend\/vendor\/laravel\/framework\/src\/Illuminate\/Pipeline\/Pipeline.php\",\n            \"line\": 116,\n            \"function\": \"Illuminate\\\\Pipeline\\\\{closure}\",\n            \"class\": \"Illuminate\\\\Pipeline\\\\Pipeline\",\n            \"type\": \"->\"\n        },\n        {\n            \"file\": \"\/Users\/alexanderbonin\/Development\/HOWHY\/howhy-backend\/vendor\/laravel\/framework\/src\/Illuminate\/Routing\/Router.php\",\n            \"line\": 797,\n            \"function\": \"then\",\n            \"class\": \"Illuminate\\\\Pipeline\\\\Pipeline\",\n            \"type\": \"->\"\n        },\n        {\n            \"file\": \"\/Users\/alexanderbonin\/Development\/HOWHY\/howhy-backend\/vendor\/laravel\/framework\/src\/Illuminate\/Routing\/Router.php\",\n            \"line\": 776,\n            \"function\": \"runRouteWithinStack\",\n            \"class\": \"Illuminate\\\\Routing\\\\Router\",\n            \"type\": \"->\"\n        },\n        {\n            \"file\": \"\/Users\/alexanderbonin\/Development\/HOWHY\/howhy-backend\/vendor\/laravel\/framework\/src\/Illuminate\/Routing\/Router.php\",\n            \"line\": 740,\n            \"function\": \"runRoute\",\n            \"class\": \"Illuminate\\\\Routing\\\\Router\",\n            \"type\": \"->\"\n        },\n        {\n            \"file\": \"\/Users\/alexanderbonin\/Development\/HOWHY\/howhy-backend\/vendor\/laravel\/framework\/src\/Illuminate\/Routing\/Router.php\",\n            \"line\": 729,\n            \"function\": \"dispatchToRoute\",\n            \"class\": \"Illuminate\\\\Routing\\\\Router\",\n            \"type\": \"->\"\n        },\n        {\n            \"file\": \"\/Users\/alexanderbonin\/Development\/HOWHY\/howhy-backend\/vendor\/laravel\/framework\/src\/Illuminate\/Foundation\/Http\/Kernel.php\",\n            \"line\": 200,\n            \"function\": \"dispatch\",\n            \"class\": \"Illuminate\\\\Routing\\\\Router\",\n            \"type\": \"->\"\n        },\n        {\n            \"file\": \"\/Users\/alexanderbonin\/Development\/HOWHY\/howhy-backend\/vendor\/laravel\/framework\/src\/Illuminate\/Pipeline\/Pipeline.php\",\n            \"line\": 141,\n            \"function\": \"Illuminate\\\\Foundation\\\\Http\\\\{closure}\",\n            \"class\": \"Illuminate\\\\Foundation\\\\Http\\\\Kernel\",\n            \"type\": \"->\"\n        },\n        {\n            \"file\": \"\/Users\/alexanderbonin\/Development\/HOWHY\/howhy-backend\/vendor\/laravel\/framework\/src\/Illuminate\/Foundation\/Http\/Middleware\/TransformsRequest.php\",\n            \"line\": 21,\n            \"function\": \"Illuminate\\\\Pipeline\\\\{closure}\",\n            \"class\": \"Illuminate\\\\Pipeline\\\\Pipeline\",\n            \"type\": \"->\"\n        },\n        {\n            \"file\": \"\/Users\/alexanderbonin\/Development\/HOWHY\/howhy-backend\/vendor\/laravel\/framework\/src\/Illuminate\/Foundation\/Http\/Middleware\/TrimStrings.php\",\n            \"line\": 40,\n            \"function\": \"handle\",\n            \"class\": \"Illuminate\\\\Foundation\\\\Http\\\\Middleware\\\\TransformsRequest\",\n            \"type\": \"->\"\n        },\n        {\n            \"file\": \"\/Users\/alexanderbonin\/Development\/HOWHY\/howhy-backend\/vendor\/laravel\/framework\/src\/Illuminate\/Pipeline\/Pipeline.php\",\n            \"line\": 180,\n            \"function\": \"handle\",\n            \"class\": \"Illuminate\\\\Foundation\\\\Http\\\\Middleware\\\\TrimStrings\",\n            \"type\": \"->\"\n        },\n        {\n            \"file\": \"\/Users\/alexanderbonin\/Development\/HOWHY\/howhy-backend\/vendor\/laravel\/framework\/src\/Illuminate\/Foundation\/Http\/Middleware\/ValidatePostSize.php\",\n            \"line\": 27,\n            \"function\": \"Illuminate\\\\Pipeline\\\\{closure}\",\n            \"class\": \"Illuminate\\\\Pipeline\\\\Pipeline\",\n            \"type\": \"->\"\n        },\n        {\n            \"file\": \"\/Users\/alexanderbonin\/Development\/HOWHY\/howhy-backend\/vendor\/laravel\/framework\/src\/Illuminate\/Pipeline\/Pipeline.php\",\n            \"line\": 180,\n            \"function\": \"handle\",\n            \"class\": \"Illuminate\\\\Foundation\\\\Http\\\\Middleware\\\\ValidatePostSize\",\n            \"type\": \"->\"\n        },\n        {\n            \"file\": \"\/Users\/alexanderbonin\/Development\/HOWHY\/howhy-backend\/vendor\/laravel\/framework\/src\/Illuminate\/Foundation\/Http\/Middleware\/PreventRequestsDuringMaintenance.php\",\n            \"line\": 86,\n            \"function\": \"Illuminate\\\\Pipeline\\\\{closure}\",\n            \"class\": \"Illuminate\\\\Pipeline\\\\Pipeline\",\n            \"type\": \"->\"\n        },\n        {\n            \"file\": \"\/Users\/alexanderbonin\/Development\/HOWHY\/howhy-backend\/vendor\/laravel\/framework\/src\/Illuminate\/Pipeline\/Pipeline.php\",\n            \"line\": 180,\n            \"function\": \"handle\",\n            \"class\": \"Illuminate\\\\Foundation\\\\Http\\\\Middleware\\\\PreventRequestsDuringMaintenance\",\n            \"type\": \"->\"\n        },\n        {\n            \"file\": \"\/Users\/alexanderbonin\/Development\/HOWHY\/howhy-backend\/vendor\/laravel\/framework\/src\/Illuminate\/Http\/Middleware\/HandleCors.php\",\n            \"line\": 62,\n            \"function\": \"Illuminate\\\\Pipeline\\\\{closure}\",\n            \"class\": \"Illuminate\\\\Pipeline\\\\Pipeline\",\n            \"type\": \"->\"\n        },\n        {\n            \"file\": \"\/Users\/alexanderbonin\/Development\/HOWHY\/howhy-backend\/vendor\/laravel\/framework\/src\/Illuminate\/Pipeline\/Pipeline.php\",\n            \"line\": 180,\n            \"function\": \"handle\",\n            \"class\": \"Illuminate\\\\Http\\\\Middleware\\\\HandleCors\",\n            \"type\": \"->\"\n        },\n        {\n            \"file\": \"\/Users\/alexanderbonin\/Development\/HOWHY\/howhy-backend\/vendor\/laravel\/framework\/src\/Illuminate\/Http\/Middleware\/TrustProxies.php\",\n            \"line\": 39,\n            \"function\": \"Illuminate\\\\Pipeline\\\\{closure}\",\n            \"class\": \"Illuminate\\\\Pipeline\\\\Pipeline\",\n            \"type\": \"->\"\n        },\n        {\n            \"file\": \"\/Users\/alexanderbonin\/Development\/HOWHY\/howhy-backend\/vendor\/laravel\/framework\/src\/Illuminate\/Pipeline\/Pipeline.php\",\n            \"line\": 180,\n            \"function\": \"handle\",\n            \"class\": \"Illuminate\\\\Http\\\\Middleware\\\\TrustProxies\",\n            \"type\": \"->\"\n        },\n        {\n            \"file\": \"\/Users\/alexanderbonin\/Development\/HOWHY\/howhy-backend\/vendor\/laravel\/framework\/src\/Illuminate\/Pipeline\/Pipeline.php\",\n            \"line\": 116,\n            \"function\": \"Illuminate\\\\Pipeline\\\\{closure}\",\n            \"class\": \"Illuminate\\\\Pipeline\\\\Pipeline\",\n            \"type\": \"->\"\n        },\n        {\n            \"file\": \"\/Users\/alexanderbonin\/Development\/HOWHY\/howhy-backend\/vendor\/laravel\/framework\/src\/Illuminate\/Foundation\/Http\/Kernel.php\",\n            \"line\": 175,\n            \"function\": \"then\",\n            \"class\": \"Illuminate\\\\Pipeline\\\\Pipeline\",\n            \"type\": \"->\"\n        },\n        {\n            \"file\": \"\/Users\/alexanderbonin\/Development\/HOWHY\/howhy-backend\/vendor\/laravel\/framework\/src\/Illuminate\/Foundation\/Http\/Kernel.php\",\n            \"line\": 144,\n            \"function\": \"sendRequestThroughRouter\",\n            \"class\": \"Illuminate\\\\Foundation\\\\Http\\\\Kernel\",\n            \"type\": \"->\"\n        },\n        {\n            \"file\": \"\/Users\/alexanderbonin\/Development\/HOWHY\/howhy-backend\/vendor\/knuckleswtf\/scribe\/src\/Extracting\/Strategies\/Responses\/ResponseCalls.php\",\n            \"line\": 299,\n            \"function\": \"handle\",\n            \"class\": \"Illuminate\\\\Foundation\\\\Http\\\\Kernel\",\n            \"type\": \"->\"\n        },\n        {\n            \"file\": \"\/Users\/alexanderbonin\/Development\/HOWHY\/howhy-backend\/vendor\/knuckleswtf\/scribe\/src\/Extracting\/Strategies\/Responses\/ResponseCalls.php\",\n            \"line\": 287,\n            \"function\": \"callLaravelOrLumenRoute\",\n            \"class\": \"Knuckles\\\\Scribe\\\\Extracting\\\\Strategies\\\\Responses\\\\ResponseCalls\",\n            \"type\": \"->\"\n        },\n        {\n            \"file\": \"\/Users\/alexanderbonin\/Development\/HOWHY\/howhy-backend\/vendor\/knuckleswtf\/scribe\/src\/Extracting\/Strategies\/Responses\/ResponseCalls.php\",\n            \"line\": 92,\n            \"function\": \"makeApiCall\",\n            \"class\": \"Knuckles\\\\Scribe\\\\Extracting\\\\Strategies\\\\Responses\\\\ResponseCalls\",\n            \"type\": \"->\"\n        },\n        {\n            \"file\": \"\/Users\/alexanderbonin\/Development\/HOWHY\/howhy-backend\/vendor\/knuckleswtf\/scribe\/src\/Extracting\/Strategies\/Responses\/ResponseCalls.php\",\n            \"line\": 45,\n            \"function\": \"makeResponseCall\",\n            \"class\": \"Knuckles\\\\Scribe\\\\Extracting\\\\Strategies\\\\Responses\\\\ResponseCalls\",\n            \"type\": \"->\"\n        },\n        {\n            \"file\": \"\/Users\/alexanderbonin\/Development\/HOWHY\/howhy-backend\/vendor\/knuckleswtf\/scribe\/src\/Extracting\/Strategies\/Responses\/ResponseCalls.php\",\n            \"line\": 35,\n            \"function\": \"makeResponseCallIfConditionsPass\",\n            \"class\": \"Knuckles\\\\Scribe\\\\Extracting\\\\Strategies\\\\Responses\\\\ResponseCalls\",\n            \"type\": \"->\"\n        },\n        {\n            \"file\": \"\/Users\/alexanderbonin\/Development\/HOWHY\/howhy-backend\/vendor\/knuckleswtf\/scribe\/src\/Extracting\/Extractor.php\",\n            \"line\": 209,\n            \"function\": \"__invoke\",\n            \"class\": \"Knuckles\\\\Scribe\\\\Extracting\\\\Strategies\\\\Responses\\\\ResponseCalls\",\n            \"type\": \"->\"\n        },\n        {\n            \"file\": \"\/Users\/alexanderbonin\/Development\/HOWHY\/howhy-backend\/vendor\/knuckleswtf\/scribe\/src\/Extracting\/Extractor.php\",\n            \"line\": 163,\n            \"function\": \"iterateThroughStrategies\",\n            \"class\": \"Knuckles\\\\Scribe\\\\Extracting\\\\Extractor\",\n            \"type\": \"->\"\n        },\n        {\n            \"file\": \"\/Users\/alexanderbonin\/Development\/HOWHY\/howhy-backend\/vendor\/knuckleswtf\/scribe\/src\/Extracting\/Extractor.php\",\n            \"line\": 95,\n            \"function\": \"fetchResponses\",\n            \"class\": \"Knuckles\\\\Scribe\\\\Extracting\\\\Extractor\",\n            \"type\": \"->\"\n        },\n        {\n            \"file\": \"\/Users\/alexanderbonin\/Development\/HOWHY\/howhy-backend\/vendor\/knuckleswtf\/scribe\/src\/GroupedEndpoints\/GroupedEndpointsFromApp.php\",\n            \"line\": 124,\n            \"function\": \"processRoute\",\n            \"class\": \"Knuckles\\\\Scribe\\\\Extracting\\\\Extractor\",\n            \"type\": \"->\"\n        },\n        {\n            \"file\": \"\/Users\/alexanderbonin\/Development\/HOWHY\/howhy-backend\/vendor\/knuckleswtf\/scribe\/src\/GroupedEndpoints\/GroupedEndpointsFromApp.php\",\n            \"line\": 71,\n            \"function\": \"extractEndpointsInfoFromLaravelApp\",\n            \"class\": \"Knuckles\\\\Scribe\\\\GroupedEndpoints\\\\GroupedEndpointsFromApp\",\n            \"type\": \"->\"\n        },\n        {\n            \"file\": \"\/Users\/alexanderbonin\/Development\/HOWHY\/howhy-backend\/vendor\/knuckleswtf\/scribe\/src\/GroupedEndpoints\/GroupedEndpointsFromApp.php\",\n            \"line\": 49,\n            \"function\": \"extractEndpointsInfoAndWriteToDisk\",\n            \"class\": \"Knuckles\\\\Scribe\\\\GroupedEndpoints\\\\GroupedEndpointsFromApp\",\n            \"type\": \"->\"\n        },\n        {\n            \"file\": \"\/Users\/alexanderbonin\/Development\/HOWHY\/howhy-backend\/vendor\/knuckleswtf\/scribe\/src\/Commands\/GenerateDocumentation.php\",\n            \"line\": 51,\n            \"function\": \"get\",\n            \"class\": \"Knuckles\\\\Scribe\\\\GroupedEndpoints\\\\GroupedEndpointsFromApp\",\n            \"type\": \"->\"\n        },\n        {\n            \"file\": \"\/Users\/alexanderbonin\/Development\/HOWHY\/howhy-backend\/vendor\/laravel\/framework\/src\/Illuminate\/Container\/BoundMethod.php\",\n            \"line\": 36,\n            \"function\": \"handle\",\n            \"class\": \"Knuckles\\\\Scribe\\\\Commands\\\\GenerateDocumentation\",\n            \"type\": \"->\"\n        },\n        {\n            \"file\": \"\/Users\/alexanderbonin\/Development\/HOWHY\/howhy-backend\/vendor\/laravel\/framework\/src\/Illuminate\/Container\/Util.php\",\n            \"line\": 41,\n            \"function\": \"Illuminate\\\\Container\\\\{closure}\",\n            \"class\": \"Illuminate\\\\Container\\\\BoundMethod\",\n            \"type\": \"::\"\n        },\n        {\n            \"file\": \"\/Users\/alexanderbonin\/Development\/HOWHY\/howhy-backend\/vendor\/laravel\/framework\/src\/Illuminate\/Container\/BoundMethod.php\",\n            \"line\": 93,\n            \"function\": \"unwrapIfClosure\",\n            \"class\": \"Illuminate\\\\Container\\\\Util\",\n            \"type\": \"::\"\n        },\n        {\n            \"file\": \"\/Users\/alexanderbonin\/Development\/HOWHY\/howhy-backend\/vendor\/laravel\/framework\/src\/Illuminate\/Container\/BoundMethod.php\",\n            \"line\": 35,\n            \"function\": \"callBoundMethod\",\n            \"class\": \"Illuminate\\\\Container\\\\BoundMethod\",\n            \"type\": \"::\"\n        },\n        {\n            \"file\": \"\/Users\/alexanderbonin\/Development\/HOWHY\/howhy-backend\/vendor\/laravel\/framework\/src\/Illuminate\/Container\/Container.php\",\n            \"line\": 662,\n            \"function\": \"call\",\n            \"class\": \"Illuminate\\\\Container\\\\BoundMethod\",\n            \"type\": \"::\"\n        },\n        {\n            \"file\": \"\/Users\/alexanderbonin\/Development\/HOWHY\/howhy-backend\/vendor\/laravel\/framework\/src\/Illuminate\/Console\/Command.php\",\n            \"line\": 194,\n            \"function\": \"call\",\n            \"class\": \"Illuminate\\\\Container\\\\Container\",\n            \"type\": \"->\"\n        },\n        {\n            \"file\": \"\/Users\/alexanderbonin\/Development\/HOWHY\/howhy-backend\/vendor\/symfony\/console\/Command\/Command.php\",\n            \"line\": 312,\n            \"function\": \"execute\",\n            \"class\": \"Illuminate\\\\Console\\\\Command\",\n            \"type\": \"->\"\n        },\n        {\n            \"file\": \"\/Users\/alexanderbonin\/Development\/HOWHY\/howhy-backend\/vendor\/laravel\/framework\/src\/Illuminate\/Console\/Command.php\",\n            \"line\": 163,\n            \"function\": \"run\",\n            \"class\": \"Symfony\\\\Component\\\\Console\\\\Command\\\\Command\",\n            \"type\": \"->\"\n        },\n        {\n            \"file\": \"\/Users\/alexanderbonin\/Development\/HOWHY\/howhy-backend\/vendor\/symfony\/console\/Application.php\",\n            \"line\": 1040,\n            \"function\": \"run\",\n            \"class\": \"Illuminate\\\\Console\\\\Command\",\n            \"type\": \"->\"\n        },\n        {\n            \"file\": \"\/Users\/alexanderbonin\/Development\/HOWHY\/howhy-backend\/vendor\/symfony\/console\/Application.php\",\n            \"line\": 314,\n            \"function\": \"doRunCommand\",\n            \"class\": \"Symfony\\\\Component\\\\Console\\\\Application\",\n            \"type\": \"->\"\n        },\n        {\n            \"file\": \"\/Users\/alexanderbonin\/Development\/HOWHY\/howhy-backend\/vendor\/symfony\/console\/Application.php\",\n            \"line\": 168,\n            \"function\": \"doRun\",\n            \"class\": \"Symfony\\\\Component\\\\Console\\\\Application\",\n            \"type\": \"->\"\n        },\n        {\n            \"file\": \"\/Users\/alexanderbonin\/Development\/HOWHY\/howhy-backend\/vendor\/laravel\/framework\/src\/Illuminate\/Foundation\/Console\/Kernel.php\",\n            \"line\": 200,\n            \"function\": \"run\",\n            \"class\": \"Symfony\\\\Component\\\\Console\\\\Application\",\n            \"type\": \"->\"\n        },\n        {\n            \"file\": \"\/Users\/alexanderbonin\/Development\/HOWHY\/howhy-backend\/artisan\",\n            \"line\": 35,\n            \"function\": \"handle\",\n            \"class\": \"Illuminate\\\\Foundation\\\\Console\\\\Kernel\",\n            \"type\": \"->\"\n        }\n    ]\n}",
-                            "name": ""
-                        }
-                    ]
-                },
-                {
-                    "name": "POST api\/videoDatas\/checkAnswers\/{id}",
-                    "request": {
-                        "url": {
-                            "host": "{{baseUrl}}",
-                            "path": "api\/videoDatas\/checkAnswers\/:id",
-                            "query": [],
-                            "raw": "{{baseUrl}}\/api\/videoDatas\/checkAnswers\/:id",
-                            "variable": [
-                                {
-                                    "id": "id",
-                                    "key": "id",
-                                    "value": "facilis",
-                                    "description": "The ID of the checkAnswer."
-                                }
-                            ]
-                        },
-                        "method": "POST",
-                        "header": [
-                            {
-                                "key": "Content-Type",
-                                "value": "application\/json"
-                            },
-                            {
-                                "key": "Accept",
-                                "value": "application\/json"
-                            }
-                        ],
-                        "body": null,
-                        "description": "",
-                        "auth": {
-                            "type": "noauth"
-                        }
-                    },
-                    "response": []
-                },
-                {
-                    "name": "GET api\/videoDatas\/list",
-                    "request": {
-                        "url": {
-                            "host": "{{baseUrl}}",
-                            "path": "api\/videoDatas\/list",
-                            "query": [],
-                            "raw": "{{baseUrl}}\/api\/videoDatas\/list"
-                        },
-                        "method": "GET",
-                        "header": [
-                            {
-                                "key": "Content-Type",
-                                "value": "application\/json"
-                            },
-                            {
-                                "key": "Accept",
-                                "value": "application\/json"
-                            }
-                        ],
-                        "body": null,
-                        "description": "",
-                        "auth": {
-                            "type": "noauth"
-                        }
-                    },
-                    "response": [
-                        {
-                            "header": [
-                                {
-                                    "key": "cache-control",
-                                    "value": "no-cache, private"
-                                },
-                                {
-                                    "key": "content-type",
-                                    "value": "application\/json"
-                                },
-                                {
-                                    "key": "x-ratelimit-limit",
-                                    "value": "60"
-                                },
-                                {
-                                    "key": "x-ratelimit-remaining",
-                                    "value": "57"
-                                },
-                                {
-                                    "key": "vary",
-                                    "value": "Origin"
-                                }
-                            ],
-                            "code": 200,
-                            "body": "[\"v1266420c88afou4upfb\",\"v1266421de9fbadwozcp\",\"v1266421de987iu6uywq\",\"v1266421da9565ehxjh4\",\"v1266421da774qtqlg5z\",\"v1266421da849hynlri2\",\"v1266421dc2c9nk3866x\",\"v12663da4960dj8ld74u\"]",
-                            "name": ""
-                        }
-                    ]
-                },
-                {
-                    "name": "GET api\/videoDatas\/all",
-                    "request": {
-                        "url": {
-                            "host": "{{baseUrl}}",
-                            "path": "api\/videoDatas\/all",
-                            "query": [],
-                            "raw": "{{baseUrl}}\/api\/videoDatas\/all"
-                        },
-                        "method": "GET",
-                        "header": [
-                            {
-                                "key": "Content-Type",
-                                "value": "application\/json"
-                            },
-                            {
-                                "key": "Accept",
-                                "value": "application\/json"
-                            }
-                        ],
-                        "body": null,
-                        "description": "",
-                        "auth": {
-                            "type": "noauth"
-                        }
-                    },
-                    "response": [
-                        {
-                            "header": [
-                                {
-                                    "key": "cache-control",
-                                    "value": "no-cache, private"
-                                },
-                                {
-                                    "key": "content-type",
-                                    "value": "application\/json"
-                                },
-                                {
-                                    "key": "vary",
-                                    "value": "Origin"
-                                }
-                            ],
-                            "code": 401,
-                            "body": "{\"message\":\"Unauthenticated.\"}",
-                            "name": ""
-                        }
-                    ]
-                },
-                {
-                    "name": "POST api\/videoDatas",
-                    "request": {
-                        "url": {
-                            "host": "{{baseUrl}}",
-                            "path": "api\/videoDatas",
-                            "query": [],
-                            "raw": "{{baseUrl}}\/api\/videoDatas"
-                        },
-                        "method": "POST",
-                        "header": [
-                            {
-                                "key": "Content-Type",
-                                "value": "application\/json"
-                            },
-                            {
-                                "key": "Accept",
-                                "value": "application\/json"
-                            }
-                        ],
-                        "body": null,
-                        "description": "",
-                        "auth": {
-                            "type": "noauth"
-                        }
-                    },
-                    "response": []
-                },
                 {
                     "name": "GET api\/check",
                     "request": {
@@ -350,7 +62,7 @@
                                 },
                                 {
                                     "key": "x-ratelimit-remaining",
-                                    "value": "56"
+                                    "value": "59"
                                 },
                                 {
                                     "key": "vary",
@@ -406,7 +118,7 @@
                                 },
                                 {
                                     "key": "x-ratelimit-remaining",
-                                    "value": "55"
+                                    "value": "58"
                                 },
                                 {
                                     "key": "vary",
@@ -470,7 +182,7 @@
                                 },
                                 {
                                     "key": "x-ratelimit-remaining",
-                                    "value": "54"
+                                    "value": "57"
                                 },
                                 {
                                     "key": "vary",
@@ -495,7 +207,7 @@
                                 {
                                     "id": "videoId",
                                     "key": "videoId",
-                                    "value": "dolore",
+                                    "value": "nihil",
                                     "description": ""
                                 }
                             ]
@@ -534,7 +246,7 @@
                                 },
                                 {
                                     "key": "x-ratelimit-remaining",
-                                    "value": "53"
+                                    "value": "56"
                                 },
                                 {
                                     "key": "vary",
@@ -598,7 +310,7 @@
                                 },
                                 {
                                     "key": "x-ratelimit-remaining",
-                                    "value": "52"
+                                    "value": "55"
                                 },
                                 {
                                     "key": "vary",
@@ -662,7 +374,7 @@
                                 },
                                 {
                                     "key": "x-ratelimit-remaining",
-                                    "value": "51"
+                                    "value": "54"
                                 },
                                 {
                                     "key": "vary",
@@ -687,7 +399,7 @@
                                 {
                                     "id": "id",
                                     "key": "id",
-                                    "value": "dolorum",
+                                    "value": "ducimus",
                                     "description": "The ID of the checkAnswer."
                                 }
                             ]
@@ -751,7 +463,7 @@
                                 {
                                     "id": "id",
                                     "key": "id",
-                                    "value": "ut",
+                                    "value": "et",
                                     "description": "The ID of the deleteQuestion."
                                 }
                             ]
@@ -818,7 +530,7 @@
                                 },
                                 {
                                     "key": "x-ratelimit-remaining",
-                                    "value": "50"
+                                    "value": "53"
                                 },
                                 {
                                     "key": "vary",
@@ -874,7 +586,7 @@
                                 },
                                 {
                                     "key": "x-ratelimit-remaining",
-                                    "value": "49"
+                                    "value": "52"
                                 },
                                 {
                                     "key": "vary",
