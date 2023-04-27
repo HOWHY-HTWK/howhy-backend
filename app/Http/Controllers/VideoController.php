@@ -16,10 +16,10 @@ class VideoController extends Controller
         $videos = Video::all();
 
         $videosWithUserProgress = $videos->map(function ($video) {
+            //add user progress to videodata
             $video['success'] = $this->getUserProgress($video);
             return $video;
         });
-
         return $videosWithUserProgress;
     }
 
@@ -29,9 +29,9 @@ class VideoController extends Controller
         $questions = $video->questions();
         $correctCount = 0;
         if ($user) {
-            $correctCount = Question::whereHas('users', function ($query) use ($user){
+            $correctCount = Question::whereHas('users', function ($query) use ($user) {
                 $query->where('user_id', $user->id)
-                      ->where('correct', true);
+                    ->where('correct', true);
             })->where('video_id', $video->id)->get()->count();
         }
         return [
@@ -46,32 +46,32 @@ class VideoController extends Controller
         return $response;
     }
 
+    /*
+    *   returns a list of all timecodes with the question id's and if the user is
+    *   logged in the information if the user answered the question correctly in the past is returned
+    */
     public function timecodes($videoId)
     {
-        $video = Video::where('videoId', $videoId)->firstOrFail();
-        $questions = $video->questions()->get();
-
-        $timecodes = [];
-
+        $questions = Video::where('videoId', $videoId)->firstOrFail()->questions()->get();
         $user = Auth::user();
-        foreach ($questions as $question) {
+        $questionTimecodes = $questions->map(function ($question) use ($user) {
             $correct = null;
             if ($user && $question->users->find($user->id)) {
                 $correct = $question->users->find($user->id)->pivot->correct;
             }
-            array_push($timecodes, ['id' => $question->id, 'timecode' => $question->timecode, 'correct' => $correct]);
-        }
-        return $timecodes;
+            return ['id' => $question->id, 'timecode' => $question->timecode, 'correct' => $correct];
+        });
+        return $questionTimecodes;
     }
 
     public function questions($videoId)
     {
         $video = Video::where('videoId', $videoId)->firstOrFail();
         $questions = $video->questions()->get();
-
         return $questions;
     }
 
+    //get all answers for one user for video (currently not used)
     public function getUserAnswers($videoId)
     {
         $user = Auth::user();
@@ -89,40 +89,4 @@ class VideoController extends Controller
         }
     }
 
-    public function transferScript()
-    {
-        $oldVideos = VideoData::all();
-
-        foreach ($oldVideos as $oldVideo) {
-            $video = new Video([
-                'videoId' => $oldVideo->videoId,
-            ]);
-
-            $user = User::where('id', $oldVideo->creator)->first();
-            if ($user) {
-                $video->user()->associate($user);
-            } else {
-                $video->user()->associate(User::find(1)->first());
-            }
-            $video->save();
-
-            $oldQuestions = $oldVideo->data;
-
-            foreach ($oldQuestions as $oldQuestion) {
-                $question = new Question([
-                    'questionText' => $oldQuestion['question'],
-                    'type' => $oldQuestion['type'],
-                    'data' => json_encode($oldQuestion['answers']),
-                    'answers' =>  json_encode($oldQuestion['answers']),
-                    'timecode' => $oldQuestion['timecode'],
-                    'correctAnswers' => json_encode($oldQuestion['correctAnswers']),
-                ]);
-
-                // $question->video()->save($video);
-                $video->questions()->save($question);
-
-                $question->save();
-            }
-        }
-    }
 }

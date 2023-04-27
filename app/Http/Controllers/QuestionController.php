@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Auth;
 
 class QuestionController extends Controller
 {
+    //get question without correct answers so the user cant cheat
     public function getById($id)
     {
         $question = Question::find($id);
@@ -17,6 +18,7 @@ class QuestionController extends Controller
         return $question;
     }
 
+    //check the users answers, store the answer and increase user score if answer is correct
     public function checkAnswers($id)
     {
         $success = false;
@@ -113,12 +115,12 @@ class QuestionController extends Controller
     public function deleteQuestion($id)
     {
         Question::find($id)->delete();
-
         return [
             'success' => true,
         ];
     }
 
+    //return user score if is logged in. else return zero
     public function score()
     {
         $score = 0;
@@ -131,14 +133,4 @@ class QuestionController extends Controller
         ];
     }
 
-
-    //just for changing the table once
-    public function fixJsonInTable()
-    {
-        $questions = Question::all();
-        foreach ($questions as $question) {
-            $question->answers = json_decode($question->answers);
-            $question->save();
-        }
-    }
 }
