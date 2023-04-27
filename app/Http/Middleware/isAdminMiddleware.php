@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Symfony\Component\HttpFoundation\Response;
 
-class IsCreatorMiddleware
+class isAdminMiddleware
 {
     /**
      * Handle an incoming request.
@@ -16,8 +16,8 @@ class IsCreatorMiddleware
      */
     public function handle(Request $request, Closure $next): Response
     {
-        if(Auth::user()){
-            if((Auth::user()->role == 'creator') || (Auth::user()->role == 'admin')){
+        if (Auth::user()) {
+            if (Auth::user()->role == 'admin') {
                 return $next($request);
             } else {
                 abort(403, 'Sie besitzen keine ausreichenden Zugriffsrechte');

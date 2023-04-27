@@ -103,12 +103,12 @@ class VideoDataController extends Controller
         return 204;
     }
 
-    public function getAllowedEmail(Request $request)
+    public function getAllowedEmail()
     {
         return AllowedEmail::all();
     }
 
-    public function setAllowedEmail(Request $request)
+    public function setAllowedEmail()
     {
         request()->validate([
             'email' => 'required',
