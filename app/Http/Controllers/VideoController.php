@@ -66,9 +66,14 @@ class VideoController extends Controller
 
     public function questions($videoId)
     {
-        $video = Video::where('videoId', $videoId)->firstOrFail();
-        $questions = $video->questions()->get();
-        return $questions;
+        $video = Video::where('videoId', $videoId)->first();
+
+        if($video){
+            $questions = $video->questions()->get();
+            return $questions;
+        } else {
+            return [];
+        }
     }
 
     //get all answers for one user for video (currently not used)
