@@ -1,0 +1,14 @@
+
+version: '3'
+
+services:
+
+  mysql-development:
+    image: arm64v8/mysql:latest
+    environment:
+      MYSQL_ROOT_PASSWORD: howhydb
+      MYSQL_DATABASE: howhydb
+    volumes:
+      - ./dbdata/mysql:/var/lib/mysql
+    ports:
+      - "3308:3306"
