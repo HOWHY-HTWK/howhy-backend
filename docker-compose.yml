@@ -3,33 +3,36 @@ services:
     nginx:
         container_name: lara-nginx
         image: nginx:alpine
-        working_dir: /var/www/html
+        working_dir: /var/www
         restart: unless-stopped
         tty: true
         ports:
             - "80:80"
             - "443:443"
         volumes:
-            - ./:/var/www/html
-            - ./nginx:/etc/nginx/conf.d
+            - ./:/var/www
+            - ./nginx:/etc/nginx/conf.d/
         networks:
             - howhy
         depends_on:
             - app
     app:
         build:
+            args:
+                user: someuser
+                uid: 1000
             context: ./
             dockerfile: Dockerfile
         image: howhy-backend
-        container_name: howhy-backend
+        container_name: howhy-backend-app
         restart: unless-stopped
         tty: true
         environment:
             SERVICE_NAME: howhy-backend
             SERVICE_TAGS: dev
-        working_dir: /var/www/html
+        working_dir: /var/www/
         volumes:
-            - ./:/var/www/html
+            - ./:/var/www/
         networks:
             - howhy
         depends_on:
@@ -48,7 +51,6 @@ services:
             MYSQL_ALLOW_EMPTY_PASSWORD: 'yes'
         volumes:
             - 'mariadb:/var/lib/mysql'
-            - './vendor/laravel/sail/database/mysql/create-testing-database.sh:/docker-entrypoint-initdb.d/10-create-testing-database.sh'
         networks:
             - howhy
         healthcheck:
@@ -59,6 +61,7 @@ services:
                 - '-p${DB_PASSWORD}'
             retries: 3
             timeout: 5s
+    # remove in production
     mailpit:
         image: 'axllent/mailpit:latest'
         ports:
