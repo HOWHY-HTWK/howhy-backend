@@ -1,40 +1,26 @@
-version: '3.7'
+version: '3'
 services:
-    nginx:
-        container_name: lara-nginx
-        image: nginx:alpine
-        working_dir: /var/www
-        restart: unless-stopped
-        tty: true
-        ports:
-            - "80:80"
-            - "443:443"
-        volumes:
-            - ./:/var/www
-            - ./nginx:/etc/nginx/conf.d/
-        networks:
-            - howhy
-        depends_on:
-            - app
-    app:
+    laravel.test:
         build:
-            args:
-                user: someuser
-                uid: 1000
-            context: ./
+            context: ./docker/8.2
             dockerfile: Dockerfile
-        image: howhy-backend
-        container_name: howhy-backend-app
-        restart: unless-stopped
-        tty: true
+            args:
+                WWWGROUP: '${WWWGROUP}'
+        image: sail-8.2/app
+        extra_hosts:
+            - 'host.docker.internal:host-gateway'
+        ports:
+            - '${APP_PORT:-80}:80'
         environment:
-            SERVICE_NAME: howhy-backend
-            SERVICE_TAGS: dev
-        working_dir: /var/www/
+            WWWUSER: '${WWWUSER}'
+            LARAVEL_SAIL: 1
+            XDEBUG_MODE: '${SAIL_XDEBUG_MODE:-off}'
+            XDEBUG_CONFIG: '${SAIL_XDEBUG_CONFIG:-client_host=host.docker.internal}'
+            IGNITION_LOCAL_SITES_PATH: '${PWD}'
         volumes:
-            - ./:/var/www/
+            - '.:/var/www/html'
         networks:
-            - howhy
+            - sail
         depends_on:
             - mariadb
             - mailpit
@@ -50,9 +36,10 @@ services:
             MYSQL_PASSWORD: '${DB_PASSWORD}'
             MYSQL_ALLOW_EMPTY_PASSWORD: 'yes'
         volumes:
-            - 'mariadb:/var/lib/mysql'
+            - 'sail-mariadb:/var/lib/mysql'
+            - './vendor/laravel/sail/database/mysql/create-testing-database.sh:/docker-entrypoint-initdb.d/10-create-testing-database.sh'
         networks:
-            - howhy
+            - sail
         healthcheck:
             test:
                 - CMD
@@ -61,17 +48,16 @@ services:
                 - '-p${DB_PASSWORD}'
             retries: 3
             timeout: 5s
-    # remove in production
     mailpit:
         image: 'axllent/mailpit:latest'
         ports:
             - '${FORWARD_MAILPIT_PORT:-1025}:1025'
             - '${FORWARD_MAILPIT_DASHBOARD_PORT:-8025}:8025'
         networks:
-            - howhy
+            - sail
 networks:
-    howhy:
+    sail:
         driver: bridge
 volumes:
-    mariadb:
+    sail-mariadb:
         driver: local
