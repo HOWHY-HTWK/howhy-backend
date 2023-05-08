@@ -33,4 +33,12 @@ The first time you run the project:
 
 - If you run the [frontend](https://github.com/HOWHY-HTWK/howhy-frontend/tree/development) you can log in there with 'admin@admin.net' and your admin password
 
+### Deploy with Docker
 
+- run `cp .env.example .env.`
+- set the database password and the admin password in the .env file
+- `docker compose -f docker-compose-prod.yml up` to run the project
+- Run `docker exec howhy-backend-app-1 composer install` to install all dependencies
+- Run `docker exec howhy-backend-app-1 php artisan key:generate`
+- Run `docker exec howhy-backend-app-1 php artisan migrate` to create all nessecary database tables
+- run `docker exec howhy-backend-app-1 artisan db:seed` to make the first user with admin rights
