@@ -16,7 +16,10 @@ use App\Http\Controllers\VideoDataController;
 */
 
 //general
-Route::middleware('auth:sanctum')->middleware('isCreator')->middleware('verified')->get('check', [VideoDataController::class, 'check']);
+Route::middleware('auth:sanctum')
+    ->middleware('isCreator')
+    ->middleware('verified')
+    ->get('check', [VideoDataController::class, 'check']);
 
 //videoController
 Route::get('videos', [VideoController::class, 'index']);
@@ -29,33 +32,42 @@ Route::middleware('auth:sanctum')
 
 //questionController
 Route::get('question/{id}', [QuestionController::class, 'getById']);
+
 Route::post('question/checkAnswers/{id}', [QuestionController::class, 'checkAnswers']);
+
 Route::middleware('auth:sanctum')
     ->middleware('isCreator')
     ->middleware('verified')
     ->post('question', [QuestionController::class, 'storeQuestion']);
+
 Route::middleware('auth:sanctum')
     ->middleware('isCreator')
     ->middleware('verified')
     ->post('deleteQuestion/{id}', [QuestionController::class, 'deleteQuestion']);
+
 Route::get('score/', [QuestionController::class, 'score']);
 
 //userController
+
 Route::middleware('auth:sanctum')->get('user', [UserController::class, 'index']);
 
 //admin
+
 Route::middleware('auth:sanctum')
     ->middleware('isCreator')
     ->middleware('verified')
     ->get('allowed-email', [VideoDataController::class, 'getAllowedEmail']);
+
 Route::middleware('auth:sanctum')
     ->middleware('isAdmin')
     ->middleware('verified')
     ->post('allowed-email', [VideoDataController::class, 'setAllowedEmail']);
+
 Route::middleware('auth:sanctum')
     ->middleware('isAdmin')
     ->middleware('verified')
     ->delete('allowed-email/{id}', [VideoDataController::class, 'deleteAllowedEmail']);
 
 //scripts to change database
+
 // Route::get('transfer', [VideoController::class, 'transferScript']);
