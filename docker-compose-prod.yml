@@ -1,17 +1,17 @@
 version: '3.7'
 services:
-    proxy:
-        container_name: proxy
-        image: nginx
-        ports:
-            - 80:80
-            # - 443:443
-        extra_hosts:
-            - 'host.docker.internal:host-gateway'
-        volumes:
-            - ./nginx/proxy:/etc/nginx/conf.d/
-        networks:
-            - howhy
+    # proxy:
+    #     container_name: proxy
+    #     image: nginx
+    #     ports:
+    #         - 80:80
+    #         # - 443:443
+    #     # extra_hosts:
+    #     #     - 'host.docker.internal:host-gateway'
+    #     volumes:
+    #         - ./nginx/proxy/conf.d:/etc/nginx/conf.d/
+    #     networks:
+    #         - howhy
     nginx:
         image: nginx:alpine
         working_dir: /var/www
