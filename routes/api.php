@@ -68,6 +68,11 @@ Route::middleware('auth:sanctum')
     ->middleware('verified')
     ->delete('allowed-email/{id}', [VideoDataController::class, 'deleteAllowedEmail']);
 
+
+// user login and signup
+Route::post('userlogin', [UserController::class, 'userLogin']);
+Route::post('usersignup', [UserController::class, 'userSignUp']);
+
 //scripts to change database
 
 // Route::get('transfer', [VideoController::class, 'transferScript']);

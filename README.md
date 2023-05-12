@@ -36,7 +36,7 @@ The first time you run the project:
 ### Deploy with Docker
 
 - run `cp .env.example .env.`
-- set the database password and the admin password in the .env file
+- set the database password, the admin password and other properties in the .env file
 - change the uid in the docker-compose-prod.yml file to the uid of the current user in the host system
 - `docker compose -f docker-compose-prod.yml up` to run the project
 - Run `docker exec howhy-backend-app-1 composer install` to install all dependencies
