@@ -68,6 +68,18 @@ Route::middleware('auth:sanctum')
     ->middleware('verified')
     ->delete('allowed-email/{id}', [VideoDataController::class, 'deleteAllowedEmail']);
 
+// rights
+
+Route::middleware('auth:sanctum')
+    ->middleware('isAdmin')
+    ->middleware('verified')
+    ->get('users', [UserController::class, 'getAll']);
+
+Route::middleware('auth:sanctum')
+    ->middleware('isAdmin')
+    ->middleware('verified')
+    ->post('makeEditor/{id}', [UserController::class, 'makeEditor']);
+
 
 // user login and signup
 Route::post('userlogin', [UserController::class, 'userLogin']);

@@ -14,6 +14,20 @@ class UserController extends Controller
         return Auth::user();
     }
 
+    public function getAll()
+    {
+        return User::all();
+    }
+
+    public function makeEditor($id){
+        $user = User::find($id);
+        $user->role = 'creator';
+        $user->save();
+
+        return true;
+    }
+
+    //TODO not done
     public function userLogin()
     {
         return [
