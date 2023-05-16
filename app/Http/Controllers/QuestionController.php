@@ -56,6 +56,8 @@ class QuestionController extends Controller
 
     public function storeQuestion()
     {
+        var_dump(Auth:user()->role);
+
         request()->validate([
             'id' => 'nullable|integer',     //null if question is new
             'videoId' => 'nullable|string', //null if question is old

@@ -2,21 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-use App\Models\VideoData;
 use App\Models\AllowedEmail;
-use Illuminate\Support\Arr;
-use Psy\Readline\Hoa\Console;
+use Illuminate\Http\Request;
 
-class VideoDataController extends Controller
+class EmailController extends Controller
 {
-    public function check()
-    {
-        return [
-            'success' => true
-        ];
-    }
-
     public function getAllowedEmail()
     {
         return AllowedEmail::all();
@@ -41,5 +31,4 @@ class VideoDataController extends Controller
         AllowedEmail::destroy($id);
         return AllowedEmail::all();
     }
-
 }

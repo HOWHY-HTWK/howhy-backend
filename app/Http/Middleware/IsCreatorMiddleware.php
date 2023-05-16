@@ -17,6 +17,7 @@ class IsCreatorMiddleware
     public function handle(Request $request, Closure $next): Response
     {
         if(Auth::user()){
+
             if((Auth::user()->role == 'creator') || (Auth::user()->role == 'admin')){
                 return $next($request);
             } else {

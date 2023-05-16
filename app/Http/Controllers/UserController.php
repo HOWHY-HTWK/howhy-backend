@@ -9,6 +9,13 @@ use Illuminate\Support\Facades\Auth;
 class UserController extends Controller
 {
 
+    public function check()
+    {
+        return [
+            'success' => true
+        ];
+    }
+
     public function index()
     {
         return Auth::user();

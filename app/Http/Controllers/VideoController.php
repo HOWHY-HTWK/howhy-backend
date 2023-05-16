@@ -14,7 +14,6 @@ class VideoController extends Controller
     public function index()
     {
         $videos = Video::all();
-
         $videosWithUserProgress = $videos->map(function ($video) {
             //add user progress to videodata
             $video['success'] = $this->getUserProgress($video);
