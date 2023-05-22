@@ -31,7 +31,7 @@ services:
         build:
             args:
                 user: someuser
-                uid: 1000
+                uid: '${UID}'
             context: ./
             dockerfile: Dockerfile
         image: howhy-backend
