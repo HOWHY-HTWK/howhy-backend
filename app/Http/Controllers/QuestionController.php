@@ -5,8 +5,10 @@ namespace App\Http\Controllers;
 use App\Models\Question;
 use App\Models\User;
 use App\Models\Video;
+use GrahamCampbell\ResultType\Success;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Log;
 
 class QuestionController extends Controller
 {
@@ -35,18 +37,21 @@ class QuestionController extends Controller
         //store question result if user is logged in
         if ($user) {
             //check if answer is already stored
-            if ($question->users->find($user->id)) {
-                //if previous answer was correct, do nothing else update
-                if ($question->users()->find($user->id)->pivot->correct) {
-                } else {
-                    $question->users()->find($user->id)->pivot->delete();
-                    $question->users()->attach($user, ['correct' => $success]);
-                }
+            $userWithPivot = $question->users->where('id', $user->id)->sortBy('created_at')->last();
+            if ($userWithPivot && $userWithPivot->pivot->correct) {
+                // do nothing because question has already bin answered correctly before
             } else {
                 $question->users()->attach($user, ['correct' => $success]);
+                if($success){
+                    $user->score = $user->score + 100;
+                    if($this->videoCompleteWithoutWrongAnswers($question, $user)){
+                        $user->score = $user->score + 100;
+                    }
+                    $user->save();
+                }
             }
-            $user->score = $user->score + 100;
-            $user->save();
+        } else {
+            // do nothing of no user is logged in
         }
 
         return [
@@ -54,10 +59,23 @@ class QuestionController extends Controller
         ];
     }
 
+    private function videoCompleteWithoutWrongAnswers($question, $user)
+    {
+        $questions = $question->video->questions;
+        foreach ($questions as $element) {
+            $userWithPivot = $element->users->find($user->id);
+            Log::info($userWithPivot);
+            if ($userWithPivot && $userWithPivot->pivot->correct) {
+                // dont return
+            } else {
+                return false;
+            }
+        }
+        return true;
+    }
+
     public function storeQuestion()
     {
-        var_dump(Auth:user()->role);
-
         request()->validate([
             'id' => 'nullable|integer',     //null if question is new
             'videoId' => 'nullable|string', //null if question is old
@@ -134,5 +152,4 @@ class QuestionController extends Controller
             'score' => $score,
         ];
     }
-
 }

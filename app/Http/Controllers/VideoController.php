@@ -56,7 +56,7 @@ class VideoController extends Controller
         $questionTimecodes = $questions->map(function ($question) use ($user) {
             $correct = null;
             if ($user && $question->users->find($user->id)) {
-                $correct = $question->users->find($user->id)->pivot->correct;
+                $correct = $question->users->where('id', $user->id)->sortBy('created_at')->last()->pivot->correct;
             }
             return ['id' => $question->id, 'timecode' => $question->timecode, 'correct' => $correct];
         });

@@ -5,7 +5,6 @@ use App\Http\Controllers\QuestionController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\VideoController;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\VideoDataController;
 
 /*
 |--------------------------------------------------------------------------
@@ -43,7 +42,8 @@ Route::get('score/', [QuestionController::class, 'score']);
 
 //userController
 
-Route::middleware('auth:sanctum')->get('user', [UserController::class, 'index']);
+Route::get('user', [UserController::class, 'index'])
+    ->middleware('auth:sanctum');
 
 //admin
 
