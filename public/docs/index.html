@@ -1,0 +1,3245 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <title>Laravel Documentation</title>
+
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="../docs/css/theme-default.style.css" media="screen">
+    <link rel="stylesheet" href="../docs/css/theme-default.print.css" media="print">
+
+    <script src="https://cdn.jsdelivr.net/npm/lodash@4.17.10/lodash.min.js"></script>
+
+    <link rel="stylesheet"
+          href="https://unpkg.com/@highlightjs/cdn-assets@11.6.0/styles/obsidian.min.css">
+    <script src="https://unpkg.com/@highlightjs/cdn-assets@11.6.0/highlight.min.js"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jets/0.14.1/jets.min.js"></script>
+
+    <style id="language-style">
+        /* starts out as display none and is replaced with js later  */
+                    body .content .bash-example code { display: none; }
+                    body .content .javascript-example code { display: none; }
+            </style>
+
+    <script>
+        var tryItOutBaseUrl = "localhost:8000";
+        var useCsrf = Boolean();
+        var csrfUrl = "/sanctum/csrf-cookie";
+    </script>
+    <script src="../docs/js/tryitout-4.18.0.js"></script>
+
+    <script src="../docs/js/theme-default-4.18.0.js"></script>
+
+</head>
+
+<body data-languages="[&quot;bash&quot;,&quot;javascript&quot;]">
+
+<a href="#" id="nav-button">
+    <span>
+        MENU
+        <img src="../docs/images/navbar.png" alt="navbar-image"/>
+    </span>
+</a>
+<div class="tocify-wrapper">
+    
+            <div class="lang-selector">
+                                            <button type="button" class="lang-button" data-language-name="bash">bash</button>
+                                            <button type="button" class="lang-button" data-language-name="javascript">javascript</button>
+                    </div>
+    
+    <div class="search">
+        <input type="text" class="search" id="input-search" placeholder="Search">
+    </div>
+
+    <div id="toc">
+                    <ul id="tocify-header-introduction" class="tocify-header">
+                <li class="tocify-item level-1" data-unique="introduction">
+                    <a href="#introduction">Introduction</a>
+                </li>
+                            </ul>
+                    <ul id="tocify-header-authenticating-requests" class="tocify-header">
+                <li class="tocify-item level-1" data-unique="authenticating-requests">
+                    <a href="#authenticating-requests">Authenticating requests</a>
+                </li>
+                            </ul>
+                    <ul id="tocify-header-endpoints" class="tocify-header">
+                <li class="tocify-item level-1" data-unique="endpoints">
+                    <a href="#endpoints">Endpoints</a>
+                </li>
+                                    <ul id="tocify-subheader-endpoints" class="tocify-subheader">
+                                                    <li class="tocify-item level-2" data-unique="endpoints-GETapi-check">
+                                <a href="#endpoints-GETapi-check">GET api/check</a>
+                            </li>
+                                                                                <li class="tocify-item level-2" data-unique="endpoints-GETapi-videos">
+                                <a href="#endpoints-GETapi-videos">GET api/videos</a>
+                            </li>
+                                                                                <li class="tocify-item level-2" data-unique="endpoints-GETapi-video--videoId-">
+                                <a href="#endpoints-GETapi-video--videoId-">GET api/video/{videoId}</a>
+                            </li>
+                                                                                <li class="tocify-item level-2" data-unique="endpoints-GETapi-timecodes--videoId-">
+                                <a href="#endpoints-GETapi-timecodes--videoId-">GET api/timecodes/{videoId}</a>
+                            </li>
+                                                                                <li class="tocify-item level-2" data-unique="endpoints-GETapi-questions--videoId-">
+                                <a href="#endpoints-GETapi-questions--videoId-">GET api/questions/{videoId}</a>
+                            </li>
+                                                                                <li class="tocify-item level-2" data-unique="endpoints-GETapi-question--id-">
+                                <a href="#endpoints-GETapi-question--id-">GET api/question/{id}</a>
+                            </li>
+                                                                                <li class="tocify-item level-2" data-unique="endpoints-POSTapi-question-checkAnswers--id-">
+                                <a href="#endpoints-POSTapi-question-checkAnswers--id-">POST api/question/checkAnswers/{id}</a>
+                            </li>
+                                                                                <li class="tocify-item level-2" data-unique="endpoints-POSTapi-question">
+                                <a href="#endpoints-POSTapi-question">POST api/question</a>
+                            </li>
+                                                                                <li class="tocify-item level-2" data-unique="endpoints-POSTapi-deleteQuestion--id-">
+                                <a href="#endpoints-POSTapi-deleteQuestion--id-">POST api/deleteQuestion/{id}</a>
+                            </li>
+                                                                                <li class="tocify-item level-2" data-unique="endpoints-GETapi-score">
+                                <a href="#endpoints-GETapi-score">GET api/score</a>
+                            </li>
+                                                                                <li class="tocify-item level-2" data-unique="endpoints-GETapi-allowed-email">
+                                <a href="#endpoints-GETapi-allowed-email">GET api/allowed-email</a>
+                            </li>
+                                                                                <li class="tocify-item level-2" data-unique="endpoints-POSTapi-allowed-email">
+                                <a href="#endpoints-POSTapi-allowed-email">POST api/allowed-email</a>
+                            </li>
+                                                                                <li class="tocify-item level-2" data-unique="endpoints-DELETEapi-allowed-email--id-">
+                                <a href="#endpoints-DELETEapi-allowed-email--id-">DELETE api/allowed-email/{id}</a>
+                            </li>
+                                                                        </ul>
+                            </ul>
+            </div>
+
+    <ul class="toc-footer" id="toc-footer">
+                    <li style="padding-bottom: 5px;"><a href="../docs/collection.json">View Postman collection</a></li>
+                            <li style="padding-bottom: 5px;"><a href="../docs/openapi.yaml">View OpenAPI spec</a></li>
+                <li><a href="http://github.com/knuckleswtf/scribe">Documentation powered by Scribe ✍</a></li>
+    </ul>
+
+    <ul class="toc-footer" id="last-updated">
+        <li>Last updated: April 27, 2023</li>
+    </ul>
+</div>
+
+<div class="page-wrapper">
+    <div class="dark-box"></div>
+    <div class="content">
+        <h1 id="introduction">Introduction</h1>
+<aside>
+    <strong>Base URL</strong>: <code>localhost:8000</code>
+</aside>
+<p>This documentation aims to provide all the information you need to work with our API.</p>
+<aside>As you scroll, you'll see code examples for working with the API in different programming languages in the dark area to the right (or as part of the content on mobile).
+You can switch the language used with the tabs at the top right (or from the nav menu at the top left on mobile).</aside>
+
+        <h1 id="authenticating-requests">Authenticating requests</h1>
+<p>This API is not authenticated.</p>
+
+        <h1 id="endpoints">Endpoints</h1>
+
+    
+
+                                <h2 id="endpoints-GETapi-check">GET api/check</h2>
+
+<p>
+</p>
+
+
+
+<span id="example-requests-GETapi-check">
+<blockquote>Example request:</blockquote>
+
+
+<div class="bash-example">
+    <pre><code class="language-bash">curl --request GET \
+    --get "localhost:8000/api/check" \
+    --header "Content-Type: application/json" \
+    --header "Accept: application/json"</code></pre></div>
+
+
+<div class="javascript-example">
+    <pre><code class="language-javascript">const url = new URL(
+    "localhost:8000/api/check"
+);
+
+const headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+fetch(url, {
+    method: "GET",
+    headers,
+}).then(response =&gt; response.json());</code></pre></div>
+
+</span>
+
+<span id="example-responses-GETapi-check">
+            <blockquote>
+            <p>Example response (200):</p>
+        </blockquote>
+                <details class="annotation">
+            <summary style="cursor: pointer;">
+                <small onclick="textContent = parentElement.parentElement.open ? 'Show headers' : 'Hide headers'">Show headers</small>
+            </summary>
+            <pre><code class="language-http">cache-control: no-cache, private
+content-type: application/json
+x-ratelimit-limit: 60
+x-ratelimit-remaining: 59
+vary: Origin
+ </code></pre></details>         <pre>
+
+<code class="language-json" style="max-height: 300px;">{
+    &quot;success&quot;: true
+}</code>
+ </pre>
+    </span>
+<span id="execution-results-GETapi-check" hidden>
+    <blockquote>Received response<span
+                id="execution-response-status-GETapi-check"></span>:
+    </blockquote>
+    <pre class="json"><code id="execution-response-content-GETapi-check"
+      data-empty-response-text="<Empty response>" style="max-height: 400px;"></code></pre>
+</span>
+<span id="execution-error-GETapi-check" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-GETapi-check">
+
+Tip: Check that you&#039;re properly connected to the network.
+If you&#039;re a maintainer of ths API, verify that your API is running and you&#039;ve enabled CORS.
+You can check the Dev Tools console for debugging information.</code></pre>
+</span>
+<form id="form-GETapi-check" data-method="GET"
+      data-path="api/check"
+      data-authed="0"
+      data-hasfiles="0"
+      data-isarraybody="0"
+      autocomplete="off"
+      onsubmit="event.preventDefault(); executeTryOut('GETapi-check', this);">
+    <h3>
+        Request&nbsp;&nbsp;&nbsp;
+                    <button type="button"
+                    style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-tryout-GETapi-check"
+                    onclick="tryItOut('GETapi-check');">Try it out ⚡
+            </button>
+            <button type="button"
+                    style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-canceltryout-GETapi-check"
+                    onclick="cancelTryOut('GETapi-check');" hidden>Cancel 🛑
+            </button>&nbsp;&nbsp;
+            <button type="submit"
+                    style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-executetryout-GETapi-check"
+                    data-initial-text="Send Request 💥"
+                    data-loading-text="⏱ Sending..."
+                    hidden>Send Request 💥
+            </button>
+            </h3>
+            <p>
+            <small class="badge badge-green">GET</small>
+            <b><code>api/check</code></b>
+        </p>
+                <h4 class="fancy-heading-panel"><b>Headers</b></h4>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Content-Type</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+               name="Content-Type"                data-endpoint="GETapi-check"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Accept</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+               name="Accept"                data-endpoint="GETapi-check"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                        </form>
+
+                    <h2 id="endpoints-GETapi-videos">GET api/videos</h2>
+
+<p>
+</p>
+
+
+
+<span id="example-requests-GETapi-videos">
+<blockquote>Example request:</blockquote>
+
+
+<div class="bash-example">
+    <pre><code class="language-bash">curl --request GET \
+    --get "localhost:8000/api/videos" \
+    --header "Content-Type: application/json" \
+    --header "Accept: application/json"</code></pre></div>
+
+
+<div class="javascript-example">
+    <pre><code class="language-javascript">const url = new URL(
+    "localhost:8000/api/videos"
+);
+
+const headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+fetch(url, {
+    method: "GET",
+    headers,
+}).then(response =&gt; response.json());</code></pre></div>
+
+</span>
+
+<span id="example-responses-GETapi-videos">
+            <blockquote>
+            <p>Example response (200):</p>
+        </blockquote>
+                <details class="annotation">
+            <summary style="cursor: pointer;">
+                <small onclick="textContent = parentElement.parentElement.open ? 'Show headers' : 'Hide headers'">Show headers</small>
+            </summary>
+            <pre><code class="language-http">cache-control: no-cache, private
+content-type: application/json
+x-ratelimit-limit: 60
+x-ratelimit-remaining: 58
+vary: Origin
+ </code></pre></details>         <pre>
+
+<code class="language-json" style="max-height: 300px;">[
+    {
+        &quot;id&quot;: 10,
+        &quot;created_at&quot;: &quot;2023-04-24T15:00:59.000000Z&quot;,
+        &quot;updated_at&quot;: &quot;2023-04-24T15:00:59.000000Z&quot;,
+        &quot;videoId&quot;: &quot;v1266420c88afou4upfb&quot;,
+        &quot;deleted_at&quot;: null,
+        &quot;user_id&quot;: 1,
+        &quot;success&quot;: {
+            &quot;questionCount&quot;: 4,
+            &quot;correctCount&quot;: 0
+        }
+    },
+    {
+        &quot;id&quot;: 11,
+        &quot;created_at&quot;: &quot;2023-04-24T15:00:59.000000Z&quot;,
+        &quot;updated_at&quot;: &quot;2023-04-24T15:00:59.000000Z&quot;,
+        &quot;videoId&quot;: &quot;v1266421de9fbadwozcp&quot;,
+        &quot;deleted_at&quot;: null,
+        &quot;user_id&quot;: 10,
+        &quot;success&quot;: {
+            &quot;questionCount&quot;: 1,
+            &quot;correctCount&quot;: 0
+        }
+    },
+    {
+        &quot;id&quot;: 12,
+        &quot;created_at&quot;: &quot;2023-04-24T15:00:59.000000Z&quot;,
+        &quot;updated_at&quot;: &quot;2023-04-24T15:00:59.000000Z&quot;,
+        &quot;videoId&quot;: &quot;v1266421de987iu6uywq&quot;,
+        &quot;deleted_at&quot;: null,
+        &quot;user_id&quot;: 10,
+        &quot;success&quot;: {
+            &quot;questionCount&quot;: 1,
+            &quot;correctCount&quot;: 0
+        }
+    },
+    {
+        &quot;id&quot;: 13,
+        &quot;created_at&quot;: &quot;2023-04-24T15:00:59.000000Z&quot;,
+        &quot;updated_at&quot;: &quot;2023-04-24T15:00:59.000000Z&quot;,
+        &quot;videoId&quot;: &quot;v1266421da9565ehxjh4&quot;,
+        &quot;deleted_at&quot;: null,
+        &quot;user_id&quot;: 10,
+        &quot;success&quot;: {
+            &quot;questionCount&quot;: 1,
+            &quot;correctCount&quot;: 0
+        }
+    },
+    {
+        &quot;id&quot;: 14,
+        &quot;created_at&quot;: &quot;2023-04-24T15:00:59.000000Z&quot;,
+        &quot;updated_at&quot;: &quot;2023-04-24T15:00:59.000000Z&quot;,
+        &quot;videoId&quot;: &quot;v1266421da774qtqlg5z&quot;,
+        &quot;deleted_at&quot;: null,
+        &quot;user_id&quot;: 10,
+        &quot;success&quot;: {
+            &quot;questionCount&quot;: 1,
+            &quot;correctCount&quot;: 0
+        }
+    },
+    {
+        &quot;id&quot;: 15,
+        &quot;created_at&quot;: &quot;2023-04-24T15:00:59.000000Z&quot;,
+        &quot;updated_at&quot;: &quot;2023-04-24T15:00:59.000000Z&quot;,
+        &quot;videoId&quot;: &quot;v1266421da849hynlri2&quot;,
+        &quot;deleted_at&quot;: null,
+        &quot;user_id&quot;: 10,
+        &quot;success&quot;: {
+            &quot;questionCount&quot;: 1,
+            &quot;correctCount&quot;: 0
+        }
+    },
+    {
+        &quot;id&quot;: 16,
+        &quot;created_at&quot;: &quot;2023-04-24T15:00:59.000000Z&quot;,
+        &quot;updated_at&quot;: &quot;2023-04-24T15:00:59.000000Z&quot;,
+        &quot;videoId&quot;: &quot;v1266421dc2c9nk3866x&quot;,
+        &quot;deleted_at&quot;: null,
+        &quot;user_id&quot;: 10,
+        &quot;success&quot;: {
+            &quot;questionCount&quot;: 1,
+            &quot;correctCount&quot;: 0
+        }
+    },
+    {
+        &quot;id&quot;: 17,
+        &quot;created_at&quot;: &quot;2023-04-24T15:00:59.000000Z&quot;,
+        &quot;updated_at&quot;: &quot;2023-04-24T15:00:59.000000Z&quot;,
+        &quot;videoId&quot;: &quot;v12663da4960dj8ld74u&quot;,
+        &quot;deleted_at&quot;: null,
+        &quot;user_id&quot;: 1,
+        &quot;success&quot;: {
+            &quot;questionCount&quot;: 2,
+            &quot;correctCount&quot;: 0
+        }
+    }
+]</code>
+ </pre>
+    </span>
+<span id="execution-results-GETapi-videos" hidden>
+    <blockquote>Received response<span
+                id="execution-response-status-GETapi-videos"></span>:
+    </blockquote>
+    <pre class="json"><code id="execution-response-content-GETapi-videos"
+      data-empty-response-text="<Empty response>" style="max-height: 400px;"></code></pre>
+</span>
+<span id="execution-error-GETapi-videos" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-GETapi-videos">
+
+Tip: Check that you&#039;re properly connected to the network.
+If you&#039;re a maintainer of ths API, verify that your API is running and you&#039;ve enabled CORS.
+You can check the Dev Tools console for debugging information.</code></pre>
+</span>
+<form id="form-GETapi-videos" data-method="GET"
+      data-path="api/videos"
+      data-authed="0"
+      data-hasfiles="0"
+      data-isarraybody="0"
+      autocomplete="off"
+      onsubmit="event.preventDefault(); executeTryOut('GETapi-videos', this);">
+    <h3>
+        Request&nbsp;&nbsp;&nbsp;
+                    <button type="button"
+                    style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-tryout-GETapi-videos"
+                    onclick="tryItOut('GETapi-videos');">Try it out ⚡
+            </button>
+            <button type="button"
+                    style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-canceltryout-GETapi-videos"
+                    onclick="cancelTryOut('GETapi-videos');" hidden>Cancel 🛑
+            </button>&nbsp;&nbsp;
+            <button type="submit"
+                    style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-executetryout-GETapi-videos"
+                    data-initial-text="Send Request 💥"
+                    data-loading-text="⏱ Sending..."
+                    hidden>Send Request 💥
+            </button>
+            </h3>
+            <p>
+            <small class="badge badge-green">GET</small>
+            <b><code>api/videos</code></b>
+        </p>
+                <h4 class="fancy-heading-panel"><b>Headers</b></h4>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Content-Type</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+               name="Content-Type"                data-endpoint="GETapi-videos"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Accept</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+               name="Accept"                data-endpoint="GETapi-videos"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                        </form>
+
+                    <h2 id="endpoints-GETapi-video--videoId-">GET api/video/{videoId}</h2>
+
+<p>
+</p>
+
+
+
+<span id="example-requests-GETapi-video--videoId-">
+<blockquote>Example request:</blockquote>
+
+
+<div class="bash-example">
+    <pre><code class="language-bash">curl --request GET \
+    --get "localhost:8000/api/video/10" \
+    --header "Content-Type: application/json" \
+    --header "Accept: application/json"</code></pre></div>
+
+
+<div class="javascript-example">
+    <pre><code class="language-javascript">const url = new URL(
+    "localhost:8000/api/video/10"
+);
+
+const headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+fetch(url, {
+    method: "GET",
+    headers,
+}).then(response =&gt; response.json());</code></pre></div>
+
+</span>
+
+<span id="example-responses-GETapi-video--videoId-">
+            <blockquote>
+            <p>Example response (404):</p>
+        </blockquote>
+                <details class="annotation">
+            <summary style="cursor: pointer;">
+                <small onclick="textContent = parentElement.parentElement.open ? 'Show headers' : 'Hide headers'">Show headers</small>
+            </summary>
+            <pre><code class="language-http">cache-control: no-cache, private
+content-type: application/json
+x-ratelimit-limit: 60
+x-ratelimit-remaining: 57
+vary: Origin
+ </code></pre></details>         <pre>
+
+<code class="language-json" style="max-height: 300px;">{
+    &quot;message&quot;: &quot;No query results for model [App\\Models\\Video].&quot;,
+    &quot;exception&quot;: &quot;Symfony\\Component\\HttpKernel\\Exception\\NotFoundHttpException&quot;,
+    &quot;file&quot;: &quot;/Users/alexanderbonin/Development/HOWHY/howhy-backend/vendor/laravel/framework/src/Illuminate/Foundation/Exceptions/Handler.php&quot;,
+    &quot;line&quot;: 408,
+    &quot;trace&quot;: [
+        {
+            &quot;file&quot;: &quot;/Users/alexanderbonin/Development/HOWHY/howhy-backend/vendor/laravel/framework/src/Illuminate/Foundation/Exceptions/Handler.php&quot;,
+            &quot;line&quot;: 384,
+            &quot;function&quot;: &quot;prepareException&quot;,
+            &quot;class&quot;: &quot;Illuminate\\Foundation\\Exceptions\\Handler&quot;,
+            &quot;type&quot;: &quot;-&gt;&quot;
+        },
+        {
+            &quot;file&quot;: &quot;/Users/alexanderbonin/Development/HOWHY/howhy-backend/vendor/nunomaduro/collision/src/Adapters/Laravel/ExceptionHandler.php&quot;,
+            &quot;line&quot;: 54,
+            &quot;function&quot;: &quot;render&quot;,
+            &quot;class&quot;: &quot;Illuminate\\Foundation\\Exceptions\\Handler&quot;,
+            &quot;type&quot;: &quot;-&gt;&quot;
+        },
+        {
+            &quot;file&quot;: &quot;/Users/alexanderbonin/Development/HOWHY/howhy-backend/vendor/laravel/framework/src/Illuminate/Routing/Pipeline.php&quot;,
+            &quot;line&quot;: 51,
+            &quot;function&quot;: &quot;render&quot;,
+            &quot;class&quot;: &quot;NunoMaduro\\Collision\\Adapters\\Laravel\\ExceptionHandler&quot;,
+            &quot;type&quot;: &quot;-&gt;&quot;
+        },
+        {
+            &quot;file&quot;: &quot;/Users/alexanderbonin/Development/HOWHY/howhy-backend/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php&quot;,
+            &quot;line&quot;: 143,
+            &quot;function&quot;: &quot;handleException&quot;,
+            &quot;class&quot;: &quot;Illuminate\\Routing\\Pipeline&quot;,
+            &quot;type&quot;: &quot;-&gt;&quot;
+        },
+        {
+            &quot;file&quot;: &quot;/Users/alexanderbonin/Development/HOWHY/howhy-backend/vendor/laravel/framework/src/Illuminate/Routing/Middleware/SubstituteBindings.php&quot;,
+            &quot;line&quot;: 50,
+            &quot;function&quot;: &quot;Illuminate\\Pipeline\\{closure}&quot;,
+            &quot;class&quot;: &quot;Illuminate\\Pipeline\\Pipeline&quot;,
+            &quot;type&quot;: &quot;-&gt;&quot;
+        },
+        {
+            &quot;file&quot;: &quot;/Users/alexanderbonin/Development/HOWHY/howhy-backend/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php&quot;,
+            &quot;line&quot;: 180,
+            &quot;function&quot;: &quot;handle&quot;,
+            &quot;class&quot;: &quot;Illuminate\\Routing\\Middleware\\SubstituteBindings&quot;,
+            &quot;type&quot;: &quot;-&gt;&quot;
+        },
+        {
+            &quot;file&quot;: &quot;/Users/alexanderbonin/Development/HOWHY/howhy-backend/vendor/laravel/framework/src/Illuminate/Routing/Middleware/ThrottleRequests.php&quot;,
+            &quot;line&quot;: 152,
+            &quot;function&quot;: &quot;Illuminate\\Pipeline\\{closure}&quot;,
+            &quot;class&quot;: &quot;Illuminate\\Pipeline\\Pipeline&quot;,
+            &quot;type&quot;: &quot;-&gt;&quot;
+        },
+        {
+            &quot;file&quot;: &quot;/Users/alexanderbonin/Development/HOWHY/howhy-backend/vendor/laravel/framework/src/Illuminate/Routing/Middleware/ThrottleRequests.php&quot;,
+            &quot;line&quot;: 118,
+            &quot;function&quot;: &quot;handleRequest&quot;,
+            &quot;class&quot;: &quot;Illuminate\\Routing\\Middleware\\ThrottleRequests&quot;,
+            &quot;type&quot;: &quot;-&gt;&quot;
+        },
+        {
+            &quot;file&quot;: &quot;/Users/alexanderbonin/Development/HOWHY/howhy-backend/vendor/laravel/framework/src/Illuminate/Routing/Middleware/ThrottleRequests.php&quot;,
+            &quot;line&quot;: 80,
+            &quot;function&quot;: &quot;handleRequestUsingNamedLimiter&quot;,
+            &quot;class&quot;: &quot;Illuminate\\Routing\\Middleware\\ThrottleRequests&quot;,
+            &quot;type&quot;: &quot;-&gt;&quot;
+        },
+        {
+            &quot;file&quot;: &quot;/Users/alexanderbonin/Development/HOWHY/howhy-backend/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php&quot;,
+            &quot;line&quot;: 180,
+            &quot;function&quot;: &quot;handle&quot;,
+            &quot;class&quot;: &quot;Illuminate\\Routing\\Middleware\\ThrottleRequests&quot;,
+            &quot;type&quot;: &quot;-&gt;&quot;
+        },
+        {
+            &quot;file&quot;: &quot;/Users/alexanderbonin/Development/HOWHY/howhy-backend/vendor/laravel/sanctum/src/Http/Middleware/EnsureFrontendRequestsAreStateful.php&quot;,
+            &quot;line&quot;: 25,
+            &quot;function&quot;: &quot;Illuminate\\Pipeline\\{closure}&quot;,
+            &quot;class&quot;: &quot;Illuminate\\Pipeline\\Pipeline&quot;,
+            &quot;type&quot;: &quot;-&gt;&quot;
+        },
+        {
+            &quot;file&quot;: &quot;/Users/alexanderbonin/Development/HOWHY/howhy-backend/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php&quot;,
+            &quot;line&quot;: 141,
+            &quot;function&quot;: &quot;Laravel\\Sanctum\\Http\\Middleware\\{closure}&quot;,
+            &quot;class&quot;: &quot;Laravel\\Sanctum\\Http\\Middleware\\EnsureFrontendRequestsAreStateful&quot;,
+            &quot;type&quot;: &quot;-&gt;&quot;
+        },
+        {
+            &quot;file&quot;: &quot;/Users/alexanderbonin/Development/HOWHY/howhy-backend/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php&quot;,
+            &quot;line&quot;: 116,
+            &quot;function&quot;: &quot;Illuminate\\Pipeline\\{closure}&quot;,
+            &quot;class&quot;: &quot;Illuminate\\Pipeline\\Pipeline&quot;,
+            &quot;type&quot;: &quot;-&gt;&quot;
+        },
+        {
+            &quot;file&quot;: &quot;/Users/alexanderbonin/Development/HOWHY/howhy-backend/vendor/laravel/sanctum/src/Http/Middleware/EnsureFrontendRequestsAreStateful.php&quot;,
+            &quot;line&quot;: 24,
+            &quot;function&quot;: &quot;then&quot;,
+            &quot;class&quot;: &quot;Illuminate\\Pipeline\\Pipeline&quot;,
+            &quot;type&quot;: &quot;-&gt;&quot;
+        },
+        {
+            &quot;file&quot;: &quot;/Users/alexanderbonin/Development/HOWHY/howhy-backend/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php&quot;,
+            &quot;line&quot;: 180,
+            &quot;function&quot;: &quot;handle&quot;,
+            &quot;class&quot;: &quot;Laravel\\Sanctum\\Http\\Middleware\\EnsureFrontendRequestsAreStateful&quot;,
+            &quot;type&quot;: &quot;-&gt;&quot;
+        },
+        {
+            &quot;file&quot;: &quot;/Users/alexanderbonin/Development/HOWHY/howhy-backend/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php&quot;,
+            &quot;line&quot;: 116,
+            &quot;function&quot;: &quot;Illuminate\\Pipeline\\{closure}&quot;,
+            &quot;class&quot;: &quot;Illuminate\\Pipeline\\Pipeline&quot;,
+            &quot;type&quot;: &quot;-&gt;&quot;
+        },
+        {
+            &quot;file&quot;: &quot;/Users/alexanderbonin/Development/HOWHY/howhy-backend/vendor/laravel/framework/src/Illuminate/Routing/Router.php&quot;,
+            &quot;line&quot;: 797,
+            &quot;function&quot;: &quot;then&quot;,
+            &quot;class&quot;: &quot;Illuminate\\Pipeline\\Pipeline&quot;,
+            &quot;type&quot;: &quot;-&gt;&quot;
+        },
+        {
+            &quot;file&quot;: &quot;/Users/alexanderbonin/Development/HOWHY/howhy-backend/vendor/laravel/framework/src/Illuminate/Routing/Router.php&quot;,
+            &quot;line&quot;: 776,
+            &quot;function&quot;: &quot;runRouteWithinStack&quot;,
+            &quot;class&quot;: &quot;Illuminate\\Routing\\Router&quot;,
+            &quot;type&quot;: &quot;-&gt;&quot;
+        },
+        {
+            &quot;file&quot;: &quot;/Users/alexanderbonin/Development/HOWHY/howhy-backend/vendor/laravel/framework/src/Illuminate/Routing/Router.php&quot;,
+            &quot;line&quot;: 740,
+            &quot;function&quot;: &quot;runRoute&quot;,
+            &quot;class&quot;: &quot;Illuminate\\Routing\\Router&quot;,
+            &quot;type&quot;: &quot;-&gt;&quot;
+        },
+        {
+            &quot;file&quot;: &quot;/Users/alexanderbonin/Development/HOWHY/howhy-backend/vendor/laravel/framework/src/Illuminate/Routing/Router.php&quot;,
+            &quot;line&quot;: 729,
+            &quot;function&quot;: &quot;dispatchToRoute&quot;,
+            &quot;class&quot;: &quot;Illuminate\\Routing\\Router&quot;,
+            &quot;type&quot;: &quot;-&gt;&quot;
+        },
+        {
+            &quot;file&quot;: &quot;/Users/alexanderbonin/Development/HOWHY/howhy-backend/vendor/laravel/framework/src/Illuminate/Foundation/Http/Kernel.php&quot;,
+            &quot;line&quot;: 200,
+            &quot;function&quot;: &quot;dispatch&quot;,
+            &quot;class&quot;: &quot;Illuminate\\Routing\\Router&quot;,
+            &quot;type&quot;: &quot;-&gt;&quot;
+        },
+        {
+            &quot;file&quot;: &quot;/Users/alexanderbonin/Development/HOWHY/howhy-backend/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php&quot;,
+            &quot;line&quot;: 141,
+            &quot;function&quot;: &quot;Illuminate\\Foundation\\Http\\{closure}&quot;,
+            &quot;class&quot;: &quot;Illuminate\\Foundation\\Http\\Kernel&quot;,
+            &quot;type&quot;: &quot;-&gt;&quot;
+        },
+        {
+            &quot;file&quot;: &quot;/Users/alexanderbonin/Development/HOWHY/howhy-backend/vendor/laravel/framework/src/Illuminate/Foundation/Http/Middleware/TransformsRequest.php&quot;,
+            &quot;line&quot;: 21,
+            &quot;function&quot;: &quot;Illuminate\\Pipeline\\{closure}&quot;,
+            &quot;class&quot;: &quot;Illuminate\\Pipeline\\Pipeline&quot;,
+            &quot;type&quot;: &quot;-&gt;&quot;
+        },
+        {
+            &quot;file&quot;: &quot;/Users/alexanderbonin/Development/HOWHY/howhy-backend/vendor/laravel/framework/src/Illuminate/Foundation/Http/Middleware/TrimStrings.php&quot;,
+            &quot;line&quot;: 40,
+            &quot;function&quot;: &quot;handle&quot;,
+            &quot;class&quot;: &quot;Illuminate\\Foundation\\Http\\Middleware\\TransformsRequest&quot;,
+            &quot;type&quot;: &quot;-&gt;&quot;
+        },
+        {
+            &quot;file&quot;: &quot;/Users/alexanderbonin/Development/HOWHY/howhy-backend/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php&quot;,
+            &quot;line&quot;: 180,
+            &quot;function&quot;: &quot;handle&quot;,
+            &quot;class&quot;: &quot;Illuminate\\Foundation\\Http\\Middleware\\TrimStrings&quot;,
+            &quot;type&quot;: &quot;-&gt;&quot;
+        },
+        {
+            &quot;file&quot;: &quot;/Users/alexanderbonin/Development/HOWHY/howhy-backend/vendor/laravel/framework/src/Illuminate/Foundation/Http/Middleware/ValidatePostSize.php&quot;,
+            &quot;line&quot;: 27,
+            &quot;function&quot;: &quot;Illuminate\\Pipeline\\{closure}&quot;,
+            &quot;class&quot;: &quot;Illuminate\\Pipeline\\Pipeline&quot;,
+            &quot;type&quot;: &quot;-&gt;&quot;
+        },
+        {
+            &quot;file&quot;: &quot;/Users/alexanderbonin/Development/HOWHY/howhy-backend/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php&quot;,
+            &quot;line&quot;: 180,
+            &quot;function&quot;: &quot;handle&quot;,
+            &quot;class&quot;: &quot;Illuminate\\Foundation\\Http\\Middleware\\ValidatePostSize&quot;,
+            &quot;type&quot;: &quot;-&gt;&quot;
+        },
+        {
+            &quot;file&quot;: &quot;/Users/alexanderbonin/Development/HOWHY/howhy-backend/vendor/laravel/framework/src/Illuminate/Foundation/Http/Middleware/PreventRequestsDuringMaintenance.php&quot;,
+            &quot;line&quot;: 86,
+            &quot;function&quot;: &quot;Illuminate\\Pipeline\\{closure}&quot;,
+            &quot;class&quot;: &quot;Illuminate\\Pipeline\\Pipeline&quot;,
+            &quot;type&quot;: &quot;-&gt;&quot;
+        },
+        {
+            &quot;file&quot;: &quot;/Users/alexanderbonin/Development/HOWHY/howhy-backend/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php&quot;,
+            &quot;line&quot;: 180,
+            &quot;function&quot;: &quot;handle&quot;,
+            &quot;class&quot;: &quot;Illuminate\\Foundation\\Http\\Middleware\\PreventRequestsDuringMaintenance&quot;,
+            &quot;type&quot;: &quot;-&gt;&quot;
+        },
+        {
+            &quot;file&quot;: &quot;/Users/alexanderbonin/Development/HOWHY/howhy-backend/vendor/laravel/framework/src/Illuminate/Http/Middleware/HandleCors.php&quot;,
+            &quot;line&quot;: 62,
+            &quot;function&quot;: &quot;Illuminate\\Pipeline\\{closure}&quot;,
+            &quot;class&quot;: &quot;Illuminate\\Pipeline\\Pipeline&quot;,
+            &quot;type&quot;: &quot;-&gt;&quot;
+        },
+        {
+            &quot;file&quot;: &quot;/Users/alexanderbonin/Development/HOWHY/howhy-backend/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php&quot;,
+            &quot;line&quot;: 180,
+            &quot;function&quot;: &quot;handle&quot;,
+            &quot;class&quot;: &quot;Illuminate\\Http\\Middleware\\HandleCors&quot;,
+            &quot;type&quot;: &quot;-&gt;&quot;
+        },
+        {
+            &quot;file&quot;: &quot;/Users/alexanderbonin/Development/HOWHY/howhy-backend/vendor/laravel/framework/src/Illuminate/Http/Middleware/TrustProxies.php&quot;,
+            &quot;line&quot;: 39,
+            &quot;function&quot;: &quot;Illuminate\\Pipeline\\{closure}&quot;,
+            &quot;class&quot;: &quot;Illuminate\\Pipeline\\Pipeline&quot;,
+            &quot;type&quot;: &quot;-&gt;&quot;
+        },
+        {
+            &quot;file&quot;: &quot;/Users/alexanderbonin/Development/HOWHY/howhy-backend/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php&quot;,
+            &quot;line&quot;: 180,
+            &quot;function&quot;: &quot;handle&quot;,
+            &quot;class&quot;: &quot;Illuminate\\Http\\Middleware\\TrustProxies&quot;,
+            &quot;type&quot;: &quot;-&gt;&quot;
+        },
+        {
+            &quot;file&quot;: &quot;/Users/alexanderbonin/Development/HOWHY/howhy-backend/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php&quot;,
+            &quot;line&quot;: 116,
+            &quot;function&quot;: &quot;Illuminate\\Pipeline\\{closure}&quot;,
+            &quot;class&quot;: &quot;Illuminate\\Pipeline\\Pipeline&quot;,
+            &quot;type&quot;: &quot;-&gt;&quot;
+        },
+        {
+            &quot;file&quot;: &quot;/Users/alexanderbonin/Development/HOWHY/howhy-backend/vendor/laravel/framework/src/Illuminate/Foundation/Http/Kernel.php&quot;,
+            &quot;line&quot;: 175,
+            &quot;function&quot;: &quot;then&quot;,
+            &quot;class&quot;: &quot;Illuminate\\Pipeline\\Pipeline&quot;,
+            &quot;type&quot;: &quot;-&gt;&quot;
+        },
+        {
+            &quot;file&quot;: &quot;/Users/alexanderbonin/Development/HOWHY/howhy-backend/vendor/laravel/framework/src/Illuminate/Foundation/Http/Kernel.php&quot;,
+            &quot;line&quot;: 144,
+            &quot;function&quot;: &quot;sendRequestThroughRouter&quot;,
+            &quot;class&quot;: &quot;Illuminate\\Foundation\\Http\\Kernel&quot;,
+            &quot;type&quot;: &quot;-&gt;&quot;
+        },
+        {
+            &quot;file&quot;: &quot;/Users/alexanderbonin/Development/HOWHY/howhy-backend/vendor/knuckleswtf/scribe/src/Extracting/Strategies/Responses/ResponseCalls.php&quot;,
+            &quot;line&quot;: 299,
+            &quot;function&quot;: &quot;handle&quot;,
+            &quot;class&quot;: &quot;Illuminate\\Foundation\\Http\\Kernel&quot;,
+            &quot;type&quot;: &quot;-&gt;&quot;
+        },
+        {
+            &quot;file&quot;: &quot;/Users/alexanderbonin/Development/HOWHY/howhy-backend/vendor/knuckleswtf/scribe/src/Extracting/Strategies/Responses/ResponseCalls.php&quot;,
+            &quot;line&quot;: 287,
+            &quot;function&quot;: &quot;callLaravelOrLumenRoute&quot;,
+            &quot;class&quot;: &quot;Knuckles\\Scribe\\Extracting\\Strategies\\Responses\\ResponseCalls&quot;,
+            &quot;type&quot;: &quot;-&gt;&quot;
+        },
+        {
+            &quot;file&quot;: &quot;/Users/alexanderbonin/Development/HOWHY/howhy-backend/vendor/knuckleswtf/scribe/src/Extracting/Strategies/Responses/ResponseCalls.php&quot;,
+            &quot;line&quot;: 92,
+            &quot;function&quot;: &quot;makeApiCall&quot;,
+            &quot;class&quot;: &quot;Knuckles\\Scribe\\Extracting\\Strategies\\Responses\\ResponseCalls&quot;,
+            &quot;type&quot;: &quot;-&gt;&quot;
+        },
+        {
+            &quot;file&quot;: &quot;/Users/alexanderbonin/Development/HOWHY/howhy-backend/vendor/knuckleswtf/scribe/src/Extracting/Strategies/Responses/ResponseCalls.php&quot;,
+            &quot;line&quot;: 45,
+            &quot;function&quot;: &quot;makeResponseCall&quot;,
+            &quot;class&quot;: &quot;Knuckles\\Scribe\\Extracting\\Strategies\\Responses\\ResponseCalls&quot;,
+            &quot;type&quot;: &quot;-&gt;&quot;
+        },
+        {
+            &quot;file&quot;: &quot;/Users/alexanderbonin/Development/HOWHY/howhy-backend/vendor/knuckleswtf/scribe/src/Extracting/Strategies/Responses/ResponseCalls.php&quot;,
+            &quot;line&quot;: 35,
+            &quot;function&quot;: &quot;makeResponseCallIfConditionsPass&quot;,
+            &quot;class&quot;: &quot;Knuckles\\Scribe\\Extracting\\Strategies\\Responses\\ResponseCalls&quot;,
+            &quot;type&quot;: &quot;-&gt;&quot;
+        },
+        {
+            &quot;file&quot;: &quot;/Users/alexanderbonin/Development/HOWHY/howhy-backend/vendor/knuckleswtf/scribe/src/Extracting/Extractor.php&quot;,
+            &quot;line&quot;: 209,
+            &quot;function&quot;: &quot;__invoke&quot;,
+            &quot;class&quot;: &quot;Knuckles\\Scribe\\Extracting\\Strategies\\Responses\\ResponseCalls&quot;,
+            &quot;type&quot;: &quot;-&gt;&quot;
+        },
+        {
+            &quot;file&quot;: &quot;/Users/alexanderbonin/Development/HOWHY/howhy-backend/vendor/knuckleswtf/scribe/src/Extracting/Extractor.php&quot;,
+            &quot;line&quot;: 163,
+            &quot;function&quot;: &quot;iterateThroughStrategies&quot;,
+            &quot;class&quot;: &quot;Knuckles\\Scribe\\Extracting\\Extractor&quot;,
+            &quot;type&quot;: &quot;-&gt;&quot;
+        },
+        {
+            &quot;file&quot;: &quot;/Users/alexanderbonin/Development/HOWHY/howhy-backend/vendor/knuckleswtf/scribe/src/Extracting/Extractor.php&quot;,
+            &quot;line&quot;: 95,
+            &quot;function&quot;: &quot;fetchResponses&quot;,
+            &quot;class&quot;: &quot;Knuckles\\Scribe\\Extracting\\Extractor&quot;,
+            &quot;type&quot;: &quot;-&gt;&quot;
+        },
+        {
+            &quot;file&quot;: &quot;/Users/alexanderbonin/Development/HOWHY/howhy-backend/vendor/knuckleswtf/scribe/src/GroupedEndpoints/GroupedEndpointsFromApp.php&quot;,
+            &quot;line&quot;: 124,
+            &quot;function&quot;: &quot;processRoute&quot;,
+            &quot;class&quot;: &quot;Knuckles\\Scribe\\Extracting\\Extractor&quot;,
+            &quot;type&quot;: &quot;-&gt;&quot;
+        },
+        {
+            &quot;file&quot;: &quot;/Users/alexanderbonin/Development/HOWHY/howhy-backend/vendor/knuckleswtf/scribe/src/GroupedEndpoints/GroupedEndpointsFromApp.php&quot;,
+            &quot;line&quot;: 71,
+            &quot;function&quot;: &quot;extractEndpointsInfoFromLaravelApp&quot;,
+            &quot;class&quot;: &quot;Knuckles\\Scribe\\GroupedEndpoints\\GroupedEndpointsFromApp&quot;,
+            &quot;type&quot;: &quot;-&gt;&quot;
+        },
+        {
+            &quot;file&quot;: &quot;/Users/alexanderbonin/Development/HOWHY/howhy-backend/vendor/knuckleswtf/scribe/src/GroupedEndpoints/GroupedEndpointsFromApp.php&quot;,
+            &quot;line&quot;: 49,
+            &quot;function&quot;: &quot;extractEndpointsInfoAndWriteToDisk&quot;,
+            &quot;class&quot;: &quot;Knuckles\\Scribe\\GroupedEndpoints\\GroupedEndpointsFromApp&quot;,
+            &quot;type&quot;: &quot;-&gt;&quot;
+        },
+        {
+            &quot;file&quot;: &quot;/Users/alexanderbonin/Development/HOWHY/howhy-backend/vendor/knuckleswtf/scribe/src/Commands/GenerateDocumentation.php&quot;,
+            &quot;line&quot;: 51,
+            &quot;function&quot;: &quot;get&quot;,
+            &quot;class&quot;: &quot;Knuckles\\Scribe\\GroupedEndpoints\\GroupedEndpointsFromApp&quot;,
+            &quot;type&quot;: &quot;-&gt;&quot;
+        },
+        {
+            &quot;file&quot;: &quot;/Users/alexanderbonin/Development/HOWHY/howhy-backend/vendor/laravel/framework/src/Illuminate/Container/BoundMethod.php&quot;,
+            &quot;line&quot;: 36,
+            &quot;function&quot;: &quot;handle&quot;,
+            &quot;class&quot;: &quot;Knuckles\\Scribe\\Commands\\GenerateDocumentation&quot;,
+            &quot;type&quot;: &quot;-&gt;&quot;
+        },
+        {
+            &quot;file&quot;: &quot;/Users/alexanderbonin/Development/HOWHY/howhy-backend/vendor/laravel/framework/src/Illuminate/Container/Util.php&quot;,
+            &quot;line&quot;: 41,
+            &quot;function&quot;: &quot;Illuminate\\Container\\{closure}&quot;,
+            &quot;class&quot;: &quot;Illuminate\\Container\\BoundMethod&quot;,
+            &quot;type&quot;: &quot;::&quot;
+        },
+        {
+            &quot;file&quot;: &quot;/Users/alexanderbonin/Development/HOWHY/howhy-backend/vendor/laravel/framework/src/Illuminate/Container/BoundMethod.php&quot;,
+            &quot;line&quot;: 93,
+            &quot;function&quot;: &quot;unwrapIfClosure&quot;,
+            &quot;class&quot;: &quot;Illuminate\\Container\\Util&quot;,
+            &quot;type&quot;: &quot;::&quot;
+        },
+        {
+            &quot;file&quot;: &quot;/Users/alexanderbonin/Development/HOWHY/howhy-backend/vendor/laravel/framework/src/Illuminate/Container/BoundMethod.php&quot;,
+            &quot;line&quot;: 35,
+            &quot;function&quot;: &quot;callBoundMethod&quot;,
+            &quot;class&quot;: &quot;Illuminate\\Container\\BoundMethod&quot;,
+            &quot;type&quot;: &quot;::&quot;
+        },
+        {
+            &quot;file&quot;: &quot;/Users/alexanderbonin/Development/HOWHY/howhy-backend/vendor/laravel/framework/src/Illuminate/Container/Container.php&quot;,
+            &quot;line&quot;: 662,
+            &quot;function&quot;: &quot;call&quot;,
+            &quot;class&quot;: &quot;Illuminate\\Container\\BoundMethod&quot;,
+            &quot;type&quot;: &quot;::&quot;
+        },
+        {
+            &quot;file&quot;: &quot;/Users/alexanderbonin/Development/HOWHY/howhy-backend/vendor/laravel/framework/src/Illuminate/Console/Command.php&quot;,
+            &quot;line&quot;: 194,
+            &quot;function&quot;: &quot;call&quot;,
+            &quot;class&quot;: &quot;Illuminate\\Container\\Container&quot;,
+            &quot;type&quot;: &quot;-&gt;&quot;
+        },
+        {
+            &quot;file&quot;: &quot;/Users/alexanderbonin/Development/HOWHY/howhy-backend/vendor/symfony/console/Command/Command.php&quot;,
+            &quot;line&quot;: 312,
+            &quot;function&quot;: &quot;execute&quot;,
+            &quot;class&quot;: &quot;Illuminate\\Console\\Command&quot;,
+            &quot;type&quot;: &quot;-&gt;&quot;
+        },
+        {
+            &quot;file&quot;: &quot;/Users/alexanderbonin/Development/HOWHY/howhy-backend/vendor/laravel/framework/src/Illuminate/Console/Command.php&quot;,
+            &quot;line&quot;: 163,
+            &quot;function&quot;: &quot;run&quot;,
+            &quot;class&quot;: &quot;Symfony\\Component\\Console\\Command\\Command&quot;,
+            &quot;type&quot;: &quot;-&gt;&quot;
+        },
+        {
+            &quot;file&quot;: &quot;/Users/alexanderbonin/Development/HOWHY/howhy-backend/vendor/symfony/console/Application.php&quot;,
+            &quot;line&quot;: 1040,
+            &quot;function&quot;: &quot;run&quot;,
+            &quot;class&quot;: &quot;Illuminate\\Console\\Command&quot;,
+            &quot;type&quot;: &quot;-&gt;&quot;
+        },
+        {
+            &quot;file&quot;: &quot;/Users/alexanderbonin/Development/HOWHY/howhy-backend/vendor/symfony/console/Application.php&quot;,
+            &quot;line&quot;: 314,
+            &quot;function&quot;: &quot;doRunCommand&quot;,
+            &quot;class&quot;: &quot;Symfony\\Component\\Console\\Application&quot;,
+            &quot;type&quot;: &quot;-&gt;&quot;
+        },
+        {
+            &quot;file&quot;: &quot;/Users/alexanderbonin/Development/HOWHY/howhy-backend/vendor/symfony/console/Application.php&quot;,
+            &quot;line&quot;: 168,
+            &quot;function&quot;: &quot;doRun&quot;,
+            &quot;class&quot;: &quot;Symfony\\Component\\Console\\Application&quot;,
+            &quot;type&quot;: &quot;-&gt;&quot;
+        },
+        {
+            &quot;file&quot;: &quot;/Users/alexanderbonin/Development/HOWHY/howhy-backend/vendor/laravel/framework/src/Illuminate/Foundation/Console/Kernel.php&quot;,
+            &quot;line&quot;: 200,
+            &quot;function&quot;: &quot;run&quot;,
+            &quot;class&quot;: &quot;Symfony\\Component\\Console\\Application&quot;,
+            &quot;type&quot;: &quot;-&gt;&quot;
+        },
+        {
+            &quot;file&quot;: &quot;/Users/alexanderbonin/Development/HOWHY/howhy-backend/artisan&quot;,
+            &quot;line&quot;: 35,
+            &quot;function&quot;: &quot;handle&quot;,
+            &quot;class&quot;: &quot;Illuminate\\Foundation\\Console\\Kernel&quot;,
+            &quot;type&quot;: &quot;-&gt;&quot;
+        }
+    ]
+}</code>
+ </pre>
+    </span>
+<span id="execution-results-GETapi-video--videoId-" hidden>
+    <blockquote>Received response<span
+                id="execution-response-status-GETapi-video--videoId-"></span>:
+    </blockquote>
+    <pre class="json"><code id="execution-response-content-GETapi-video--videoId-"
+      data-empty-response-text="<Empty response>" style="max-height: 400px;"></code></pre>
+</span>
+<span id="execution-error-GETapi-video--videoId-" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-GETapi-video--videoId-">
+
+Tip: Check that you&#039;re properly connected to the network.
+If you&#039;re a maintainer of ths API, verify that your API is running and you&#039;ve enabled CORS.
+You can check the Dev Tools console for debugging information.</code></pre>
+</span>
+<form id="form-GETapi-video--videoId-" data-method="GET"
+      data-path="api/video/{videoId}"
+      data-authed="0"
+      data-hasfiles="0"
+      data-isarraybody="0"
+      autocomplete="off"
+      onsubmit="event.preventDefault(); executeTryOut('GETapi-video--videoId-', this);">
+    <h3>
+        Request&nbsp;&nbsp;&nbsp;
+                    <button type="button"
+                    style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-tryout-GETapi-video--videoId-"
+                    onclick="tryItOut('GETapi-video--videoId-');">Try it out ⚡
+            </button>
+            <button type="button"
+                    style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-canceltryout-GETapi-video--videoId-"
+                    onclick="cancelTryOut('GETapi-video--videoId-');" hidden>Cancel 🛑
+            </button>&nbsp;&nbsp;
+            <button type="submit"
+                    style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-executetryout-GETapi-video--videoId-"
+                    data-initial-text="Send Request 💥"
+                    data-loading-text="⏱ Sending..."
+                    hidden>Send Request 💥
+            </button>
+            </h3>
+            <p>
+            <small class="badge badge-green">GET</small>
+            <b><code>api/video/{videoId}</code></b>
+        </p>
+                <h4 class="fancy-heading-panel"><b>Headers</b></h4>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Content-Type</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+               name="Content-Type"                data-endpoint="GETapi-video--videoId-"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Accept</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+               name="Accept"                data-endpoint="GETapi-video--videoId-"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                        <h4 class="fancy-heading-panel"><b>URL Parameters</b></h4>
+                    <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>videoId</code></b>&nbsp;&nbsp;
+<small>integer</small>&nbsp;
+ &nbsp;
+                <input type="number" style="display: none"
+               name="videoId"                data-endpoint="GETapi-video--videoId-"
+               value="10"
+               data-component="url">
+    <br>
+<p>Example: <code>10</code></p>
+            </div>
+                    </form>
+
+                    <h2 id="endpoints-GETapi-timecodes--videoId-">GET api/timecodes/{videoId}</h2>
+
+<p>
+</p>
+
+
+
+<span id="example-requests-GETapi-timecodes--videoId-">
+<blockquote>Example request:</blockquote>
+
+
+<div class="bash-example">
+    <pre><code class="language-bash">curl --request GET \
+    --get "localhost:8000/api/timecodes/nihil" \
+    --header "Content-Type: application/json" \
+    --header "Accept: application/json"</code></pre></div>
+
+
+<div class="javascript-example">
+    <pre><code class="language-javascript">const url = new URL(
+    "localhost:8000/api/timecodes/nihil"
+);
+
+const headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+fetch(url, {
+    method: "GET",
+    headers,
+}).then(response =&gt; response.json());</code></pre></div>
+
+</span>
+
+<span id="example-responses-GETapi-timecodes--videoId-">
+            <blockquote>
+            <p>Example response (404):</p>
+        </blockquote>
+                <details class="annotation">
+            <summary style="cursor: pointer;">
+                <small onclick="textContent = parentElement.parentElement.open ? 'Show headers' : 'Hide headers'">Show headers</small>
+            </summary>
+            <pre><code class="language-http">cache-control: no-cache, private
+content-type: application/json
+x-ratelimit-limit: 60
+x-ratelimit-remaining: 56
+vary: Origin
+ </code></pre></details>         <pre>
+
+<code class="language-json" style="max-height: 300px;">{
+    &quot;message&quot;: &quot;No query results for model [App\\Models\\Video].&quot;,
+    &quot;exception&quot;: &quot;Symfony\\Component\\HttpKernel\\Exception\\NotFoundHttpException&quot;,
+    &quot;file&quot;: &quot;/Users/alexanderbonin/Development/HOWHY/howhy-backend/vendor/laravel/framework/src/Illuminate/Foundation/Exceptions/Handler.php&quot;,
+    &quot;line&quot;: 408,
+    &quot;trace&quot;: [
+        {
+            &quot;file&quot;: &quot;/Users/alexanderbonin/Development/HOWHY/howhy-backend/vendor/laravel/framework/src/Illuminate/Foundation/Exceptions/Handler.php&quot;,
+            &quot;line&quot;: 384,
+            &quot;function&quot;: &quot;prepareException&quot;,
+            &quot;class&quot;: &quot;Illuminate\\Foundation\\Exceptions\\Handler&quot;,
+            &quot;type&quot;: &quot;-&gt;&quot;
+        },
+        {
+            &quot;file&quot;: &quot;/Users/alexanderbonin/Development/HOWHY/howhy-backend/vendor/nunomaduro/collision/src/Adapters/Laravel/ExceptionHandler.php&quot;,
+            &quot;line&quot;: 54,
+            &quot;function&quot;: &quot;render&quot;,
+            &quot;class&quot;: &quot;Illuminate\\Foundation\\Exceptions\\Handler&quot;,
+            &quot;type&quot;: &quot;-&gt;&quot;
+        },
+        {
+            &quot;file&quot;: &quot;/Users/alexanderbonin/Development/HOWHY/howhy-backend/vendor/laravel/framework/src/Illuminate/Routing/Pipeline.php&quot;,
+            &quot;line&quot;: 51,
+            &quot;function&quot;: &quot;render&quot;,
+            &quot;class&quot;: &quot;NunoMaduro\\Collision\\Adapters\\Laravel\\ExceptionHandler&quot;,
+            &quot;type&quot;: &quot;-&gt;&quot;
+        },
+        {
+            &quot;file&quot;: &quot;/Users/alexanderbonin/Development/HOWHY/howhy-backend/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php&quot;,
+            &quot;line&quot;: 143,
+            &quot;function&quot;: &quot;handleException&quot;,
+            &quot;class&quot;: &quot;Illuminate\\Routing\\Pipeline&quot;,
+            &quot;type&quot;: &quot;-&gt;&quot;
+        },
+        {
+            &quot;file&quot;: &quot;/Users/alexanderbonin/Development/HOWHY/howhy-backend/vendor/laravel/framework/src/Illuminate/Routing/Middleware/SubstituteBindings.php&quot;,
+            &quot;line&quot;: 50,
+            &quot;function&quot;: &quot;Illuminate\\Pipeline\\{closure}&quot;,
+            &quot;class&quot;: &quot;Illuminate\\Pipeline\\Pipeline&quot;,
+            &quot;type&quot;: &quot;-&gt;&quot;
+        },
+        {
+            &quot;file&quot;: &quot;/Users/alexanderbonin/Development/HOWHY/howhy-backend/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php&quot;,
+            &quot;line&quot;: 180,
+            &quot;function&quot;: &quot;handle&quot;,
+            &quot;class&quot;: &quot;Illuminate\\Routing\\Middleware\\SubstituteBindings&quot;,
+            &quot;type&quot;: &quot;-&gt;&quot;
+        },
+        {
+            &quot;file&quot;: &quot;/Users/alexanderbonin/Development/HOWHY/howhy-backend/vendor/laravel/framework/src/Illuminate/Routing/Middleware/ThrottleRequests.php&quot;,
+            &quot;line&quot;: 152,
+            &quot;function&quot;: &quot;Illuminate\\Pipeline\\{closure}&quot;,
+            &quot;class&quot;: &quot;Illuminate\\Pipeline\\Pipeline&quot;,
+            &quot;type&quot;: &quot;-&gt;&quot;
+        },
+        {
+            &quot;file&quot;: &quot;/Users/alexanderbonin/Development/HOWHY/howhy-backend/vendor/laravel/framework/src/Illuminate/Routing/Middleware/ThrottleRequests.php&quot;,
+            &quot;line&quot;: 118,
+            &quot;function&quot;: &quot;handleRequest&quot;,
+            &quot;class&quot;: &quot;Illuminate\\Routing\\Middleware\\ThrottleRequests&quot;,
+            &quot;type&quot;: &quot;-&gt;&quot;
+        },
+        {
+            &quot;file&quot;: &quot;/Users/alexanderbonin/Development/HOWHY/howhy-backend/vendor/laravel/framework/src/Illuminate/Routing/Middleware/ThrottleRequests.php&quot;,
+            &quot;line&quot;: 80,
+            &quot;function&quot;: &quot;handleRequestUsingNamedLimiter&quot;,
+            &quot;class&quot;: &quot;Illuminate\\Routing\\Middleware\\ThrottleRequests&quot;,
+            &quot;type&quot;: &quot;-&gt;&quot;
+        },
+        {
+            &quot;file&quot;: &quot;/Users/alexanderbonin/Development/HOWHY/howhy-backend/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php&quot;,
+            &quot;line&quot;: 180,
+            &quot;function&quot;: &quot;handle&quot;,
+            &quot;class&quot;: &quot;Illuminate\\Routing\\Middleware\\ThrottleRequests&quot;,
+            &quot;type&quot;: &quot;-&gt;&quot;
+        },
+        {
+            &quot;file&quot;: &quot;/Users/alexanderbonin/Development/HOWHY/howhy-backend/vendor/laravel/sanctum/src/Http/Middleware/EnsureFrontendRequestsAreStateful.php&quot;,
+            &quot;line&quot;: 25,
+            &quot;function&quot;: &quot;Illuminate\\Pipeline\\{closure}&quot;,
+            &quot;class&quot;: &quot;Illuminate\\Pipeline\\Pipeline&quot;,
+            &quot;type&quot;: &quot;-&gt;&quot;
+        },
+        {
+            &quot;file&quot;: &quot;/Users/alexanderbonin/Development/HOWHY/howhy-backend/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php&quot;,
+            &quot;line&quot;: 141,
+            &quot;function&quot;: &quot;Laravel\\Sanctum\\Http\\Middleware\\{closure}&quot;,
+            &quot;class&quot;: &quot;Laravel\\Sanctum\\Http\\Middleware\\EnsureFrontendRequestsAreStateful&quot;,
+            &quot;type&quot;: &quot;-&gt;&quot;
+        },
+        {
+            &quot;file&quot;: &quot;/Users/alexanderbonin/Development/HOWHY/howhy-backend/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php&quot;,
+            &quot;line&quot;: 116,
+            &quot;function&quot;: &quot;Illuminate\\Pipeline\\{closure}&quot;,
+            &quot;class&quot;: &quot;Illuminate\\Pipeline\\Pipeline&quot;,
+            &quot;type&quot;: &quot;-&gt;&quot;
+        },
+        {
+            &quot;file&quot;: &quot;/Users/alexanderbonin/Development/HOWHY/howhy-backend/vendor/laravel/sanctum/src/Http/Middleware/EnsureFrontendRequestsAreStateful.php&quot;,
+            &quot;line&quot;: 24,
+            &quot;function&quot;: &quot;then&quot;,
+            &quot;class&quot;: &quot;Illuminate\\Pipeline\\Pipeline&quot;,
+            &quot;type&quot;: &quot;-&gt;&quot;
+        },
+        {
+            &quot;file&quot;: &quot;/Users/alexanderbonin/Development/HOWHY/howhy-backend/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php&quot;,
+            &quot;line&quot;: 180,
+            &quot;function&quot;: &quot;handle&quot;,
+            &quot;class&quot;: &quot;Laravel\\Sanctum\\Http\\Middleware\\EnsureFrontendRequestsAreStateful&quot;,
+            &quot;type&quot;: &quot;-&gt;&quot;
+        },
+        {
+            &quot;file&quot;: &quot;/Users/alexanderbonin/Development/HOWHY/howhy-backend/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php&quot;,
+            &quot;line&quot;: 116,
+            &quot;function&quot;: &quot;Illuminate\\Pipeline\\{closure}&quot;,
+            &quot;class&quot;: &quot;Illuminate\\Pipeline\\Pipeline&quot;,
+            &quot;type&quot;: &quot;-&gt;&quot;
+        },
+        {
+            &quot;file&quot;: &quot;/Users/alexanderbonin/Development/HOWHY/howhy-backend/vendor/laravel/framework/src/Illuminate/Routing/Router.php&quot;,
+            &quot;line&quot;: 797,
+            &quot;function&quot;: &quot;then&quot;,
+            &quot;class&quot;: &quot;Illuminate\\Pipeline\\Pipeline&quot;,
+            &quot;type&quot;: &quot;-&gt;&quot;
+        },
+        {
+            &quot;file&quot;: &quot;/Users/alexanderbonin/Development/HOWHY/howhy-backend/vendor/laravel/framework/src/Illuminate/Routing/Router.php&quot;,
+            &quot;line&quot;: 776,
+            &quot;function&quot;: &quot;runRouteWithinStack&quot;,
+            &quot;class&quot;: &quot;Illuminate\\Routing\\Router&quot;,
+            &quot;type&quot;: &quot;-&gt;&quot;
+        },
+        {
+            &quot;file&quot;: &quot;/Users/alexanderbonin/Development/HOWHY/howhy-backend/vendor/laravel/framework/src/Illuminate/Routing/Router.php&quot;,
+            &quot;line&quot;: 740,
+            &quot;function&quot;: &quot;runRoute&quot;,
+            &quot;class&quot;: &quot;Illuminate\\Routing\\Router&quot;,
+            &quot;type&quot;: &quot;-&gt;&quot;
+        },
+        {
+            &quot;file&quot;: &quot;/Users/alexanderbonin/Development/HOWHY/howhy-backend/vendor/laravel/framework/src/Illuminate/Routing/Router.php&quot;,
+            &quot;line&quot;: 729,
+            &quot;function&quot;: &quot;dispatchToRoute&quot;,
+            &quot;class&quot;: &quot;Illuminate\\Routing\\Router&quot;,
+            &quot;type&quot;: &quot;-&gt;&quot;
+        },
+        {
+            &quot;file&quot;: &quot;/Users/alexanderbonin/Development/HOWHY/howhy-backend/vendor/laravel/framework/src/Illuminate/Foundation/Http/Kernel.php&quot;,
+            &quot;line&quot;: 200,
+            &quot;function&quot;: &quot;dispatch&quot;,
+            &quot;class&quot;: &quot;Illuminate\\Routing\\Router&quot;,
+            &quot;type&quot;: &quot;-&gt;&quot;
+        },
+        {
+            &quot;file&quot;: &quot;/Users/alexanderbonin/Development/HOWHY/howhy-backend/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php&quot;,
+            &quot;line&quot;: 141,
+            &quot;function&quot;: &quot;Illuminate\\Foundation\\Http\\{closure}&quot;,
+            &quot;class&quot;: &quot;Illuminate\\Foundation\\Http\\Kernel&quot;,
+            &quot;type&quot;: &quot;-&gt;&quot;
+        },
+        {
+            &quot;file&quot;: &quot;/Users/alexanderbonin/Development/HOWHY/howhy-backend/vendor/laravel/framework/src/Illuminate/Foundation/Http/Middleware/TransformsRequest.php&quot;,
+            &quot;line&quot;: 21,
+            &quot;function&quot;: &quot;Illuminate\\Pipeline\\{closure}&quot;,
+            &quot;class&quot;: &quot;Illuminate\\Pipeline\\Pipeline&quot;,
+            &quot;type&quot;: &quot;-&gt;&quot;
+        },
+        {
+            &quot;file&quot;: &quot;/Users/alexanderbonin/Development/HOWHY/howhy-backend/vendor/laravel/framework/src/Illuminate/Foundation/Http/Middleware/TrimStrings.php&quot;,
+            &quot;line&quot;: 40,
+            &quot;function&quot;: &quot;handle&quot;,
+            &quot;class&quot;: &quot;Illuminate\\Foundation\\Http\\Middleware\\TransformsRequest&quot;,
+            &quot;type&quot;: &quot;-&gt;&quot;
+        },
+        {
+            &quot;file&quot;: &quot;/Users/alexanderbonin/Development/HOWHY/howhy-backend/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php&quot;,
+            &quot;line&quot;: 180,
+            &quot;function&quot;: &quot;handle&quot;,
+            &quot;class&quot;: &quot;Illuminate\\Foundation\\Http\\Middleware\\TrimStrings&quot;,
+            &quot;type&quot;: &quot;-&gt;&quot;
+        },
+        {
+            &quot;file&quot;: &quot;/Users/alexanderbonin/Development/HOWHY/howhy-backend/vendor/laravel/framework/src/Illuminate/Foundation/Http/Middleware/ValidatePostSize.php&quot;,
+            &quot;line&quot;: 27,
+            &quot;function&quot;: &quot;Illuminate\\Pipeline\\{closure}&quot;,
+            &quot;class&quot;: &quot;Illuminate\\Pipeline\\Pipeline&quot;,
+            &quot;type&quot;: &quot;-&gt;&quot;
+        },
+        {
+            &quot;file&quot;: &quot;/Users/alexanderbonin/Development/HOWHY/howhy-backend/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php&quot;,
+            &quot;line&quot;: 180,
+            &quot;function&quot;: &quot;handle&quot;,
+            &quot;class&quot;: &quot;Illuminate\\Foundation\\Http\\Middleware\\ValidatePostSize&quot;,
+            &quot;type&quot;: &quot;-&gt;&quot;
+        },
+        {
+            &quot;file&quot;: &quot;/Users/alexanderbonin/Development/HOWHY/howhy-backend/vendor/laravel/framework/src/Illuminate/Foundation/Http/Middleware/PreventRequestsDuringMaintenance.php&quot;,
+            &quot;line&quot;: 86,
+            &quot;function&quot;: &quot;Illuminate\\Pipeline\\{closure}&quot;,
+            &quot;class&quot;: &quot;Illuminate\\Pipeline\\Pipeline&quot;,
+            &quot;type&quot;: &quot;-&gt;&quot;
+        },
+        {
+            &quot;file&quot;: &quot;/Users/alexanderbonin/Development/HOWHY/howhy-backend/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php&quot;,
+            &quot;line&quot;: 180,
+            &quot;function&quot;: &quot;handle&quot;,
+            &quot;class&quot;: &quot;Illuminate\\Foundation\\Http\\Middleware\\PreventRequestsDuringMaintenance&quot;,
+            &quot;type&quot;: &quot;-&gt;&quot;
+        },
+        {
+            &quot;file&quot;: &quot;/Users/alexanderbonin/Development/HOWHY/howhy-backend/vendor/laravel/framework/src/Illuminate/Http/Middleware/HandleCors.php&quot;,
+            &quot;line&quot;: 62,
+            &quot;function&quot;: &quot;Illuminate\\Pipeline\\{closure}&quot;,
+            &quot;class&quot;: &quot;Illuminate\\Pipeline\\Pipeline&quot;,
+            &quot;type&quot;: &quot;-&gt;&quot;
+        },
+        {
+            &quot;file&quot;: &quot;/Users/alexanderbonin/Development/HOWHY/howhy-backend/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php&quot;,
+            &quot;line&quot;: 180,
+            &quot;function&quot;: &quot;handle&quot;,
+            &quot;class&quot;: &quot;Illuminate\\Http\\Middleware\\HandleCors&quot;,
+            &quot;type&quot;: &quot;-&gt;&quot;
+        },
+        {
+            &quot;file&quot;: &quot;/Users/alexanderbonin/Development/HOWHY/howhy-backend/vendor/laravel/framework/src/Illuminate/Http/Middleware/TrustProxies.php&quot;,
+            &quot;line&quot;: 39,
+            &quot;function&quot;: &quot;Illuminate\\Pipeline\\{closure}&quot;,
+            &quot;class&quot;: &quot;Illuminate\\Pipeline\\Pipeline&quot;,
+            &quot;type&quot;: &quot;-&gt;&quot;
+        },
+        {
+            &quot;file&quot;: &quot;/Users/alexanderbonin/Development/HOWHY/howhy-backend/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php&quot;,
+            &quot;line&quot;: 180,
+            &quot;function&quot;: &quot;handle&quot;,
+            &quot;class&quot;: &quot;Illuminate\\Http\\Middleware\\TrustProxies&quot;,
+            &quot;type&quot;: &quot;-&gt;&quot;
+        },
+        {
+            &quot;file&quot;: &quot;/Users/alexanderbonin/Development/HOWHY/howhy-backend/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php&quot;,
+            &quot;line&quot;: 116,
+            &quot;function&quot;: &quot;Illuminate\\Pipeline\\{closure}&quot;,
+            &quot;class&quot;: &quot;Illuminate\\Pipeline\\Pipeline&quot;,
+            &quot;type&quot;: &quot;-&gt;&quot;
+        },
+        {
+            &quot;file&quot;: &quot;/Users/alexanderbonin/Development/HOWHY/howhy-backend/vendor/laravel/framework/src/Illuminate/Foundation/Http/Kernel.php&quot;,
+            &quot;line&quot;: 175,
+            &quot;function&quot;: &quot;then&quot;,
+            &quot;class&quot;: &quot;Illuminate\\Pipeline\\Pipeline&quot;,
+            &quot;type&quot;: &quot;-&gt;&quot;
+        },
+        {
+            &quot;file&quot;: &quot;/Users/alexanderbonin/Development/HOWHY/howhy-backend/vendor/laravel/framework/src/Illuminate/Foundation/Http/Kernel.php&quot;,
+            &quot;line&quot;: 144,
+            &quot;function&quot;: &quot;sendRequestThroughRouter&quot;,
+            &quot;class&quot;: &quot;Illuminate\\Foundation\\Http\\Kernel&quot;,
+            &quot;type&quot;: &quot;-&gt;&quot;
+        },
+        {
+            &quot;file&quot;: &quot;/Users/alexanderbonin/Development/HOWHY/howhy-backend/vendor/knuckleswtf/scribe/src/Extracting/Strategies/Responses/ResponseCalls.php&quot;,
+            &quot;line&quot;: 299,
+            &quot;function&quot;: &quot;handle&quot;,
+            &quot;class&quot;: &quot;Illuminate\\Foundation\\Http\\Kernel&quot;,
+            &quot;type&quot;: &quot;-&gt;&quot;
+        },
+        {
+            &quot;file&quot;: &quot;/Users/alexanderbonin/Development/HOWHY/howhy-backend/vendor/knuckleswtf/scribe/src/Extracting/Strategies/Responses/ResponseCalls.php&quot;,
+            &quot;line&quot;: 287,
+            &quot;function&quot;: &quot;callLaravelOrLumenRoute&quot;,
+            &quot;class&quot;: &quot;Knuckles\\Scribe\\Extracting\\Strategies\\Responses\\ResponseCalls&quot;,
+            &quot;type&quot;: &quot;-&gt;&quot;
+        },
+        {
+            &quot;file&quot;: &quot;/Users/alexanderbonin/Development/HOWHY/howhy-backend/vendor/knuckleswtf/scribe/src/Extracting/Strategies/Responses/ResponseCalls.php&quot;,
+            &quot;line&quot;: 92,
+            &quot;function&quot;: &quot;makeApiCall&quot;,
+            &quot;class&quot;: &quot;Knuckles\\Scribe\\Extracting\\Strategies\\Responses\\ResponseCalls&quot;,
+            &quot;type&quot;: &quot;-&gt;&quot;
+        },
+        {
+            &quot;file&quot;: &quot;/Users/alexanderbonin/Development/HOWHY/howhy-backend/vendor/knuckleswtf/scribe/src/Extracting/Strategies/Responses/ResponseCalls.php&quot;,
+            &quot;line&quot;: 45,
+            &quot;function&quot;: &quot;makeResponseCall&quot;,
+            &quot;class&quot;: &quot;Knuckles\\Scribe\\Extracting\\Strategies\\Responses\\ResponseCalls&quot;,
+            &quot;type&quot;: &quot;-&gt;&quot;
+        },
+        {
+            &quot;file&quot;: &quot;/Users/alexanderbonin/Development/HOWHY/howhy-backend/vendor/knuckleswtf/scribe/src/Extracting/Strategies/Responses/ResponseCalls.php&quot;,
+            &quot;line&quot;: 35,
+            &quot;function&quot;: &quot;makeResponseCallIfConditionsPass&quot;,
+            &quot;class&quot;: &quot;Knuckles\\Scribe\\Extracting\\Strategies\\Responses\\ResponseCalls&quot;,
+            &quot;type&quot;: &quot;-&gt;&quot;
+        },
+        {
+            &quot;file&quot;: &quot;/Users/alexanderbonin/Development/HOWHY/howhy-backend/vendor/knuckleswtf/scribe/src/Extracting/Extractor.php&quot;,
+            &quot;line&quot;: 209,
+            &quot;function&quot;: &quot;__invoke&quot;,
+            &quot;class&quot;: &quot;Knuckles\\Scribe\\Extracting\\Strategies\\Responses\\ResponseCalls&quot;,
+            &quot;type&quot;: &quot;-&gt;&quot;
+        },
+        {
+            &quot;file&quot;: &quot;/Users/alexanderbonin/Development/HOWHY/howhy-backend/vendor/knuckleswtf/scribe/src/Extracting/Extractor.php&quot;,
+            &quot;line&quot;: 163,
+            &quot;function&quot;: &quot;iterateThroughStrategies&quot;,
+            &quot;class&quot;: &quot;Knuckles\\Scribe\\Extracting\\Extractor&quot;,
+            &quot;type&quot;: &quot;-&gt;&quot;
+        },
+        {
+            &quot;file&quot;: &quot;/Users/alexanderbonin/Development/HOWHY/howhy-backend/vendor/knuckleswtf/scribe/src/Extracting/Extractor.php&quot;,
+            &quot;line&quot;: 95,
+            &quot;function&quot;: &quot;fetchResponses&quot;,
+            &quot;class&quot;: &quot;Knuckles\\Scribe\\Extracting\\Extractor&quot;,
+            &quot;type&quot;: &quot;-&gt;&quot;
+        },
+        {
+            &quot;file&quot;: &quot;/Users/alexanderbonin/Development/HOWHY/howhy-backend/vendor/knuckleswtf/scribe/src/GroupedEndpoints/GroupedEndpointsFromApp.php&quot;,
+            &quot;line&quot;: 124,
+            &quot;function&quot;: &quot;processRoute&quot;,
+            &quot;class&quot;: &quot;Knuckles\\Scribe\\Extracting\\Extractor&quot;,
+            &quot;type&quot;: &quot;-&gt;&quot;
+        },
+        {
+            &quot;file&quot;: &quot;/Users/alexanderbonin/Development/HOWHY/howhy-backend/vendor/knuckleswtf/scribe/src/GroupedEndpoints/GroupedEndpointsFromApp.php&quot;,
+            &quot;line&quot;: 71,
+            &quot;function&quot;: &quot;extractEndpointsInfoFromLaravelApp&quot;,
+            &quot;class&quot;: &quot;Knuckles\\Scribe\\GroupedEndpoints\\GroupedEndpointsFromApp&quot;,
+            &quot;type&quot;: &quot;-&gt;&quot;
+        },
+        {
+            &quot;file&quot;: &quot;/Users/alexanderbonin/Development/HOWHY/howhy-backend/vendor/knuckleswtf/scribe/src/GroupedEndpoints/GroupedEndpointsFromApp.php&quot;,
+            &quot;line&quot;: 49,
+            &quot;function&quot;: &quot;extractEndpointsInfoAndWriteToDisk&quot;,
+            &quot;class&quot;: &quot;Knuckles\\Scribe\\GroupedEndpoints\\GroupedEndpointsFromApp&quot;,
+            &quot;type&quot;: &quot;-&gt;&quot;
+        },
+        {
+            &quot;file&quot;: &quot;/Users/alexanderbonin/Development/HOWHY/howhy-backend/vendor/knuckleswtf/scribe/src/Commands/GenerateDocumentation.php&quot;,
+            &quot;line&quot;: 51,
+            &quot;function&quot;: &quot;get&quot;,
+            &quot;class&quot;: &quot;Knuckles\\Scribe\\GroupedEndpoints\\GroupedEndpointsFromApp&quot;,
+            &quot;type&quot;: &quot;-&gt;&quot;
+        },
+        {
+            &quot;file&quot;: &quot;/Users/alexanderbonin/Development/HOWHY/howhy-backend/vendor/laravel/framework/src/Illuminate/Container/BoundMethod.php&quot;,
+            &quot;line&quot;: 36,
+            &quot;function&quot;: &quot;handle&quot;,
+            &quot;class&quot;: &quot;Knuckles\\Scribe\\Commands\\GenerateDocumentation&quot;,
+            &quot;type&quot;: &quot;-&gt;&quot;
+        },
+        {
+            &quot;file&quot;: &quot;/Users/alexanderbonin/Development/HOWHY/howhy-backend/vendor/laravel/framework/src/Illuminate/Container/Util.php&quot;,
+            &quot;line&quot;: 41,
+            &quot;function&quot;: &quot;Illuminate\\Container\\{closure}&quot;,
+            &quot;class&quot;: &quot;Illuminate\\Container\\BoundMethod&quot;,
+            &quot;type&quot;: &quot;::&quot;
+        },
+        {
+            &quot;file&quot;: &quot;/Users/alexanderbonin/Development/HOWHY/howhy-backend/vendor/laravel/framework/src/Illuminate/Container/BoundMethod.php&quot;,
+            &quot;line&quot;: 93,
+            &quot;function&quot;: &quot;unwrapIfClosure&quot;,
+            &quot;class&quot;: &quot;Illuminate\\Container\\Util&quot;,
+            &quot;type&quot;: &quot;::&quot;
+        },
+        {
+            &quot;file&quot;: &quot;/Users/alexanderbonin/Development/HOWHY/howhy-backend/vendor/laravel/framework/src/Illuminate/Container/BoundMethod.php&quot;,
+            &quot;line&quot;: 35,
+            &quot;function&quot;: &quot;callBoundMethod&quot;,
+            &quot;class&quot;: &quot;Illuminate\\Container\\BoundMethod&quot;,
+            &quot;type&quot;: &quot;::&quot;
+        },
+        {
+            &quot;file&quot;: &quot;/Users/alexanderbonin/Development/HOWHY/howhy-backend/vendor/laravel/framework/src/Illuminate/Container/Container.php&quot;,
+            &quot;line&quot;: 662,
+            &quot;function&quot;: &quot;call&quot;,
+            &quot;class&quot;: &quot;Illuminate\\Container\\BoundMethod&quot;,
+            &quot;type&quot;: &quot;::&quot;
+        },
+        {
+            &quot;file&quot;: &quot;/Users/alexanderbonin/Development/HOWHY/howhy-backend/vendor/laravel/framework/src/Illuminate/Console/Command.php&quot;,
+            &quot;line&quot;: 194,
+            &quot;function&quot;: &quot;call&quot;,
+            &quot;class&quot;: &quot;Illuminate\\Container\\Container&quot;,
+            &quot;type&quot;: &quot;-&gt;&quot;
+        },
+        {
+            &quot;file&quot;: &quot;/Users/alexanderbonin/Development/HOWHY/howhy-backend/vendor/symfony/console/Command/Command.php&quot;,
+            &quot;line&quot;: 312,
+            &quot;function&quot;: &quot;execute&quot;,
+            &quot;class&quot;: &quot;Illuminate\\Console\\Command&quot;,
+            &quot;type&quot;: &quot;-&gt;&quot;
+        },
+        {
+            &quot;file&quot;: &quot;/Users/alexanderbonin/Development/HOWHY/howhy-backend/vendor/laravel/framework/src/Illuminate/Console/Command.php&quot;,
+            &quot;line&quot;: 163,
+            &quot;function&quot;: &quot;run&quot;,
+            &quot;class&quot;: &quot;Symfony\\Component\\Console\\Command\\Command&quot;,
+            &quot;type&quot;: &quot;-&gt;&quot;
+        },
+        {
+            &quot;file&quot;: &quot;/Users/alexanderbonin/Development/HOWHY/howhy-backend/vendor/symfony/console/Application.php&quot;,
+            &quot;line&quot;: 1040,
+            &quot;function&quot;: &quot;run&quot;,
+            &quot;class&quot;: &quot;Illuminate\\Console\\Command&quot;,
+            &quot;type&quot;: &quot;-&gt;&quot;
+        },
+        {
+            &quot;file&quot;: &quot;/Users/alexanderbonin/Development/HOWHY/howhy-backend/vendor/symfony/console/Application.php&quot;,
+            &quot;line&quot;: 314,
+            &quot;function&quot;: &quot;doRunCommand&quot;,
+            &quot;class&quot;: &quot;Symfony\\Component\\Console\\Application&quot;,
+            &quot;type&quot;: &quot;-&gt;&quot;
+        },
+        {
+            &quot;file&quot;: &quot;/Users/alexanderbonin/Development/HOWHY/howhy-backend/vendor/symfony/console/Application.php&quot;,
+            &quot;line&quot;: 168,
+            &quot;function&quot;: &quot;doRun&quot;,
+            &quot;class&quot;: &quot;Symfony\\Component\\Console\\Application&quot;,
+            &quot;type&quot;: &quot;-&gt;&quot;
+        },
+        {
+            &quot;file&quot;: &quot;/Users/alexanderbonin/Development/HOWHY/howhy-backend/vendor/laravel/framework/src/Illuminate/Foundation/Console/Kernel.php&quot;,
+            &quot;line&quot;: 200,
+            &quot;function&quot;: &quot;run&quot;,
+            &quot;class&quot;: &quot;Symfony\\Component\\Console\\Application&quot;,
+            &quot;type&quot;: &quot;-&gt;&quot;
+        },
+        {
+            &quot;file&quot;: &quot;/Users/alexanderbonin/Development/HOWHY/howhy-backend/artisan&quot;,
+            &quot;line&quot;: 35,
+            &quot;function&quot;: &quot;handle&quot;,
+            &quot;class&quot;: &quot;Illuminate\\Foundation\\Console\\Kernel&quot;,
+            &quot;type&quot;: &quot;-&gt;&quot;
+        }
+    ]
+}</code>
+ </pre>
+    </span>
+<span id="execution-results-GETapi-timecodes--videoId-" hidden>
+    <blockquote>Received response<span
+                id="execution-response-status-GETapi-timecodes--videoId-"></span>:
+    </blockquote>
+    <pre class="json"><code id="execution-response-content-GETapi-timecodes--videoId-"
+      data-empty-response-text="<Empty response>" style="max-height: 400px;"></code></pre>
+</span>
+<span id="execution-error-GETapi-timecodes--videoId-" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-GETapi-timecodes--videoId-">
+
+Tip: Check that you&#039;re properly connected to the network.
+If you&#039;re a maintainer of ths API, verify that your API is running and you&#039;ve enabled CORS.
+You can check the Dev Tools console for debugging information.</code></pre>
+</span>
+<form id="form-GETapi-timecodes--videoId-" data-method="GET"
+      data-path="api/timecodes/{videoId}"
+      data-authed="0"
+      data-hasfiles="0"
+      data-isarraybody="0"
+      autocomplete="off"
+      onsubmit="event.preventDefault(); executeTryOut('GETapi-timecodes--videoId-', this);">
+    <h3>
+        Request&nbsp;&nbsp;&nbsp;
+                    <button type="button"
+                    style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-tryout-GETapi-timecodes--videoId-"
+                    onclick="tryItOut('GETapi-timecodes--videoId-');">Try it out ⚡
+            </button>
+            <button type="button"
+                    style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-canceltryout-GETapi-timecodes--videoId-"
+                    onclick="cancelTryOut('GETapi-timecodes--videoId-');" hidden>Cancel 🛑
+            </button>&nbsp;&nbsp;
+            <button type="submit"
+                    style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-executetryout-GETapi-timecodes--videoId-"
+                    data-initial-text="Send Request 💥"
+                    data-loading-text="⏱ Sending..."
+                    hidden>Send Request 💥
+            </button>
+            </h3>
+            <p>
+            <small class="badge badge-green">GET</small>
+            <b><code>api/timecodes/{videoId}</code></b>
+        </p>
+                <h4 class="fancy-heading-panel"><b>Headers</b></h4>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Content-Type</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+               name="Content-Type"                data-endpoint="GETapi-timecodes--videoId-"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Accept</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+               name="Accept"                data-endpoint="GETapi-timecodes--videoId-"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                        <h4 class="fancy-heading-panel"><b>URL Parameters</b></h4>
+                    <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>videoId</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+               name="videoId"                data-endpoint="GETapi-timecodes--videoId-"
+               value="nihil"
+               data-component="url">
+    <br>
+<p>Example: <code>nihil</code></p>
+            </div>
+                    </form>
+
+                    <h2 id="endpoints-GETapi-questions--videoId-">GET api/questions/{videoId}</h2>
+
+<p>
+</p>
+
+
+
+<span id="example-requests-GETapi-questions--videoId-">
+<blockquote>Example request:</blockquote>
+
+
+<div class="bash-example">
+    <pre><code class="language-bash">curl --request GET \
+    --get "localhost:8000/api/questions/4" \
+    --header "Content-Type: application/json" \
+    --header "Accept: application/json"</code></pre></div>
+
+
+<div class="javascript-example">
+    <pre><code class="language-javascript">const url = new URL(
+    "localhost:8000/api/questions/4"
+);
+
+const headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+fetch(url, {
+    method: "GET",
+    headers,
+}).then(response =&gt; response.json());</code></pre></div>
+
+</span>
+
+<span id="example-responses-GETapi-questions--videoId-">
+            <blockquote>
+            <p>Example response (404):</p>
+        </blockquote>
+                <details class="annotation">
+            <summary style="cursor: pointer;">
+                <small onclick="textContent = parentElement.parentElement.open ? 'Show headers' : 'Hide headers'">Show headers</small>
+            </summary>
+            <pre><code class="language-http">cache-control: no-cache, private
+content-type: application/json
+x-ratelimit-limit: 60
+x-ratelimit-remaining: 55
+vary: Origin
+ </code></pre></details>         <pre>
+
+<code class="language-json" style="max-height: 300px;">{
+    &quot;message&quot;: &quot;No query results for model [App\\Models\\Video].&quot;,
+    &quot;exception&quot;: &quot;Symfony\\Component\\HttpKernel\\Exception\\NotFoundHttpException&quot;,
+    &quot;file&quot;: &quot;/Users/alexanderbonin/Development/HOWHY/howhy-backend/vendor/laravel/framework/src/Illuminate/Foundation/Exceptions/Handler.php&quot;,
+    &quot;line&quot;: 408,
+    &quot;trace&quot;: [
+        {
+            &quot;file&quot;: &quot;/Users/alexanderbonin/Development/HOWHY/howhy-backend/vendor/laravel/framework/src/Illuminate/Foundation/Exceptions/Handler.php&quot;,
+            &quot;line&quot;: 384,
+            &quot;function&quot;: &quot;prepareException&quot;,
+            &quot;class&quot;: &quot;Illuminate\\Foundation\\Exceptions\\Handler&quot;,
+            &quot;type&quot;: &quot;-&gt;&quot;
+        },
+        {
+            &quot;file&quot;: &quot;/Users/alexanderbonin/Development/HOWHY/howhy-backend/vendor/nunomaduro/collision/src/Adapters/Laravel/ExceptionHandler.php&quot;,
+            &quot;line&quot;: 54,
+            &quot;function&quot;: &quot;render&quot;,
+            &quot;class&quot;: &quot;Illuminate\\Foundation\\Exceptions\\Handler&quot;,
+            &quot;type&quot;: &quot;-&gt;&quot;
+        },
+        {
+            &quot;file&quot;: &quot;/Users/alexanderbonin/Development/HOWHY/howhy-backend/vendor/laravel/framework/src/Illuminate/Routing/Pipeline.php&quot;,
+            &quot;line&quot;: 51,
+            &quot;function&quot;: &quot;render&quot;,
+            &quot;class&quot;: &quot;NunoMaduro\\Collision\\Adapters\\Laravel\\ExceptionHandler&quot;,
+            &quot;type&quot;: &quot;-&gt;&quot;
+        },
+        {
+            &quot;file&quot;: &quot;/Users/alexanderbonin/Development/HOWHY/howhy-backend/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php&quot;,
+            &quot;line&quot;: 143,
+            &quot;function&quot;: &quot;handleException&quot;,
+            &quot;class&quot;: &quot;Illuminate\\Routing\\Pipeline&quot;,
+            &quot;type&quot;: &quot;-&gt;&quot;
+        },
+        {
+            &quot;file&quot;: &quot;/Users/alexanderbonin/Development/HOWHY/howhy-backend/app/Http/Middleware/IsCreatorMiddleware.php&quot;,
+            &quot;line&quot;: 26,
+            &quot;function&quot;: &quot;Illuminate\\Pipeline\\{closure}&quot;,
+            &quot;class&quot;: &quot;Illuminate\\Pipeline\\Pipeline&quot;,
+            &quot;type&quot;: &quot;-&gt;&quot;
+        },
+        {
+            &quot;file&quot;: &quot;/Users/alexanderbonin/Development/HOWHY/howhy-backend/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php&quot;,
+            &quot;line&quot;: 180,
+            &quot;function&quot;: &quot;handle&quot;,
+            &quot;class&quot;: &quot;App\\Http\\Middleware\\IsCreatorMiddleware&quot;,
+            &quot;type&quot;: &quot;-&gt;&quot;
+        },
+        {
+            &quot;file&quot;: &quot;/Users/alexanderbonin/Development/HOWHY/howhy-backend/vendor/laravel/framework/src/Illuminate/Routing/Middleware/SubstituteBindings.php&quot;,
+            &quot;line&quot;: 50,
+            &quot;function&quot;: &quot;Illuminate\\Pipeline\\{closure}&quot;,
+            &quot;class&quot;: &quot;Illuminate\\Pipeline\\Pipeline&quot;,
+            &quot;type&quot;: &quot;-&gt;&quot;
+        },
+        {
+            &quot;file&quot;: &quot;/Users/alexanderbonin/Development/HOWHY/howhy-backend/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php&quot;,
+            &quot;line&quot;: 180,
+            &quot;function&quot;: &quot;handle&quot;,
+            &quot;class&quot;: &quot;Illuminate\\Routing\\Middleware\\SubstituteBindings&quot;,
+            &quot;type&quot;: &quot;-&gt;&quot;
+        },
+        {
+            &quot;file&quot;: &quot;/Users/alexanderbonin/Development/HOWHY/howhy-backend/vendor/laravel/framework/src/Illuminate/Routing/Middleware/ThrottleRequests.php&quot;,
+            &quot;line&quot;: 152,
+            &quot;function&quot;: &quot;Illuminate\\Pipeline\\{closure}&quot;,
+            &quot;class&quot;: &quot;Illuminate\\Pipeline\\Pipeline&quot;,
+            &quot;type&quot;: &quot;-&gt;&quot;
+        },
+        {
+            &quot;file&quot;: &quot;/Users/alexanderbonin/Development/HOWHY/howhy-backend/vendor/laravel/framework/src/Illuminate/Routing/Middleware/ThrottleRequests.php&quot;,
+            &quot;line&quot;: 118,
+            &quot;function&quot;: &quot;handleRequest&quot;,
+            &quot;class&quot;: &quot;Illuminate\\Routing\\Middleware\\ThrottleRequests&quot;,
+            &quot;type&quot;: &quot;-&gt;&quot;
+        },
+        {
+            &quot;file&quot;: &quot;/Users/alexanderbonin/Development/HOWHY/howhy-backend/vendor/laravel/framework/src/Illuminate/Routing/Middleware/ThrottleRequests.php&quot;,
+            &quot;line&quot;: 80,
+            &quot;function&quot;: &quot;handleRequestUsingNamedLimiter&quot;,
+            &quot;class&quot;: &quot;Illuminate\\Routing\\Middleware\\ThrottleRequests&quot;,
+            &quot;type&quot;: &quot;-&gt;&quot;
+        },
+        {
+            &quot;file&quot;: &quot;/Users/alexanderbonin/Development/HOWHY/howhy-backend/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php&quot;,
+            &quot;line&quot;: 180,
+            &quot;function&quot;: &quot;handle&quot;,
+            &quot;class&quot;: &quot;Illuminate\\Routing\\Middleware\\ThrottleRequests&quot;,
+            &quot;type&quot;: &quot;-&gt;&quot;
+        },
+        {
+            &quot;file&quot;: &quot;/Users/alexanderbonin/Development/HOWHY/howhy-backend/vendor/laravel/sanctum/src/Http/Middleware/EnsureFrontendRequestsAreStateful.php&quot;,
+            &quot;line&quot;: 25,
+            &quot;function&quot;: &quot;Illuminate\\Pipeline\\{closure}&quot;,
+            &quot;class&quot;: &quot;Illuminate\\Pipeline\\Pipeline&quot;,
+            &quot;type&quot;: &quot;-&gt;&quot;
+        },
+        {
+            &quot;file&quot;: &quot;/Users/alexanderbonin/Development/HOWHY/howhy-backend/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php&quot;,
+            &quot;line&quot;: 141,
+            &quot;function&quot;: &quot;Laravel\\Sanctum\\Http\\Middleware\\{closure}&quot;,
+            &quot;class&quot;: &quot;Laravel\\Sanctum\\Http\\Middleware\\EnsureFrontendRequestsAreStateful&quot;,
+            &quot;type&quot;: &quot;-&gt;&quot;
+        },
+        {
+            &quot;file&quot;: &quot;/Users/alexanderbonin/Development/HOWHY/howhy-backend/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php&quot;,
+            &quot;line&quot;: 116,
+            &quot;function&quot;: &quot;Illuminate\\Pipeline\\{closure}&quot;,
+            &quot;class&quot;: &quot;Illuminate\\Pipeline\\Pipeline&quot;,
+            &quot;type&quot;: &quot;-&gt;&quot;
+        },
+        {
+            &quot;file&quot;: &quot;/Users/alexanderbonin/Development/HOWHY/howhy-backend/vendor/laravel/sanctum/src/Http/Middleware/EnsureFrontendRequestsAreStateful.php&quot;,
+            &quot;line&quot;: 24,
+            &quot;function&quot;: &quot;then&quot;,
+            &quot;class&quot;: &quot;Illuminate\\Pipeline\\Pipeline&quot;,
+            &quot;type&quot;: &quot;-&gt;&quot;
+        },
+        {
+            &quot;file&quot;: &quot;/Users/alexanderbonin/Development/HOWHY/howhy-backend/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php&quot;,
+            &quot;line&quot;: 180,
+            &quot;function&quot;: &quot;handle&quot;,
+            &quot;class&quot;: &quot;Laravel\\Sanctum\\Http\\Middleware\\EnsureFrontendRequestsAreStateful&quot;,
+            &quot;type&quot;: &quot;-&gt;&quot;
+        },
+        {
+            &quot;file&quot;: &quot;/Users/alexanderbonin/Development/HOWHY/howhy-backend/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php&quot;,
+            &quot;line&quot;: 116,
+            &quot;function&quot;: &quot;Illuminate\\Pipeline\\{closure}&quot;,
+            &quot;class&quot;: &quot;Illuminate\\Pipeline\\Pipeline&quot;,
+            &quot;type&quot;: &quot;-&gt;&quot;
+        },
+        {
+            &quot;file&quot;: &quot;/Users/alexanderbonin/Development/HOWHY/howhy-backend/vendor/laravel/framework/src/Illuminate/Routing/Router.php&quot;,
+            &quot;line&quot;: 797,
+            &quot;function&quot;: &quot;then&quot;,
+            &quot;class&quot;: &quot;Illuminate\\Pipeline\\Pipeline&quot;,
+            &quot;type&quot;: &quot;-&gt;&quot;
+        },
+        {
+            &quot;file&quot;: &quot;/Users/alexanderbonin/Development/HOWHY/howhy-backend/vendor/laravel/framework/src/Illuminate/Routing/Router.php&quot;,
+            &quot;line&quot;: 776,
+            &quot;function&quot;: &quot;runRouteWithinStack&quot;,
+            &quot;class&quot;: &quot;Illuminate\\Routing\\Router&quot;,
+            &quot;type&quot;: &quot;-&gt;&quot;
+        },
+        {
+            &quot;file&quot;: &quot;/Users/alexanderbonin/Development/HOWHY/howhy-backend/vendor/laravel/framework/src/Illuminate/Routing/Router.php&quot;,
+            &quot;line&quot;: 740,
+            &quot;function&quot;: &quot;runRoute&quot;,
+            &quot;class&quot;: &quot;Illuminate\\Routing\\Router&quot;,
+            &quot;type&quot;: &quot;-&gt;&quot;
+        },
+        {
+            &quot;file&quot;: &quot;/Users/alexanderbonin/Development/HOWHY/howhy-backend/vendor/laravel/framework/src/Illuminate/Routing/Router.php&quot;,
+            &quot;line&quot;: 729,
+            &quot;function&quot;: &quot;dispatchToRoute&quot;,
+            &quot;class&quot;: &quot;Illuminate\\Routing\\Router&quot;,
+            &quot;type&quot;: &quot;-&gt;&quot;
+        },
+        {
+            &quot;file&quot;: &quot;/Users/alexanderbonin/Development/HOWHY/howhy-backend/vendor/laravel/framework/src/Illuminate/Foundation/Http/Kernel.php&quot;,
+            &quot;line&quot;: 200,
+            &quot;function&quot;: &quot;dispatch&quot;,
+            &quot;class&quot;: &quot;Illuminate\\Routing\\Router&quot;,
+            &quot;type&quot;: &quot;-&gt;&quot;
+        },
+        {
+            &quot;file&quot;: &quot;/Users/alexanderbonin/Development/HOWHY/howhy-backend/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php&quot;,
+            &quot;line&quot;: 141,
+            &quot;function&quot;: &quot;Illuminate\\Foundation\\Http\\{closure}&quot;,
+            &quot;class&quot;: &quot;Illuminate\\Foundation\\Http\\Kernel&quot;,
+            &quot;type&quot;: &quot;-&gt;&quot;
+        },
+        {
+            &quot;file&quot;: &quot;/Users/alexanderbonin/Development/HOWHY/howhy-backend/vendor/laravel/framework/src/Illuminate/Foundation/Http/Middleware/TransformsRequest.php&quot;,
+            &quot;line&quot;: 21,
+            &quot;function&quot;: &quot;Illuminate\\Pipeline\\{closure}&quot;,
+            &quot;class&quot;: &quot;Illuminate\\Pipeline\\Pipeline&quot;,
+            &quot;type&quot;: &quot;-&gt;&quot;
+        },
+        {
+            &quot;file&quot;: &quot;/Users/alexanderbonin/Development/HOWHY/howhy-backend/vendor/laravel/framework/src/Illuminate/Foundation/Http/Middleware/TrimStrings.php&quot;,
+            &quot;line&quot;: 40,
+            &quot;function&quot;: &quot;handle&quot;,
+            &quot;class&quot;: &quot;Illuminate\\Foundation\\Http\\Middleware\\TransformsRequest&quot;,
+            &quot;type&quot;: &quot;-&gt;&quot;
+        },
+        {
+            &quot;file&quot;: &quot;/Users/alexanderbonin/Development/HOWHY/howhy-backend/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php&quot;,
+            &quot;line&quot;: 180,
+            &quot;function&quot;: &quot;handle&quot;,
+            &quot;class&quot;: &quot;Illuminate\\Foundation\\Http\\Middleware\\TrimStrings&quot;,
+            &quot;type&quot;: &quot;-&gt;&quot;
+        },
+        {
+            &quot;file&quot;: &quot;/Users/alexanderbonin/Development/HOWHY/howhy-backend/vendor/laravel/framework/src/Illuminate/Foundation/Http/Middleware/ValidatePostSize.php&quot;,
+            &quot;line&quot;: 27,
+            &quot;function&quot;: &quot;Illuminate\\Pipeline\\{closure}&quot;,
+            &quot;class&quot;: &quot;Illuminate\\Pipeline\\Pipeline&quot;,
+            &quot;type&quot;: &quot;-&gt;&quot;
+        },
+        {
+            &quot;file&quot;: &quot;/Users/alexanderbonin/Development/HOWHY/howhy-backend/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php&quot;,
+            &quot;line&quot;: 180,
+            &quot;function&quot;: &quot;handle&quot;,
+            &quot;class&quot;: &quot;Illuminate\\Foundation\\Http\\Middleware\\ValidatePostSize&quot;,
+            &quot;type&quot;: &quot;-&gt;&quot;
+        },
+        {
+            &quot;file&quot;: &quot;/Users/alexanderbonin/Development/HOWHY/howhy-backend/vendor/laravel/framework/src/Illuminate/Foundation/Http/Middleware/PreventRequestsDuringMaintenance.php&quot;,
+            &quot;line&quot;: 86,
+            &quot;function&quot;: &quot;Illuminate\\Pipeline\\{closure}&quot;,
+            &quot;class&quot;: &quot;Illuminate\\Pipeline\\Pipeline&quot;,
+            &quot;type&quot;: &quot;-&gt;&quot;
+        },
+        {
+            &quot;file&quot;: &quot;/Users/alexanderbonin/Development/HOWHY/howhy-backend/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php&quot;,
+            &quot;line&quot;: 180,
+            &quot;function&quot;: &quot;handle&quot;,
+            &quot;class&quot;: &quot;Illuminate\\Foundation\\Http\\Middleware\\PreventRequestsDuringMaintenance&quot;,
+            &quot;type&quot;: &quot;-&gt;&quot;
+        },
+        {
+            &quot;file&quot;: &quot;/Users/alexanderbonin/Development/HOWHY/howhy-backend/vendor/laravel/framework/src/Illuminate/Http/Middleware/HandleCors.php&quot;,
+            &quot;line&quot;: 62,
+            &quot;function&quot;: &quot;Illuminate\\Pipeline\\{closure}&quot;,
+            &quot;class&quot;: &quot;Illuminate\\Pipeline\\Pipeline&quot;,
+            &quot;type&quot;: &quot;-&gt;&quot;
+        },
+        {
+            &quot;file&quot;: &quot;/Users/alexanderbonin/Development/HOWHY/howhy-backend/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php&quot;,
+            &quot;line&quot;: 180,
+            &quot;function&quot;: &quot;handle&quot;,
+            &quot;class&quot;: &quot;Illuminate\\Http\\Middleware\\HandleCors&quot;,
+            &quot;type&quot;: &quot;-&gt;&quot;
+        },
+        {
+            &quot;file&quot;: &quot;/Users/alexanderbonin/Development/HOWHY/howhy-backend/vendor/laravel/framework/src/Illuminate/Http/Middleware/TrustProxies.php&quot;,
+            &quot;line&quot;: 39,
+            &quot;function&quot;: &quot;Illuminate\\Pipeline\\{closure}&quot;,
+            &quot;class&quot;: &quot;Illuminate\\Pipeline\\Pipeline&quot;,
+            &quot;type&quot;: &quot;-&gt;&quot;
+        },
+        {
+            &quot;file&quot;: &quot;/Users/alexanderbonin/Development/HOWHY/howhy-backend/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php&quot;,
+            &quot;line&quot;: 180,
+            &quot;function&quot;: &quot;handle&quot;,
+            &quot;class&quot;: &quot;Illuminate\\Http\\Middleware\\TrustProxies&quot;,
+            &quot;type&quot;: &quot;-&gt;&quot;
+        },
+        {
+            &quot;file&quot;: &quot;/Users/alexanderbonin/Development/HOWHY/howhy-backend/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php&quot;,
+            &quot;line&quot;: 116,
+            &quot;function&quot;: &quot;Illuminate\\Pipeline\\{closure}&quot;,
+            &quot;class&quot;: &quot;Illuminate\\Pipeline\\Pipeline&quot;,
+            &quot;type&quot;: &quot;-&gt;&quot;
+        },
+        {
+            &quot;file&quot;: &quot;/Users/alexanderbonin/Development/HOWHY/howhy-backend/vendor/laravel/framework/src/Illuminate/Foundation/Http/Kernel.php&quot;,
+            &quot;line&quot;: 175,
+            &quot;function&quot;: &quot;then&quot;,
+            &quot;class&quot;: &quot;Illuminate\\Pipeline\\Pipeline&quot;,
+            &quot;type&quot;: &quot;-&gt;&quot;
+        },
+        {
+            &quot;file&quot;: &quot;/Users/alexanderbonin/Development/HOWHY/howhy-backend/vendor/laravel/framework/src/Illuminate/Foundation/Http/Kernel.php&quot;,
+            &quot;line&quot;: 144,
+            &quot;function&quot;: &quot;sendRequestThroughRouter&quot;,
+            &quot;class&quot;: &quot;Illuminate\\Foundation\\Http\\Kernel&quot;,
+            &quot;type&quot;: &quot;-&gt;&quot;
+        },
+        {
+            &quot;file&quot;: &quot;/Users/alexanderbonin/Development/HOWHY/howhy-backend/vendor/knuckleswtf/scribe/src/Extracting/Strategies/Responses/ResponseCalls.php&quot;,
+            &quot;line&quot;: 299,
+            &quot;function&quot;: &quot;handle&quot;,
+            &quot;class&quot;: &quot;Illuminate\\Foundation\\Http\\Kernel&quot;,
+            &quot;type&quot;: &quot;-&gt;&quot;
+        },
+        {
+            &quot;file&quot;: &quot;/Users/alexanderbonin/Development/HOWHY/howhy-backend/vendor/knuckleswtf/scribe/src/Extracting/Strategies/Responses/ResponseCalls.php&quot;,
+            &quot;line&quot;: 287,
+            &quot;function&quot;: &quot;callLaravelOrLumenRoute&quot;,
+            &quot;class&quot;: &quot;Knuckles\\Scribe\\Extracting\\Strategies\\Responses\\ResponseCalls&quot;,
+            &quot;type&quot;: &quot;-&gt;&quot;
+        },
+        {
+            &quot;file&quot;: &quot;/Users/alexanderbonin/Development/HOWHY/howhy-backend/vendor/knuckleswtf/scribe/src/Extracting/Strategies/Responses/ResponseCalls.php&quot;,
+            &quot;line&quot;: 92,
+            &quot;function&quot;: &quot;makeApiCall&quot;,
+            &quot;class&quot;: &quot;Knuckles\\Scribe\\Extracting\\Strategies\\Responses\\ResponseCalls&quot;,
+            &quot;type&quot;: &quot;-&gt;&quot;
+        },
+        {
+            &quot;file&quot;: &quot;/Users/alexanderbonin/Development/HOWHY/howhy-backend/vendor/knuckleswtf/scribe/src/Extracting/Strategies/Responses/ResponseCalls.php&quot;,
+            &quot;line&quot;: 45,
+            &quot;function&quot;: &quot;makeResponseCall&quot;,
+            &quot;class&quot;: &quot;Knuckles\\Scribe\\Extracting\\Strategies\\Responses\\ResponseCalls&quot;,
+            &quot;type&quot;: &quot;-&gt;&quot;
+        },
+        {
+            &quot;file&quot;: &quot;/Users/alexanderbonin/Development/HOWHY/howhy-backend/vendor/knuckleswtf/scribe/src/Extracting/Strategies/Responses/ResponseCalls.php&quot;,
+            &quot;line&quot;: 35,
+            &quot;function&quot;: &quot;makeResponseCallIfConditionsPass&quot;,
+            &quot;class&quot;: &quot;Knuckles\\Scribe\\Extracting\\Strategies\\Responses\\ResponseCalls&quot;,
+            &quot;type&quot;: &quot;-&gt;&quot;
+        },
+        {
+            &quot;file&quot;: &quot;/Users/alexanderbonin/Development/HOWHY/howhy-backend/vendor/knuckleswtf/scribe/src/Extracting/Extractor.php&quot;,
+            &quot;line&quot;: 209,
+            &quot;function&quot;: &quot;__invoke&quot;,
+            &quot;class&quot;: &quot;Knuckles\\Scribe\\Extracting\\Strategies\\Responses\\ResponseCalls&quot;,
+            &quot;type&quot;: &quot;-&gt;&quot;
+        },
+        {
+            &quot;file&quot;: &quot;/Users/alexanderbonin/Development/HOWHY/howhy-backend/vendor/knuckleswtf/scribe/src/Extracting/Extractor.php&quot;,
+            &quot;line&quot;: 163,
+            &quot;function&quot;: &quot;iterateThroughStrategies&quot;,
+            &quot;class&quot;: &quot;Knuckles\\Scribe\\Extracting\\Extractor&quot;,
+            &quot;type&quot;: &quot;-&gt;&quot;
+        },
+        {
+            &quot;file&quot;: &quot;/Users/alexanderbonin/Development/HOWHY/howhy-backend/vendor/knuckleswtf/scribe/src/Extracting/Extractor.php&quot;,
+            &quot;line&quot;: 95,
+            &quot;function&quot;: &quot;fetchResponses&quot;,
+            &quot;class&quot;: &quot;Knuckles\\Scribe\\Extracting\\Extractor&quot;,
+            &quot;type&quot;: &quot;-&gt;&quot;
+        },
+        {
+            &quot;file&quot;: &quot;/Users/alexanderbonin/Development/HOWHY/howhy-backend/vendor/knuckleswtf/scribe/src/GroupedEndpoints/GroupedEndpointsFromApp.php&quot;,
+            &quot;line&quot;: 124,
+            &quot;function&quot;: &quot;processRoute&quot;,
+            &quot;class&quot;: &quot;Knuckles\\Scribe\\Extracting\\Extractor&quot;,
+            &quot;type&quot;: &quot;-&gt;&quot;
+        },
+        {
+            &quot;file&quot;: &quot;/Users/alexanderbonin/Development/HOWHY/howhy-backend/vendor/knuckleswtf/scribe/src/GroupedEndpoints/GroupedEndpointsFromApp.php&quot;,
+            &quot;line&quot;: 71,
+            &quot;function&quot;: &quot;extractEndpointsInfoFromLaravelApp&quot;,
+            &quot;class&quot;: &quot;Knuckles\\Scribe\\GroupedEndpoints\\GroupedEndpointsFromApp&quot;,
+            &quot;type&quot;: &quot;-&gt;&quot;
+        },
+        {
+            &quot;file&quot;: &quot;/Users/alexanderbonin/Development/HOWHY/howhy-backend/vendor/knuckleswtf/scribe/src/GroupedEndpoints/GroupedEndpointsFromApp.php&quot;,
+            &quot;line&quot;: 49,
+            &quot;function&quot;: &quot;extractEndpointsInfoAndWriteToDisk&quot;,
+            &quot;class&quot;: &quot;Knuckles\\Scribe\\GroupedEndpoints\\GroupedEndpointsFromApp&quot;,
+            &quot;type&quot;: &quot;-&gt;&quot;
+        },
+        {
+            &quot;file&quot;: &quot;/Users/alexanderbonin/Development/HOWHY/howhy-backend/vendor/knuckleswtf/scribe/src/Commands/GenerateDocumentation.php&quot;,
+            &quot;line&quot;: 51,
+            &quot;function&quot;: &quot;get&quot;,
+            &quot;class&quot;: &quot;Knuckles\\Scribe\\GroupedEndpoints\\GroupedEndpointsFromApp&quot;,
+            &quot;type&quot;: &quot;-&gt;&quot;
+        },
+        {
+            &quot;file&quot;: &quot;/Users/alexanderbonin/Development/HOWHY/howhy-backend/vendor/laravel/framework/src/Illuminate/Container/BoundMethod.php&quot;,
+            &quot;line&quot;: 36,
+            &quot;function&quot;: &quot;handle&quot;,
+            &quot;class&quot;: &quot;Knuckles\\Scribe\\Commands\\GenerateDocumentation&quot;,
+            &quot;type&quot;: &quot;-&gt;&quot;
+        },
+        {
+            &quot;file&quot;: &quot;/Users/alexanderbonin/Development/HOWHY/howhy-backend/vendor/laravel/framework/src/Illuminate/Container/Util.php&quot;,
+            &quot;line&quot;: 41,
+            &quot;function&quot;: &quot;Illuminate\\Container\\{closure}&quot;,
+            &quot;class&quot;: &quot;Illuminate\\Container\\BoundMethod&quot;,
+            &quot;type&quot;: &quot;::&quot;
+        },
+        {
+            &quot;file&quot;: &quot;/Users/alexanderbonin/Development/HOWHY/howhy-backend/vendor/laravel/framework/src/Illuminate/Container/BoundMethod.php&quot;,
+            &quot;line&quot;: 93,
+            &quot;function&quot;: &quot;unwrapIfClosure&quot;,
+            &quot;class&quot;: &quot;Illuminate\\Container\\Util&quot;,
+            &quot;type&quot;: &quot;::&quot;
+        },
+        {
+            &quot;file&quot;: &quot;/Users/alexanderbonin/Development/HOWHY/howhy-backend/vendor/laravel/framework/src/Illuminate/Container/BoundMethod.php&quot;,
+            &quot;line&quot;: 35,
+            &quot;function&quot;: &quot;callBoundMethod&quot;,
+            &quot;class&quot;: &quot;Illuminate\\Container\\BoundMethod&quot;,
+            &quot;type&quot;: &quot;::&quot;
+        },
+        {
+            &quot;file&quot;: &quot;/Users/alexanderbonin/Development/HOWHY/howhy-backend/vendor/laravel/framework/src/Illuminate/Container/Container.php&quot;,
+            &quot;line&quot;: 662,
+            &quot;function&quot;: &quot;call&quot;,
+            &quot;class&quot;: &quot;Illuminate\\Container\\BoundMethod&quot;,
+            &quot;type&quot;: &quot;::&quot;
+        },
+        {
+            &quot;file&quot;: &quot;/Users/alexanderbonin/Development/HOWHY/howhy-backend/vendor/laravel/framework/src/Illuminate/Console/Command.php&quot;,
+            &quot;line&quot;: 194,
+            &quot;function&quot;: &quot;call&quot;,
+            &quot;class&quot;: &quot;Illuminate\\Container\\Container&quot;,
+            &quot;type&quot;: &quot;-&gt;&quot;
+        },
+        {
+            &quot;file&quot;: &quot;/Users/alexanderbonin/Development/HOWHY/howhy-backend/vendor/symfony/console/Command/Command.php&quot;,
+            &quot;line&quot;: 312,
+            &quot;function&quot;: &quot;execute&quot;,
+            &quot;class&quot;: &quot;Illuminate\\Console\\Command&quot;,
+            &quot;type&quot;: &quot;-&gt;&quot;
+        },
+        {
+            &quot;file&quot;: &quot;/Users/alexanderbonin/Development/HOWHY/howhy-backend/vendor/laravel/framework/src/Illuminate/Console/Command.php&quot;,
+            &quot;line&quot;: 163,
+            &quot;function&quot;: &quot;run&quot;,
+            &quot;class&quot;: &quot;Symfony\\Component\\Console\\Command\\Command&quot;,
+            &quot;type&quot;: &quot;-&gt;&quot;
+        },
+        {
+            &quot;file&quot;: &quot;/Users/alexanderbonin/Development/HOWHY/howhy-backend/vendor/symfony/console/Application.php&quot;,
+            &quot;line&quot;: 1040,
+            &quot;function&quot;: &quot;run&quot;,
+            &quot;class&quot;: &quot;Illuminate\\Console\\Command&quot;,
+            &quot;type&quot;: &quot;-&gt;&quot;
+        },
+        {
+            &quot;file&quot;: &quot;/Users/alexanderbonin/Development/HOWHY/howhy-backend/vendor/symfony/console/Application.php&quot;,
+            &quot;line&quot;: 314,
+            &quot;function&quot;: &quot;doRunCommand&quot;,
+            &quot;class&quot;: &quot;Symfony\\Component\\Console\\Application&quot;,
+            &quot;type&quot;: &quot;-&gt;&quot;
+        },
+        {
+            &quot;file&quot;: &quot;/Users/alexanderbonin/Development/HOWHY/howhy-backend/vendor/symfony/console/Application.php&quot;,
+            &quot;line&quot;: 168,
+            &quot;function&quot;: &quot;doRun&quot;,
+            &quot;class&quot;: &quot;Symfony\\Component\\Console\\Application&quot;,
+            &quot;type&quot;: &quot;-&gt;&quot;
+        },
+        {
+            &quot;file&quot;: &quot;/Users/alexanderbonin/Development/HOWHY/howhy-backend/vendor/laravel/framework/src/Illuminate/Foundation/Console/Kernel.php&quot;,
+            &quot;line&quot;: 200,
+            &quot;function&quot;: &quot;run&quot;,
+            &quot;class&quot;: &quot;Symfony\\Component\\Console\\Application&quot;,
+            &quot;type&quot;: &quot;-&gt;&quot;
+        },
+        {
+            &quot;file&quot;: &quot;/Users/alexanderbonin/Development/HOWHY/howhy-backend/artisan&quot;,
+            &quot;line&quot;: 35,
+            &quot;function&quot;: &quot;handle&quot;,
+            &quot;class&quot;: &quot;Illuminate\\Foundation\\Console\\Kernel&quot;,
+            &quot;type&quot;: &quot;-&gt;&quot;
+        }
+    ]
+}</code>
+ </pre>
+    </span>
+<span id="execution-results-GETapi-questions--videoId-" hidden>
+    <blockquote>Received response<span
+                id="execution-response-status-GETapi-questions--videoId-"></span>:
+    </blockquote>
+    <pre class="json"><code id="execution-response-content-GETapi-questions--videoId-"
+      data-empty-response-text="<Empty response>" style="max-height: 400px;"></code></pre>
+</span>
+<span id="execution-error-GETapi-questions--videoId-" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-GETapi-questions--videoId-">
+
+Tip: Check that you&#039;re properly connected to the network.
+If you&#039;re a maintainer of ths API, verify that your API is running and you&#039;ve enabled CORS.
+You can check the Dev Tools console for debugging information.</code></pre>
+</span>
+<form id="form-GETapi-questions--videoId-" data-method="GET"
+      data-path="api/questions/{videoId}"
+      data-authed="0"
+      data-hasfiles="0"
+      data-isarraybody="0"
+      autocomplete="off"
+      onsubmit="event.preventDefault(); executeTryOut('GETapi-questions--videoId-', this);">
+    <h3>
+        Request&nbsp;&nbsp;&nbsp;
+                    <button type="button"
+                    style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-tryout-GETapi-questions--videoId-"
+                    onclick="tryItOut('GETapi-questions--videoId-');">Try it out ⚡
+            </button>
+            <button type="button"
+                    style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-canceltryout-GETapi-questions--videoId-"
+                    onclick="cancelTryOut('GETapi-questions--videoId-');" hidden>Cancel 🛑
+            </button>&nbsp;&nbsp;
+            <button type="submit"
+                    style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-executetryout-GETapi-questions--videoId-"
+                    data-initial-text="Send Request 💥"
+                    data-loading-text="⏱ Sending..."
+                    hidden>Send Request 💥
+            </button>
+            </h3>
+            <p>
+            <small class="badge badge-green">GET</small>
+            <b><code>api/questions/{videoId}</code></b>
+        </p>
+                <h4 class="fancy-heading-panel"><b>Headers</b></h4>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Content-Type</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+               name="Content-Type"                data-endpoint="GETapi-questions--videoId-"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Accept</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+               name="Accept"                data-endpoint="GETapi-questions--videoId-"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                        <h4 class="fancy-heading-panel"><b>URL Parameters</b></h4>
+                    <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>videoId</code></b>&nbsp;&nbsp;
+<small>integer</small>&nbsp;
+ &nbsp;
+                <input type="number" style="display: none"
+               name="videoId"                data-endpoint="GETapi-questions--videoId-"
+               value="4"
+               data-component="url">
+    <br>
+<p>Example: <code>4</code></p>
+            </div>
+                    </form>
+
+                    <h2 id="endpoints-GETapi-question--id-">GET api/question/{id}</h2>
+
+<p>
+</p>
+
+
+
+<span id="example-requests-GETapi-question--id-">
+<blockquote>Example request:</blockquote>
+
+
+<div class="bash-example">
+    <pre><code class="language-bash">curl --request GET \
+    --get "localhost:8000/api/question/4" \
+    --header "Content-Type: application/json" \
+    --header "Accept: application/json"</code></pre></div>
+
+
+<div class="javascript-example">
+    <pre><code class="language-javascript">const url = new URL(
+    "localhost:8000/api/question/4"
+);
+
+const headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+fetch(url, {
+    method: "GET",
+    headers,
+}).then(response =&gt; response.json());</code></pre></div>
+
+</span>
+
+<span id="example-responses-GETapi-question--id-">
+            <blockquote>
+            <p>Example response (200):</p>
+        </blockquote>
+                <details class="annotation">
+            <summary style="cursor: pointer;">
+                <small onclick="textContent = parentElement.parentElement.open ? 'Show headers' : 'Hide headers'">Show headers</small>
+            </summary>
+            <pre><code class="language-http">cache-control: no-cache, private
+content-type: application/json
+x-ratelimit-limit: 60
+x-ratelimit-remaining: 54
+vary: Origin
+ </code></pre></details>         <pre>
+
+<code class="language-json" style="max-height: 300px;">{
+    &quot;id&quot;: 4,
+    &quot;created_at&quot;: &quot;2023-04-24T15:00:59.000000Z&quot;,
+    &quot;updated_at&quot;: &quot;2023-04-24T16:37:04.000000Z&quot;,
+    &quot;data&quot;: [
+        {
+            &quot;id&quot;: 0,
+            &quot;text&quot;: &quot;richtig&quot;
+        },
+        {
+            &quot;id&quot;: 1,
+            &quot;text&quot;: &quot;flasch&quot;
+        }
+    ],
+    &quot;deleted_at&quot;: null,
+    &quot;video_id&quot;: 10,
+    &quot;questionText&quot;: &quot;frage 2&quot;,
+    &quot;timecode&quot;: 60,
+    &quot;type&quot;: &quot;multiplechoice&quot;,
+    &quot;answers&quot;: [
+        {
+            &quot;id&quot;: 0,
+            &quot;text&quot;: &quot;richtig&quot;
+        },
+        {
+            &quot;id&quot;: 1,
+            &quot;text&quot;: &quot;flasch&quot;
+        }
+    ]
+}</code>
+ </pre>
+    </span>
+<span id="execution-results-GETapi-question--id-" hidden>
+    <blockquote>Received response<span
+                id="execution-response-status-GETapi-question--id-"></span>:
+    </blockquote>
+    <pre class="json"><code id="execution-response-content-GETapi-question--id-"
+      data-empty-response-text="<Empty response>" style="max-height: 400px;"></code></pre>
+</span>
+<span id="execution-error-GETapi-question--id-" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-GETapi-question--id-">
+
+Tip: Check that you&#039;re properly connected to the network.
+If you&#039;re a maintainer of ths API, verify that your API is running and you&#039;ve enabled CORS.
+You can check the Dev Tools console for debugging information.</code></pre>
+</span>
+<form id="form-GETapi-question--id-" data-method="GET"
+      data-path="api/question/{id}"
+      data-authed="0"
+      data-hasfiles="0"
+      data-isarraybody="0"
+      autocomplete="off"
+      onsubmit="event.preventDefault(); executeTryOut('GETapi-question--id-', this);">
+    <h3>
+        Request&nbsp;&nbsp;&nbsp;
+                    <button type="button"
+                    style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-tryout-GETapi-question--id-"
+                    onclick="tryItOut('GETapi-question--id-');">Try it out ⚡
+            </button>
+            <button type="button"
+                    style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-canceltryout-GETapi-question--id-"
+                    onclick="cancelTryOut('GETapi-question--id-');" hidden>Cancel 🛑
+            </button>&nbsp;&nbsp;
+            <button type="submit"
+                    style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-executetryout-GETapi-question--id-"
+                    data-initial-text="Send Request 💥"
+                    data-loading-text="⏱ Sending..."
+                    hidden>Send Request 💥
+            </button>
+            </h3>
+            <p>
+            <small class="badge badge-green">GET</small>
+            <b><code>api/question/{id}</code></b>
+        </p>
+                <h4 class="fancy-heading-panel"><b>Headers</b></h4>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Content-Type</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+               name="Content-Type"                data-endpoint="GETapi-question--id-"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Accept</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+               name="Accept"                data-endpoint="GETapi-question--id-"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                        <h4 class="fancy-heading-panel"><b>URL Parameters</b></h4>
+                    <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>id</code></b>&nbsp;&nbsp;
+<small>integer</small>&nbsp;
+ &nbsp;
+                <input type="number" style="display: none"
+               name="id"                data-endpoint="GETapi-question--id-"
+               value="4"
+               data-component="url">
+    <br>
+<p>The ID of the question. Example: <code>4</code></p>
+            </div>
+                    </form>
+
+                    <h2 id="endpoints-POSTapi-question-checkAnswers--id-">POST api/question/checkAnswers/{id}</h2>
+
+<p>
+</p>
+
+
+
+<span id="example-requests-POSTapi-question-checkAnswers--id-">
+<blockquote>Example request:</blockquote>
+
+
+<div class="bash-example">
+    <pre><code class="language-bash">curl --request POST \
+    "localhost:8000/api/question/checkAnswers/ducimus" \
+    --header "Content-Type: application/json" \
+    --header "Accept: application/json"</code></pre></div>
+
+
+<div class="javascript-example">
+    <pre><code class="language-javascript">const url = new URL(
+    "localhost:8000/api/question/checkAnswers/ducimus"
+);
+
+const headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+fetch(url, {
+    method: "POST",
+    headers,
+}).then(response =&gt; response.json());</code></pre></div>
+
+</span>
+
+<span id="example-responses-POSTapi-question-checkAnswers--id-">
+</span>
+<span id="execution-results-POSTapi-question-checkAnswers--id-" hidden>
+    <blockquote>Received response<span
+                id="execution-response-status-POSTapi-question-checkAnswers--id-"></span>:
+    </blockquote>
+    <pre class="json"><code id="execution-response-content-POSTapi-question-checkAnswers--id-"
+      data-empty-response-text="<Empty response>" style="max-height: 400px;"></code></pre>
+</span>
+<span id="execution-error-POSTapi-question-checkAnswers--id-" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-POSTapi-question-checkAnswers--id-">
+
+Tip: Check that you&#039;re properly connected to the network.
+If you&#039;re a maintainer of ths API, verify that your API is running and you&#039;ve enabled CORS.
+You can check the Dev Tools console for debugging information.</code></pre>
+</span>
+<form id="form-POSTapi-question-checkAnswers--id-" data-method="POST"
+      data-path="api/question/checkAnswers/{id}"
+      data-authed="0"
+      data-hasfiles="0"
+      data-isarraybody="0"
+      autocomplete="off"
+      onsubmit="event.preventDefault(); executeTryOut('POSTapi-question-checkAnswers--id-', this);">
+    <h3>
+        Request&nbsp;&nbsp;&nbsp;
+                    <button type="button"
+                    style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-tryout-POSTapi-question-checkAnswers--id-"
+                    onclick="tryItOut('POSTapi-question-checkAnswers--id-');">Try it out ⚡
+            </button>
+            <button type="button"
+                    style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-canceltryout-POSTapi-question-checkAnswers--id-"
+                    onclick="cancelTryOut('POSTapi-question-checkAnswers--id-');" hidden>Cancel 🛑
+            </button>&nbsp;&nbsp;
+            <button type="submit"
+                    style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-executetryout-POSTapi-question-checkAnswers--id-"
+                    data-initial-text="Send Request 💥"
+                    data-loading-text="⏱ Sending..."
+                    hidden>Send Request 💥
+            </button>
+            </h3>
+            <p>
+            <small class="badge badge-black">POST</small>
+            <b><code>api/question/checkAnswers/{id}</code></b>
+        </p>
+                <h4 class="fancy-heading-panel"><b>Headers</b></h4>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Content-Type</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+               name="Content-Type"                data-endpoint="POSTapi-question-checkAnswers--id-"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Accept</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+               name="Accept"                data-endpoint="POSTapi-question-checkAnswers--id-"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                        <h4 class="fancy-heading-panel"><b>URL Parameters</b></h4>
+                    <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>id</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+               name="id"                data-endpoint="POSTapi-question-checkAnswers--id-"
+               value="ducimus"
+               data-component="url">
+    <br>
+<p>The ID of the checkAnswer. Example: <code>ducimus</code></p>
+            </div>
+                    </form>
+
+                    <h2 id="endpoints-POSTapi-question">POST api/question</h2>
+
+<p>
+</p>
+
+
+
+<span id="example-requests-POSTapi-question">
+<blockquote>Example request:</blockquote>
+
+
+<div class="bash-example">
+    <pre><code class="language-bash">curl --request POST \
+    "localhost:8000/api/question" \
+    --header "Content-Type: application/json" \
+    --header "Accept: application/json"</code></pre></div>
+
+
+<div class="javascript-example">
+    <pre><code class="language-javascript">const url = new URL(
+    "localhost:8000/api/question"
+);
+
+const headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+fetch(url, {
+    method: "POST",
+    headers,
+}).then(response =&gt; response.json());</code></pre></div>
+
+</span>
+
+<span id="example-responses-POSTapi-question">
+</span>
+<span id="execution-results-POSTapi-question" hidden>
+    <blockquote>Received response<span
+                id="execution-response-status-POSTapi-question"></span>:
+    </blockquote>
+    <pre class="json"><code id="execution-response-content-POSTapi-question"
+      data-empty-response-text="<Empty response>" style="max-height: 400px;"></code></pre>
+</span>
+<span id="execution-error-POSTapi-question" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-POSTapi-question">
+
+Tip: Check that you&#039;re properly connected to the network.
+If you&#039;re a maintainer of ths API, verify that your API is running and you&#039;ve enabled CORS.
+You can check the Dev Tools console for debugging information.</code></pre>
+</span>
+<form id="form-POSTapi-question" data-method="POST"
+      data-path="api/question"
+      data-authed="0"
+      data-hasfiles="0"
+      data-isarraybody="0"
+      autocomplete="off"
+      onsubmit="event.preventDefault(); executeTryOut('POSTapi-question', this);">
+    <h3>
+        Request&nbsp;&nbsp;&nbsp;
+                    <button type="button"
+                    style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-tryout-POSTapi-question"
+                    onclick="tryItOut('POSTapi-question');">Try it out ⚡
+            </button>
+            <button type="button"
+                    style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-canceltryout-POSTapi-question"
+                    onclick="cancelTryOut('POSTapi-question');" hidden>Cancel 🛑
+            </button>&nbsp;&nbsp;
+            <button type="submit"
+                    style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-executetryout-POSTapi-question"
+                    data-initial-text="Send Request 💥"
+                    data-loading-text="⏱ Sending..."
+                    hidden>Send Request 💥
+            </button>
+            </h3>
+            <p>
+            <small class="badge badge-black">POST</small>
+            <b><code>api/question</code></b>
+        </p>
+                <h4 class="fancy-heading-panel"><b>Headers</b></h4>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Content-Type</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+               name="Content-Type"                data-endpoint="POSTapi-question"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Accept</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+               name="Accept"                data-endpoint="POSTapi-question"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                        </form>
+
+                    <h2 id="endpoints-POSTapi-deleteQuestion--id-">POST api/deleteQuestion/{id}</h2>
+
+<p>
+</p>
+
+
+
+<span id="example-requests-POSTapi-deleteQuestion--id-">
+<blockquote>Example request:</blockquote>
+
+
+<div class="bash-example">
+    <pre><code class="language-bash">curl --request POST \
+    "localhost:8000/api/deleteQuestion/et" \
+    --header "Content-Type: application/json" \
+    --header "Accept: application/json"</code></pre></div>
+
+
+<div class="javascript-example">
+    <pre><code class="language-javascript">const url = new URL(
+    "localhost:8000/api/deleteQuestion/et"
+);
+
+const headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+fetch(url, {
+    method: "POST",
+    headers,
+}).then(response =&gt; response.json());</code></pre></div>
+
+</span>
+
+<span id="example-responses-POSTapi-deleteQuestion--id-">
+</span>
+<span id="execution-results-POSTapi-deleteQuestion--id-" hidden>
+    <blockquote>Received response<span
+                id="execution-response-status-POSTapi-deleteQuestion--id-"></span>:
+    </blockquote>
+    <pre class="json"><code id="execution-response-content-POSTapi-deleteQuestion--id-"
+      data-empty-response-text="<Empty response>" style="max-height: 400px;"></code></pre>
+</span>
+<span id="execution-error-POSTapi-deleteQuestion--id-" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-POSTapi-deleteQuestion--id-">
+
+Tip: Check that you&#039;re properly connected to the network.
+If you&#039;re a maintainer of ths API, verify that your API is running and you&#039;ve enabled CORS.
+You can check the Dev Tools console for debugging information.</code></pre>
+</span>
+<form id="form-POSTapi-deleteQuestion--id-" data-method="POST"
+      data-path="api/deleteQuestion/{id}"
+      data-authed="0"
+      data-hasfiles="0"
+      data-isarraybody="0"
+      autocomplete="off"
+      onsubmit="event.preventDefault(); executeTryOut('POSTapi-deleteQuestion--id-', this);">
+    <h3>
+        Request&nbsp;&nbsp;&nbsp;
+                    <button type="button"
+                    style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-tryout-POSTapi-deleteQuestion--id-"
+                    onclick="tryItOut('POSTapi-deleteQuestion--id-');">Try it out ⚡
+            </button>
+            <button type="button"
+                    style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-canceltryout-POSTapi-deleteQuestion--id-"
+                    onclick="cancelTryOut('POSTapi-deleteQuestion--id-');" hidden>Cancel 🛑
+            </button>&nbsp;&nbsp;
+            <button type="submit"
+                    style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-executetryout-POSTapi-deleteQuestion--id-"
+                    data-initial-text="Send Request 💥"
+                    data-loading-text="⏱ Sending..."
+                    hidden>Send Request 💥
+            </button>
+            </h3>
+            <p>
+            <small class="badge badge-black">POST</small>
+            <b><code>api/deleteQuestion/{id}</code></b>
+        </p>
+                <h4 class="fancy-heading-panel"><b>Headers</b></h4>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Content-Type</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+               name="Content-Type"                data-endpoint="POSTapi-deleteQuestion--id-"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Accept</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+               name="Accept"                data-endpoint="POSTapi-deleteQuestion--id-"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                        <h4 class="fancy-heading-panel"><b>URL Parameters</b></h4>
+                    <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>id</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+               name="id"                data-endpoint="POSTapi-deleteQuestion--id-"
+               value="et"
+               data-component="url">
+    <br>
+<p>The ID of the deleteQuestion. Example: <code>et</code></p>
+            </div>
+                    </form>
+
+                    <h2 id="endpoints-GETapi-score">GET api/score</h2>
+
+<p>
+</p>
+
+
+
+<span id="example-requests-GETapi-score">
+<blockquote>Example request:</blockquote>
+
+
+<div class="bash-example">
+    <pre><code class="language-bash">curl --request GET \
+    --get "localhost:8000/api/score" \
+    --header "Content-Type: application/json" \
+    --header "Accept: application/json"</code></pre></div>
+
+
+<div class="javascript-example">
+    <pre><code class="language-javascript">const url = new URL(
+    "localhost:8000/api/score"
+);
+
+const headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+fetch(url, {
+    method: "GET",
+    headers,
+}).then(response =&gt; response.json());</code></pre></div>
+
+</span>
+
+<span id="example-responses-GETapi-score">
+            <blockquote>
+            <p>Example response (200):</p>
+        </blockquote>
+                <details class="annotation">
+            <summary style="cursor: pointer;">
+                <small onclick="textContent = parentElement.parentElement.open ? 'Show headers' : 'Hide headers'">Show headers</small>
+            </summary>
+            <pre><code class="language-http">cache-control: no-cache, private
+content-type: application/json
+x-ratelimit-limit: 60
+x-ratelimit-remaining: 53
+vary: Origin
+ </code></pre></details>         <pre>
+
+<code class="language-json" style="max-height: 300px;">{
+    &quot;score&quot;: 0
+}</code>
+ </pre>
+    </span>
+<span id="execution-results-GETapi-score" hidden>
+    <blockquote>Received response<span
+                id="execution-response-status-GETapi-score"></span>:
+    </blockquote>
+    <pre class="json"><code id="execution-response-content-GETapi-score"
+      data-empty-response-text="<Empty response>" style="max-height: 400px;"></code></pre>
+</span>
+<span id="execution-error-GETapi-score" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-GETapi-score">
+
+Tip: Check that you&#039;re properly connected to the network.
+If you&#039;re a maintainer of ths API, verify that your API is running and you&#039;ve enabled CORS.
+You can check the Dev Tools console for debugging information.</code></pre>
+</span>
+<form id="form-GETapi-score" data-method="GET"
+      data-path="api/score"
+      data-authed="0"
+      data-hasfiles="0"
+      data-isarraybody="0"
+      autocomplete="off"
+      onsubmit="event.preventDefault(); executeTryOut('GETapi-score', this);">
+    <h3>
+        Request&nbsp;&nbsp;&nbsp;
+                    <button type="button"
+                    style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-tryout-GETapi-score"
+                    onclick="tryItOut('GETapi-score');">Try it out ⚡
+            </button>
+            <button type="button"
+                    style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-canceltryout-GETapi-score"
+                    onclick="cancelTryOut('GETapi-score');" hidden>Cancel 🛑
+            </button>&nbsp;&nbsp;
+            <button type="submit"
+                    style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-executetryout-GETapi-score"
+                    data-initial-text="Send Request 💥"
+                    data-loading-text="⏱ Sending..."
+                    hidden>Send Request 💥
+            </button>
+            </h3>
+            <p>
+            <small class="badge badge-green">GET</small>
+            <b><code>api/score</code></b>
+        </p>
+                <h4 class="fancy-heading-panel"><b>Headers</b></h4>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Content-Type</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+               name="Content-Type"                data-endpoint="GETapi-score"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Accept</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+               name="Accept"                data-endpoint="GETapi-score"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                        </form>
+
+                    <h2 id="endpoints-GETapi-allowed-email">GET api/allowed-email</h2>
+
+<p>
+</p>
+
+
+
+<span id="example-requests-GETapi-allowed-email">
+<blockquote>Example request:</blockquote>
+
+
+<div class="bash-example">
+    <pre><code class="language-bash">curl --request GET \
+    --get "localhost:8000/api/allowed-email" \
+    --header "Content-Type: application/json" \
+    --header "Accept: application/json"</code></pre></div>
+
+
+<div class="javascript-example">
+    <pre><code class="language-javascript">const url = new URL(
+    "localhost:8000/api/allowed-email"
+);
+
+const headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+fetch(url, {
+    method: "GET",
+    headers,
+}).then(response =&gt; response.json());</code></pre></div>
+
+</span>
+
+<span id="example-responses-GETapi-allowed-email">
+            <blockquote>
+            <p>Example response (200):</p>
+        </blockquote>
+                <details class="annotation">
+            <summary style="cursor: pointer;">
+                <small onclick="textContent = parentElement.parentElement.open ? 'Show headers' : 'Hide headers'">Show headers</small>
+            </summary>
+            <pre><code class="language-http">cache-control: no-cache, private
+content-type: application/json
+x-ratelimit-limit: 60
+x-ratelimit-remaining: 52
+vary: Origin
+ </code></pre></details>         <pre>
+
+<code class="language-json" style="max-height: 300px;">[
+    {
+        &quot;id&quot;: 9,
+        &quot;created_at&quot;: &quot;2023-04-14T10:23:57.000000Z&quot;,
+        &quot;updated_at&quot;: &quot;2023-04-14T10:23:57.000000Z&quot;,
+        &quot;email&quot;: &quot;test1@test.de&quot;
+    },
+    {
+        &quot;id&quot;: 11,
+        &quot;created_at&quot;: &quot;2023-04-14T10:56:40.000000Z&quot;,
+        &quot;updated_at&quot;: &quot;2023-04-14T10:56:40.000000Z&quot;,
+        &quot;email&quot;: &quot;peter.mueller@gmx.de&quot;
+    },
+    {
+        &quot;id&quot;: 12,
+        &quot;created_at&quot;: &quot;2023-04-20T14:33:47.000000Z&quot;,
+        &quot;updated_at&quot;: &quot;2023-04-20T14:33:47.000000Z&quot;,
+        &quot;email&quot;: &quot;creator@test.de&quot;
+    },
+    {
+        &quot;id&quot;: 13,
+        &quot;created_at&quot;: &quot;2023-04-26T10:55:02.000000Z&quot;,
+        &quot;updated_at&quot;: &quot;2023-04-26T10:55:02.000000Z&quot;,
+        &quot;email&quot;: &quot;test3@test.de&quot;
+    }
+]</code>
+ </pre>
+    </span>
+<span id="execution-results-GETapi-allowed-email" hidden>
+    <blockquote>Received response<span
+                id="execution-response-status-GETapi-allowed-email"></span>:
+    </blockquote>
+    <pre class="json"><code id="execution-response-content-GETapi-allowed-email"
+      data-empty-response-text="<Empty response>" style="max-height: 400px;"></code></pre>
+</span>
+<span id="execution-error-GETapi-allowed-email" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-GETapi-allowed-email">
+
+Tip: Check that you&#039;re properly connected to the network.
+If you&#039;re a maintainer of ths API, verify that your API is running and you&#039;ve enabled CORS.
+You can check the Dev Tools console for debugging information.</code></pre>
+</span>
+<form id="form-GETapi-allowed-email" data-method="GET"
+      data-path="api/allowed-email"
+      data-authed="0"
+      data-hasfiles="0"
+      data-isarraybody="0"
+      autocomplete="off"
+      onsubmit="event.preventDefault(); executeTryOut('GETapi-allowed-email', this);">
+    <h3>
+        Request&nbsp;&nbsp;&nbsp;
+                    <button type="button"
+                    style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-tryout-GETapi-allowed-email"
+                    onclick="tryItOut('GETapi-allowed-email');">Try it out ⚡
+            </button>
+            <button type="button"
+                    style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-canceltryout-GETapi-allowed-email"
+                    onclick="cancelTryOut('GETapi-allowed-email');" hidden>Cancel 🛑
+            </button>&nbsp;&nbsp;
+            <button type="submit"
+                    style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-executetryout-GETapi-allowed-email"
+                    data-initial-text="Send Request 💥"
+                    data-loading-text="⏱ Sending..."
+                    hidden>Send Request 💥
+            </button>
+            </h3>
+            <p>
+            <small class="badge badge-green">GET</small>
+            <b><code>api/allowed-email</code></b>
+        </p>
+                <h4 class="fancy-heading-panel"><b>Headers</b></h4>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Content-Type</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+               name="Content-Type"                data-endpoint="GETapi-allowed-email"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Accept</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+               name="Accept"                data-endpoint="GETapi-allowed-email"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                        </form>
+
+                    <h2 id="endpoints-POSTapi-allowed-email">POST api/allowed-email</h2>
+
+<p>
+</p>
+
+
+
+<span id="example-requests-POSTapi-allowed-email">
+<blockquote>Example request:</blockquote>
+
+
+<div class="bash-example">
+    <pre><code class="language-bash">curl --request POST \
+    "localhost:8000/api/allowed-email" \
+    --header "Content-Type: application/json" \
+    --header "Accept: application/json"</code></pre></div>
+
+
+<div class="javascript-example">
+    <pre><code class="language-javascript">const url = new URL(
+    "localhost:8000/api/allowed-email"
+);
+
+const headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+fetch(url, {
+    method: "POST",
+    headers,
+}).then(response =&gt; response.json());</code></pre></div>
+
+</span>
+
+<span id="example-responses-POSTapi-allowed-email">
+</span>
+<span id="execution-results-POSTapi-allowed-email" hidden>
+    <blockquote>Received response<span
+                id="execution-response-status-POSTapi-allowed-email"></span>:
+    </blockquote>
+    <pre class="json"><code id="execution-response-content-POSTapi-allowed-email"
+      data-empty-response-text="<Empty response>" style="max-height: 400px;"></code></pre>
+</span>
+<span id="execution-error-POSTapi-allowed-email" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-POSTapi-allowed-email">
+
+Tip: Check that you&#039;re properly connected to the network.
+If you&#039;re a maintainer of ths API, verify that your API is running and you&#039;ve enabled CORS.
+You can check the Dev Tools console for debugging information.</code></pre>
+</span>
+<form id="form-POSTapi-allowed-email" data-method="POST"
+      data-path="api/allowed-email"
+      data-authed="0"
+      data-hasfiles="0"
+      data-isarraybody="0"
+      autocomplete="off"
+      onsubmit="event.preventDefault(); executeTryOut('POSTapi-allowed-email', this);">
+    <h3>
+        Request&nbsp;&nbsp;&nbsp;
+                    <button type="button"
+                    style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-tryout-POSTapi-allowed-email"
+                    onclick="tryItOut('POSTapi-allowed-email');">Try it out ⚡
+            </button>
+            <button type="button"
+                    style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-canceltryout-POSTapi-allowed-email"
+                    onclick="cancelTryOut('POSTapi-allowed-email');" hidden>Cancel 🛑
+            </button>&nbsp;&nbsp;
+            <button type="submit"
+                    style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-executetryout-POSTapi-allowed-email"
+                    data-initial-text="Send Request 💥"
+                    data-loading-text="⏱ Sending..."
+                    hidden>Send Request 💥
+            </button>
+            </h3>
+            <p>
+            <small class="badge badge-black">POST</small>
+            <b><code>api/allowed-email</code></b>
+        </p>
+                <h4 class="fancy-heading-panel"><b>Headers</b></h4>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Content-Type</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+               name="Content-Type"                data-endpoint="POSTapi-allowed-email"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Accept</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+               name="Accept"                data-endpoint="POSTapi-allowed-email"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                        </form>
+
+                    <h2 id="endpoints-DELETEapi-allowed-email--id-">DELETE api/allowed-email/{id}</h2>
+
+<p>
+</p>
+
+
+
+<span id="example-requests-DELETEapi-allowed-email--id-">
+<blockquote>Example request:</blockquote>
+
+
+<div class="bash-example">
+    <pre><code class="language-bash">curl --request DELETE \
+    "localhost:8000/api/allowed-email/9" \
+    --header "Content-Type: application/json" \
+    --header "Accept: application/json"</code></pre></div>
+
+
+<div class="javascript-example">
+    <pre><code class="language-javascript">const url = new URL(
+    "localhost:8000/api/allowed-email/9"
+);
+
+const headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+fetch(url, {
+    method: "DELETE",
+    headers,
+}).then(response =&gt; response.json());</code></pre></div>
+
+</span>
+
+<span id="example-responses-DELETEapi-allowed-email--id-">
+</span>
+<span id="execution-results-DELETEapi-allowed-email--id-" hidden>
+    <blockquote>Received response<span
+                id="execution-response-status-DELETEapi-allowed-email--id-"></span>:
+    </blockquote>
+    <pre class="json"><code id="execution-response-content-DELETEapi-allowed-email--id-"
+      data-empty-response-text="<Empty response>" style="max-height: 400px;"></code></pre>
+</span>
+<span id="execution-error-DELETEapi-allowed-email--id-" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-DELETEapi-allowed-email--id-">
+
+Tip: Check that you&#039;re properly connected to the network.
+If you&#039;re a maintainer of ths API, verify that your API is running and you&#039;ve enabled CORS.
+You can check the Dev Tools console for debugging information.</code></pre>
+</span>
+<form id="form-DELETEapi-allowed-email--id-" data-method="DELETE"
+      data-path="api/allowed-email/{id}"
+      data-authed="0"
+      data-hasfiles="0"
+      data-isarraybody="0"
+      autocomplete="off"
+      onsubmit="event.preventDefault(); executeTryOut('DELETEapi-allowed-email--id-', this);">
+    <h3>
+        Request&nbsp;&nbsp;&nbsp;
+                    <button type="button"
+                    style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-tryout-DELETEapi-allowed-email--id-"
+                    onclick="tryItOut('DELETEapi-allowed-email--id-');">Try it out ⚡
+            </button>
+            <button type="button"
+                    style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-canceltryout-DELETEapi-allowed-email--id-"
+                    onclick="cancelTryOut('DELETEapi-allowed-email--id-');" hidden>Cancel 🛑
+            </button>&nbsp;&nbsp;
+            <button type="submit"
+                    style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-executetryout-DELETEapi-allowed-email--id-"
+                    data-initial-text="Send Request 💥"
+                    data-loading-text="⏱ Sending..."
+                    hidden>Send Request 💥
+            </button>
+            </h3>
+            <p>
+            <small class="badge badge-red">DELETE</small>
+            <b><code>api/allowed-email/{id}</code></b>
+        </p>
+                <h4 class="fancy-heading-panel"><b>Headers</b></h4>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Content-Type</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+               name="Content-Type"                data-endpoint="DELETEapi-allowed-email--id-"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Accept</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+               name="Accept"                data-endpoint="DELETEapi-allowed-email--id-"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                        <h4 class="fancy-heading-panel"><b>URL Parameters</b></h4>
+                    <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>id</code></b>&nbsp;&nbsp;
+<small>integer</small>&nbsp;
+ &nbsp;
+                <input type="number" style="display: none"
+               name="id"                data-endpoint="DELETEapi-allowed-email--id-"
+               value="9"
+               data-component="url">
+    <br>
+<p>The ID of the allowed email. Example: <code>9</code></p>
+            </div>
+                    </form>
+
+            
+
+        
+    </div>
+    <div class="dark-box">
+                    <div class="lang-selector">
+                                                        <button type="button" class="lang-button" data-language-name="bash">bash</button>
+                                                        <button type="button" class="lang-button" data-language-name="javascript">javascript</button>
+                            </div>
+            </div>
+</div>
+</body>
+</html>
