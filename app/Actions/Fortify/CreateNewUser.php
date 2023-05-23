@@ -35,6 +35,12 @@ class CreateNewUser implements CreatesNewUsers
             'editor' => ['boolean'],
         ])->validate();
 
+        if($this->isHtwkAdress(request('email'))){
+
+        } else {
+            abort(402, 'Es sind nur HTWK-Adressen erlaubt!');
+        }
+
         $role = 'enduser';
 
         if($input['editor']) {
@@ -51,5 +57,13 @@ class CreateNewUser implements CreatesNewUsers
             'password' => Hash::make($input['password']),
             'role' => $role,
         ]);
+    }
+
+    private function isHtwkAdress($email){
+        if(preg_match("/@htwk-leipzig\.de$/",$email) || preg_match("/@stud\.htwk-leipzig\.de$/",$email)){
+            return true;
+        } else {
+            return false;
+        }
     }
 }
