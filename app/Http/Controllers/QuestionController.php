@@ -21,14 +21,15 @@ class QuestionController extends Controller
     }
 
     //check the users answers, store the answer and increase user score if answer is correct
-    public function checkAnswers($id)
+    public function checkAnswers()
     {
         $success = false;
         $user = Auth::user();
         request()->validate([
+            'questionId' => 'required',
             'answers' => 'required'
         ]);
-        $question = Question::find($id);
+        $question = Question::find(request('questionId'));
 
         if ($question->correctAnswers == request('answers')) {
             $success = true;
