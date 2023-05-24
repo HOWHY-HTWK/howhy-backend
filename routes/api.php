@@ -48,7 +48,7 @@ Route::get('user', [UserController::class, 'index'])
 //admin
 
 Route::get('allowed-email', [EmailController::class, 'getAllowedEmail'])
-    ->middleware(['auth:sanctum', 'isCreator', 'verified']);
+    ->middleware(['auth:sanctum', 'isAdmin', 'verified']);
 
 Route::post('allowed-email', [EmailController::class, 'setAllowedEmail'])
     ->middleware(['auth:sanctum', 'isAdmin', 'verified']);
@@ -59,7 +59,7 @@ Route::delete('allowed-email/{id}', [EmailController::class, 'deleteAllowedEmail
 // rights
 
 Route::get('users', [UserController::class, 'getAll'])
-    ->middleware(['auth:sanctum', 'isCreator', 'verified']);
+    ->middleware(['auth:sanctum', 'isAdmin', 'verified']);
 
 Route::post('makeEditor/{id}', [UserController::class, 'makeEditor'])
     ->middleware(['auth:sanctum', 'isAdmin', 'verified']);
