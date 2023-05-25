@@ -45,6 +45,9 @@ Route::get('score/', [QuestionController::class, 'score']);
 Route::get('user', [UserController::class, 'index'])
     ->middleware('auth:sanctum');
 
+Route::post('username', [UserController::class, 'changeUsername'])
+    ->middleware('auth:sanctum', 'verified');
+
 //admin
 
 Route::get('allowed-email', [EmailController::class, 'getAllowedEmail'])

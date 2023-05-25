@@ -21,6 +21,18 @@ class UserController extends Controller
         return Auth::user();
     }
 
+    public function changeUsername(){
+        request()->validate([
+            'username' => 'required|min:5|max:20',
+        ]);
+
+        $user = Auth::user();
+        $user->name = request('username');
+        $user->save();
+
+        return Auth::user();
+    }
+
     public function getAll()
     {
         return User::all();
@@ -31,20 +43,6 @@ class UserController extends Controller
         $user->role = 'creator';
         $user->save();
 
-        return true;
-    }
-
-    //TODO not done
-    public function userLogin()
-    {
-        return [
-            'username' => request('username'),
-            'role' => 'user',
-        ];
-    }
-
-    public function userSignUp()
-    {
         return true;
     }
 }
