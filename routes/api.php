@@ -48,6 +48,10 @@ Route::get('user', [UserController::class, 'index'])
 Route::post('username', [UserController::class, 'changeUsername'])
     ->middleware('auth:sanctum', 'verified');
 
+Route::get('ranking', [UserController::class, 'ranking'])
+    ->middleware('auth:sanctum');
+
+
 //admin
 
 Route::get('allowed-email', [EmailController::class, 'getAllowedEmail'])

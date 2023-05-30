@@ -45,6 +45,15 @@ class UserController extends Controller
         return User::all();
     }
 
+    public function ranking()
+    {
+        $users = User::orderBy('score', 'desc')
+            ->take(5)
+            ->get();
+
+        return $users;
+    }
+
     public function makeEditor($id)
     {
         $user = User::find($id);
