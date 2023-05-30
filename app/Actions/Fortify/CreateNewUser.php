@@ -23,7 +23,12 @@ class CreateNewUser implements CreatesNewUsers
         $allowed_emails = AllowedEmail::pluck('email')->toArray();
 
         Validator::make($input, [
-            'name' => ['required', 'string', 'max:255'],
+            'name' => [
+                'required',
+                'string',
+                'max:255',
+                Rule::unique(User::class)
+            ],
             'email' => [
                 'required',
                 'string',
