@@ -23,6 +23,11 @@ class Question extends Model
 
     // protected $hidden = ['correctAnswerIndexes'];
 
+    public function children()
+    {
+        return $this->hasMany(Question::class, 'parent_id');
+    }
+
     public function video(): BelongsTo
     {
         return $this->belongsTo(Video::class);
