@@ -30,7 +30,7 @@ Route::get('questions/{videoId}', [VideoController::class, 'questions'])
 //questionController
 Route::get('question/{id}', [QuestionController::class, 'getById']);
 
-Route::post('question/checkAnswers/{id}', [QuestionController::class, 'checkAnswers']);
+Route::post('question/checkAnswers/', [QuestionController::class, 'checkAnswers']);
 
 Route::post('question', [QuestionController::class, 'storeQuestion'])
     ->middleware(['auth:sanctum', 'isCreator', 'verified']);
@@ -45,10 +45,17 @@ Route::get('score/', [QuestionController::class, 'score']);
 Route::get('user', [UserController::class, 'index'])
     ->middleware('auth:sanctum');
 
+Route::post('username', [UserController::class, 'changeUsername'])
+    ->middleware('auth:sanctum', 'verified');
+
+Route::get('ranking', [UserController::class, 'ranking'])
+    ->middleware('auth:sanctum');
+
+
 //admin
 
 Route::get('allowed-email', [EmailController::class, 'getAllowedEmail'])
-    ->middleware(['auth:sanctum', 'isCreator', 'verified']);
+    ->middleware(['auth:sanctum', 'isAdmin', 'verified']);
 
 Route::post('allowed-email', [EmailController::class, 'setAllowedEmail'])
     ->middleware(['auth:sanctum', 'isAdmin', 'verified']);
@@ -59,7 +66,7 @@ Route::delete('allowed-email/{id}', [EmailController::class, 'deleteAllowedEmail
 // rights
 
 Route::get('users', [UserController::class, 'getAll'])
-    ->middleware(['auth:sanctum', 'isCreator', 'verified']);
+    ->middleware(['auth:sanctum', 'isAdmin', 'verified']);
 
 Route::post('makeEditor/{id}', [UserController::class, 'makeEditor'])
     ->middleware(['auth:sanctum', 'isAdmin', 'verified']);

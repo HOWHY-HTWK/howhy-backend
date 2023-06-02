@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Validation\Rule;
 
 class UserController extends Controller
 {
@@ -21,30 +22,44 @@ class UserController extends Controller
         return Auth::user();
     }
 
+    public function changeUsername()
+    {
+        request()->validate([
+            'name' => [
+                'required',
+                'min:5',
+                'max:20',
+                Rule::unique(User::class),
+            ],
+        ]);
+
+        $user = Auth::user();
+        $user->name = request('name');
+        $user->save();
+
+        return Auth::user();
+    }
+
     public function getAll()
     {
         return User::all();
     }
 
-    public function makeEditor($id){
+    public function ranking()
+    {
+        $users = User::orderBy('score', 'desc')
+            ->take(5)
+            ->get();
+
+        return $users;
+    }
+
+    public function makeEditor($id)
+    {
         $user = User::find($id);
         $user->role = 'creator';
         $user->save();
 
-        return true;
-    }
-
-    //TODO not done
-    public function userLogin()
-    {
-        return [
-            'username' => request('username'),
-            'role' => 'user',
-        ];
-    }
-
-    public function userSignUp()
-    {
         return true;
     }
 }

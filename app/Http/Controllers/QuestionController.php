@@ -21,14 +21,15 @@ class QuestionController extends Controller
     }
 
     //check the users answers, store the answer and increase user score if answer is correct
-    public function checkAnswers($id)
+    public function checkAnswers()
     {
         $success = false;
         $user = Auth::user();
         request()->validate([
+            'questionId' => 'required',
             'answers' => 'required'
         ]);
-        $question = Question::find($id);
+        $question = Question::find(request('questionId'));
 
         if ($question->correctAnswers == request('answers')) {
             $success = true;
@@ -42,9 +43,9 @@ class QuestionController extends Controller
                 // do nothing because question has already bin answered correctly before
             } else {
                 $question->users()->attach($user, ['correct' => $success]);
-                if($success){
+                if ($success) {
                     $user->score = $user->score + 100;
-                    if($this->videoCompleteWithoutWrongAnswers($question, $user)){
+                    if ($this->videoCompleteWithoutWrongAnswers($question, $user)) {
                         $user->score = $user->score + 100;
                     }
                     $user->save();
@@ -59,6 +60,7 @@ class QuestionController extends Controller
         ];
     }
 
+    //user gets 100 bonus points when completing video without errors
     private function videoCompleteWithoutWrongAnswers($question, $user)
     {
         $questions = $question->video->questions;
@@ -87,45 +89,55 @@ class QuestionController extends Controller
             'answers' => 'required',
         ]);
 
+        $videoId = request('videoId');
+        $id = request('id');
         $video = null;
 
-        //find video for old question
-        if (request('video_id') != null) {
+        if (request('video_id') != null) {      //find video for old question
             $video = Video::find(request('video_id'));
         }
 
-        //find video for new question
-        if (request('videoId') != null) {
-            $video =  Video::where('videoId', request('videoId'))->first();
+        if ($videoId != null) {           //find video for new question
+            $video = Video::where('videoId', $videoId)->first();
         }
 
-        //if video is not yet in the database make a new entry
-        if ($video == null) {
+        if($video == null) {           //if video is not yet in the database make a new entry
             $video = new Video([
-                'videoId' => request('videoId'),
-                'user_id' => request('creatorId'),
+                'videoId' => $videoId,
             ]);
             $user = Auth::user();
             $video->user()->associate($user);
             $video->save();
         }
 
-        //if question already exists softdelete to be able to retrieve old data
-        if (request('id')) {
-            Question::find(request('id'))->delete();
+        if ($id) { //if question already exists create a copy of old data and update
+            $question = Question::find($id);
+            $copy = $question->replicate();
+            $copy->parent_id = $question->id;
+            $copy->save();
+            $copy->delete();
+
+            //update question data
+            $question->questionText = request('questionText');
+            $question->timecode = request('timecode');
+            $question->data = request('answers');
+            $question->type = request('type');
+            $question->correctAnswers = request('correctAnswers');
+            $question->answers = request('answers');
+            $question->save();
+
+        } else { //if question is new create a new Question
+            $question =  new Question([
+                'questionText' => request('questionText'),
+                'timecode' => request('timecode'),
+                'data' => request('answers'),
+                'type' => request('type'),
+                'correctAnswers' => request('correctAnswers'),
+                'answers' => request('answers'),
+            ]);
+            $question->video_id = $video->id;
+            $question->save();
         }
-
-        $question =  new Question([
-            'questionText' => request('questionText'),
-            'timecode' => request('timecode'),
-            'data' => request('answers'),
-            'type' => request('type'),
-            'correctAnswers' => request('correctAnswers'),
-            'answers' => request('answers'),
-        ]);
-
-        $question->video()->associate($video);
-        $question->save();
 
         return [
             'success' => true,
