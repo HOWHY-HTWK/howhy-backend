@@ -5,17 +5,12 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasOne;
-use Illuminate\Database\Eloquent\Relations\Pivot;
 
-class QuestionUser extends Pivot
+class PrizeUser extends Model
 {
     protected $table = 'question_user';
 
-    protected $fillable = ['correct'];
-
-    protected $casts = [
-        'correct' => 'boolean',
-    ];
+    protected $fillable = ['hash', 'expires', 'redeemed'];
 
     public function user(): HasOne
     {
@@ -24,7 +19,7 @@ class QuestionUser extends Pivot
 
     public function question(): HasOne
     {
-        return $this->hasOne(Question::class);
+        return $this->hasOne(Prize::class);
     }
     use HasFactory;
 }

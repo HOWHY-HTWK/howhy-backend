@@ -1,6 +1,5 @@
 <?php
 
-use App\Models\Question;
 use App\Models\User;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
@@ -13,11 +12,14 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('question_user', function (Blueprint $table) {
+        Schema::create('prizes', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
-            $table->foreignIdFor(User::class);
-            $table->foreignIdFor(Question::class);
+            $table->string('title');
+            $table->string('date');
+            $table->string('place');
+            $table->string('timeframe');
+            $table->bigInteger('points');
         });
     }
 
@@ -26,6 +28,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('question_user');
+        Schema::dropIfExists('prizes');
     }
 };

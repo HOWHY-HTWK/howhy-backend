@@ -3,10 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Question;
-use App\Models\User;
 use App\Models\Video;
-use App\Models\VideoData;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class VideoController extends Controller
@@ -67,7 +64,7 @@ class VideoController extends Controller
     {
         $video = Video::where('videoId', $videoId)->first();
 
-        if($video){
+        if ($video) {
             $questions = $video->questions()->get();
             return $questions;
         } else {
@@ -92,5 +89,4 @@ class VideoController extends Controller
             }
         }
     }
-
 }

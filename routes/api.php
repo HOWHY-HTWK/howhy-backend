@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\EmailController;
+use App\Http\Controllers\PrizeController;
 use App\Http\Controllers\QuestionController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\VideoController;
@@ -70,6 +71,18 @@ Route::get('users', [UserController::class, 'getAll'])
 
 Route::post('makeEditor/{id}', [UserController::class, 'makeEditor'])
     ->middleware(['auth:sanctum', 'isAdmin', 'verified']);
+
+// prizes
+
+Route::get('prizes', [PrizeController::class, 'getPrizes'])
+    ->middleware(['auth:sanctum', 'verified']);
+
+Route::get('code/{id}', [PrizeController::class, 'getCode'])
+    ->middleware(['auth:sanctum', 'verified']);
+
+Route::post('prize', [PrizeController::class, 'storePrize'])
+    ->middleware(['auth:sanctum', 'isAdmin', 'verified']);
+
 
 //scripts to change database
 
