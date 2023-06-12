@@ -4,8 +4,13 @@ namespace App\Http\Controllers;
 
 use App\Http\Middleware\Authenticate;
 use App\Models\Prize;
+use App\Models\PrizeUser;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Stringable;
+use Illuminate\Support\Str;
+
 
 class PrizeController extends Controller
 {
@@ -25,10 +30,24 @@ class PrizeController extends Controller
 
     public function getCode($id)
     {
+
+        $currentTime = Carbon::now();
+        $expires = $currentTime->addMinutes(2);
+
         $user = Auth::user();
         $prize = Prize::find($id);
 
-        $prize->users()->attach($user);
+        $code = Str::random(32) . bin2hex(random_bytes(16));
+
+        $prize->users()->attach($user, [
+            'hash' => $code,
+            'expires' => $expires,
+            'redeemed' => false
+        ]);
+
+        return [
+            "code" => $code
+        ];
     }
 
     public function storePrize()
@@ -52,6 +71,14 @@ class PrizeController extends Controller
 
         return [
             'success' => true,
+        ];
+    }
+
+    public function checkCode($code)
+    {
+        $pivot = PrizeUser::where('hash', $code)->first();
+        return [
+            "prize" => $pivot->prize()
         ];
     }
 }

@@ -84,6 +84,10 @@ Route::post('prize', [PrizeController::class, 'storePrize'])
     ->middleware(['auth:sanctum', 'isAdmin', 'verified']);
 
 
+Route::get('checkCode/{code}', [PrizeController::class, 'checkCode']);
+
+
+
 //scripts to change database
 
 // Route::get('transfer', [VideoController::class, 'transferScript']);

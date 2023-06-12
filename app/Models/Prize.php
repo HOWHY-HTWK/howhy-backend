@@ -16,7 +16,7 @@ class Prize extends Model
 
     public function users(): BelongsToMany
     {
-        return $this->belongsToMany(User::class)->using(PrizeUsers::class)->withPivot('hash', 'expires')->withTimestamps();
+        return $this->belongsToMany(User::class)->using(PrizeUser::class)->withPivot('hash', 'expires')->withTimestamps();
     }
 
     use HasFactory;
