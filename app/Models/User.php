@@ -25,7 +25,7 @@ class User extends Authenticatable implements MustVerifyEmail
         'role',
     ];
 
-    protected $attributes =[
+    protected $attributes = [
         'score' => 0,
     ];
 
@@ -51,5 +51,10 @@ class User extends Authenticatable implements MustVerifyEmail
     public function questions(): BelongsToMany
     {
         return $this->belongsToMany(Question::class)->using(QuestionUser::class)->withPivot('correct')->withTimestamps();
+    }
+
+    public function prizes(): BelongsToMany
+    {
+        return $this->belongsToMany(Prize::class)->using(PrizeUser::class)->withPivot('hash', 'expires')->withTimestamps();
     }
 }
