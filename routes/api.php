@@ -83,9 +83,9 @@ Route::get('code/{id}', [PrizeController::class, 'getCode'])
 Route::post('prize', [PrizeController::class, 'storePrize'])
     ->middleware(['auth:sanctum', 'isAdmin', 'verified']);
 
-
 Route::get('checkCode/{code}', [PrizeController::class, 'checkCode']);
 
+Route::get('redeemCode/{code}', [PrizeController::class, 'redeemCode']);
 
 
 //scripts to change database
