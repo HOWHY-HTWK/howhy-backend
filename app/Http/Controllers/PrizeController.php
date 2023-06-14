@@ -20,9 +20,11 @@ class PrizeController extends Controller
         $prizes = Prize::all();
         $prizesWithUserData = $prizes->map(function ($prize) {
             $user = Auth::user();
+            $pivot = PrizeUser::where('user_id', $user->id)->where('prize_id', $prize->id)->first();
+            $prize['redeemed'] = $pivot ? $pivot->redeemed : false;
             $score =  $user->score;
-            $prize['valid'] = $score >= $prize->points;
-            $prize['redeemed'] = false;
+
+            $prize['valid'] = $prize->redeemed != true ? $score >= $prize->points : false;
             return $prize;
         });
         return $prizes;
@@ -88,9 +90,29 @@ class PrizeController extends Controller
     public function checkCode($code)
     {
         $pivot = PrizeUser::where('hash', $code)->first();
-        $prize = $pivot->prize();
+
+        $prize = Prize::find($pivot->prize_id);
         return [
             "prize" => $prize,
+            "redeemed" => $pivot->redeemed,
+        ];
+    }
+
+    public function redeemCode($code)
+    {
+        // request()->validate([
+        //     'code' => 'required',
+        // ]);
+
+        $pivot = PrizeUser::where('hash', $code)->first();
+        $pivot->redeemed = true;
+        $pivot->save();
+
+        $prize = Prize::find($pivot->prize_id);
+
+        return [
+            "prize" => $prize,
+            "redeemed" => $pivot->redeemed,
         ];
     }
 }
