@@ -24,7 +24,7 @@ class PrizeController extends Controller
             $prize['redeemed'] = $pivot ? $pivot->redeemed : false;
             $score =  $user->score;
 
-            $prize['valid'] = $prize->redeemed != true ? $score >= $prize->points : false;
+            $prize['valid'] = $score >= $prize->points;
             return $prize;
         });
         return $prizes;
