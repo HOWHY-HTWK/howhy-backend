@@ -62,4 +62,14 @@ class UserController extends Controller
 
         return true;
     }
+
+    public function deleteAccount()
+    {
+        $user = User::find(Auth::user()->id);
+        $user->delete();
+
+        return [
+            'success' => true
+        ];
+    }
 }

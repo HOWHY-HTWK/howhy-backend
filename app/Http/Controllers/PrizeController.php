@@ -6,6 +6,7 @@ use App\Http\Middleware\Authenticate;
 use App\Models\Prize;
 use App\Models\PrizeUser;
 use Carbon\Carbon;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Stringable;
@@ -22,12 +23,18 @@ class PrizeController extends Controller
             $user = Auth::user();
             $pivot = PrizeUser::where('user_id', $user->id)->where('prize_id', $prize->id)->first();
             $prize['redeemed'] = $pivot ? $pivot->redeemed : false;
-            $score =  $user->score;
 
-            $prize['valid'] = $score >= $prize->points;
+
+            $prize['valid'] = $this->isValid($user, $prize);
             return $prize;
         });
         return $prizes;
+    }
+
+    private function isValid($user, $prize)
+    {
+        $score =  $user->score;
+        return $score >= $prize->points;
     }
 
     public function getCode($id)
@@ -46,9 +53,13 @@ class PrizeController extends Controller
         $code = Str::random(32) . bin2hex(random_bytes(16));
 
         if ($pivot) {
-            $pivot->hash = $code;
-            $pivot->expires = $expires;
-            $pivot->save();
+            if ($pivot->redeemed) {
+                throw new ModelNotFoundException("Code wurde schon eingelöst!");
+            } else {
+                $pivot->hash = $code;
+                $pivot->expires = $expires;
+                $pivot->save();
+            }
         } else {
             $prize->users()->attach($user, [
                 'hash' => $code,
@@ -57,10 +68,13 @@ class PrizeController extends Controller
             ]);
         }
 
-
-        return [
-            "code" => $code
-        ];
+        if ($this->isValid($user, $prize)) {
+            return [
+                "code" => $code
+            ];
+        } else {
+            throw new ModelNotFoundException("Du hast noch nicht genug Punkte!");
+        }
     }
 
     public function storePrize()
@@ -100,10 +114,6 @@ class PrizeController extends Controller
 
     public function redeemCode($code)
     {
-        // request()->validate([
-        //     'code' => 'required',
-        // ]);
-
         $pivot = PrizeUser::where('hash', $code)->first();
         $pivot->redeemed = true;
         $pivot->save();

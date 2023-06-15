@@ -52,6 +52,9 @@ Route::post('username', [UserController::class, 'changeUsername'])
 Route::get('ranking', [UserController::class, 'ranking'])
     ->middleware('auth:sanctum');
 
+Route::get('deleteUser', [UserController::class, 'deleteAccount'])
+    ->middleware('auth:sanctum');
+
 
 //admin
 
