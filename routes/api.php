@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\EmailController;
 use App\Http\Controllers\PrizeController;
+use App\Http\Controllers\PrizeMessageController;
 use App\Http\Controllers\QuestionController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\VideoController;
@@ -89,6 +90,10 @@ Route::post('prize', [PrizeController::class, 'storePrize'])
 Route::get('checkCode/{code}', [PrizeController::class, 'checkCode']);
 
 Route::get('redeemCode/{code}', [PrizeController::class, 'redeemCode']);
+
+Route::get('prizes/message/', [PrizeMessageController::class, 'getMessage']);
+
+Route::post('prizes/message/', [PrizeMessageController::class, 'setMessage']);
 
 
 //scripts to change database
