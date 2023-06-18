@@ -81,17 +81,14 @@ class PrizeController extends Controller
     {
         request()->validate([
             'title' => 'required',
-            'date' => 'required',
-            'place' => 'required',
-            'timeframe' => 'required',
             'points' => 'required',
         ]);
 
         $prize =  new Prize([
             'title' => request('title'),
-            'date' => request('date'),
-            'place' => request('place'),
-            'timeframe' => request('timeframe'),
+            'date' => '',
+            'place' => '',
+            'timeframe' => '',
             'points' => request('points'),
         ]);
         $prize->save();
@@ -99,6 +96,29 @@ class PrizeController extends Controller
         return [
             'success' => true,
         ];
+    }
+
+    public function updatePrize($id)
+    {
+        request()->validate([
+            'title' => 'required',
+            'points' => 'required',
+        ]);
+
+        $prize = Prize::find($id);
+        $prize->title = request('title');
+        $prize->points = request('points');
+        $prize->save();
+
+        return $prize;
+    }
+
+    public function deletePrize($id)
+    {
+        $prize = Prize::find($id);
+        $prize->delete();
+
+        return true;
     }
 
     public function checkCode($code)

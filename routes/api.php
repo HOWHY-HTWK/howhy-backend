@@ -87,6 +87,12 @@ Route::get('code/{id}', [PrizeController::class, 'getCode'])
 Route::post('prize', [PrizeController::class, 'storePrize'])
     ->middleware(['auth:sanctum', 'isAdmin', 'verified']);
 
+Route::post('prize/{id}', [PrizeController::class, 'updatePrize'])
+    ->middleware(['auth:sanctum', 'isAdmin', 'verified']);
+
+Route::delete('prize/{id}', [PrizeController::class, 'deletePrize'])
+    ->middleware(['auth:sanctum', 'isAdmin', 'verified']);
+
 Route::get('checkCode/{code}', [PrizeController::class, 'checkCode']);
 
 Route::get('redeemCode/{code}', [PrizeController::class, 'redeemCode']);
