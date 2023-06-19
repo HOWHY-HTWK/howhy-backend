@@ -56,7 +56,7 @@ services:
         - '-p${DB_PASSWORD}'
       retries: 3
       timeout: 5s
-      restart: unless-stopped
+    restart: unless-stopped
   # remove in production
   # mailpit:
   #   image: 'axllent/mailpit:latest'
