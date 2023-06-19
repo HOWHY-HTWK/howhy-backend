@@ -32,7 +32,6 @@ services:
       - howhy
     depends_on:
       - mariadb
-      - mailpit
   mariadb:
     image: 'mariadb:10'
     ports:
