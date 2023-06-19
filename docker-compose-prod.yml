@@ -1,84 +1,73 @@
 version: '3.7'
 services:
-    # proxy:
-    #     container_name: proxy
-    #     image: nginx
-    #     ports:
-    #         - 80:80
-    #         # - 443:443
-    #     # extra_hosts:
-    #     #     - 'host.docker.internal:host-gateway'
-    #     volumes:
-    #         - ./nginx/proxy/conf.d:/etc/nginx/conf.d/
-    #     networks:
-    #         - howhy
-    nginx:
-        image: nginx:alpine
-        working_dir: /var/www
-        restart: unless-stopped
-        tty: true
-        ports:
-            - "8000:80"
-            # - "443:443"
-        volumes:
-            - ./:/var/www
-            - ./nginx:/etc/nginx/conf.d/
-        networks:
-            - howhy
-        depends_on:
-            - app
-    app:
-        build:
-            args:
-                user: someuser
-                uid: '${UID}'
-            context: ./
-            dockerfile: Dockerfile
-        image: howhy-backend
-        restart: unless-stopped
-        tty: true
-        working_dir: /var/www
-        volumes:
-            - ./:/var/www
-        networks:
-            - howhy
-        depends_on:
-            - mariadb
-            - mailpit
-    mariadb:
-        image: 'mariadb:10'
-        ports:
-            - '${FORWARD_DB_PORT:-3306}:3306'
-        environment:
-            MYSQL_ROOT_PASSWORD: '${DB_PASSWORD}'
-            MYSQL_ROOT_HOST: '%'
-            MYSQL_DATABASE: '${DB_DATABASE}'
-            MYSQL_USER: '${DB_USERNAME}'
-            MYSQL_PASSWORD: '${DB_PASSWORD}'
-            MYSQL_ALLOW_EMPTY_PASSWORD: 'yes'
-        volumes:
-            - './dbdata:/var/lib/mysql'
-        networks:
-            - howhy
-        healthcheck:
-            test:
-                - CMD
-                - mysqladmin
-                - ping
-                - '-p${DB_PASSWORD}'
-            retries: 3
-            timeout: 5s
-    # remove in production
-    mailpit:
-        image: 'axllent/mailpit:latest'
-        ports:
-            - '${FORWARD_MAILPIT_PORT:-1025}:1025'
-            - '${FORWARD_MAILPIT_DASHBOARD_PORT:-8025}:8025'
-        networks:
-            - howhy
+  nginx:
+    image: nginx:alpine
+    working_dir: /var/www
+    restart: unless-stopped
+    tty: true
+    ports:
+      - "8000:80"
+      # - "443:443"
+    volumes:
+      - ./:/var/www
+      - ./nginx:/etc/nginx/conf.d/
+    networks:
+      - howhy
+    depends_on:
+      - app
+  app:
+    build:
+      args:
+        user: someuser
+        uid: '${UID}'
+      context: ./
+      dockerfile: Dockerfile
+    image: howhy-backend
+    restart: unless-stopped
+    tty: true
+    working_dir: /var/www
+    volumes:
+      - ./:/var/www
+    networks:
+      - howhy
+    depends_on:
+      - mariadb
+      - mailpit
+  mariadb:
+    image: 'mariadb:10'
+    ports:
+      - '${FORWARD_DB_PORT:-3306}:3306'
+    environment:
+      MYSQL_ROOT_PASSWORD: '${DB_PASSWORD}'
+      MYSQL_ROOT_HOST: '%'
+      MYSQL_DATABASE: '${DB_DATABASE}'
+      MYSQL_USER: '${DB_USERNAME}'
+      MYSQL_PASSWORD: '${DB_PASSWORD}'
+      MYSQL_ALLOW_EMPTY_PASSWORD: 'yes'
+    volumes:
+      - './dbdata:/var/lib/mysql'
+    networks:
+      - howhy
+    healthcheck:
+      test:
+        - CMD
+        - mysqladmin
+        - ping
+        - '-p${DB_PASSWORD}'
+      retries: 3
+      timeout: 5s
+      restart: unless-stopped
+  # remove in production
+  # mailpit:
+  #   image: 'axllent/mailpit:latest'
+  #   ports:
+  #     - '${FORWARD_MAILPIT_PORT:-1025}:1025'
+  #     - '${FORWARD_MAILPIT_DASHBOARD_PORT:-8025}:8025'
+  #   networks:
+  #     - howhy
 networks:
-    howhy:
-        driver: bridge
+  howhy:
+    driver: bridge
 volumes:
-    sail-mariadb:
-        driver: local
+  sail-mariadb:
+    driver: local
