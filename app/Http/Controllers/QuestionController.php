@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Question;
+use App\Models\QuestionUser;
 use App\Models\User;
 use App\Models\Video;
 use GrahamCampbell\ResultType\Success;
@@ -101,7 +102,7 @@ class QuestionController extends Controller
             $video = Video::where('videoId', $videoId)->first();
         }
 
-        if($video == null) {           //if video is not yet in the database make a new entry
+        if ($video == null) {           //if video is not yet in the database make a new entry
             $video = new Video([
                 'videoId' => $videoId,
             ]);
@@ -125,7 +126,6 @@ class QuestionController extends Controller
             $question->correctAnswers = request('correctAnswers');
             $question->answers = request('answers');
             $question->save();
-
         } else { //if question is new create a new Question
             $question =  new Question([
                 'questionText' => request('questionText'),
@@ -163,5 +163,11 @@ class QuestionController extends Controller
         return [
             'score' => $score,
         ];
+    }
+
+    public function getUsage()
+    {
+        $questionUser = QuestionUser::all();
+        return $questionUser;
     }
 }
