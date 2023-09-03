@@ -101,6 +101,9 @@ Route::get('prizes/message/', [PrizeMessageController::class, 'getMessage']);
 
 Route::post('prizes/message/', [PrizeMessageController::class, 'setMessage']);
 
+//statistics
+Route::get('usage/', [QuestionController::class, 'getUsage'])
+    ->middleware(['auth:sanctum', 'isAdmin', 'verified']);
 
 //scripts to change database
 
