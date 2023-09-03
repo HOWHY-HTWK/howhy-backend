@@ -112,3 +112,9 @@ server {
 }
 
 ```
+
+## misc
+
+### Trademark
+
+"HOWHY" is a registered Trademark in Germany. Please beware of that if you are using this Project.
