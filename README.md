@@ -1,58 +1,80 @@
-
 # HOWHY Backend
 
-The Howhy Backend is a Laravel Backend with MariaDB Database.
+This project is part of the HOWHY project. It is the backend for the HOWHY project. The frontend can be
+found [here](https://github.com/HOWHY-HTWK/howhy-frontend/tree/development).
 
-## Introduction
+## Project Description
 
-Howhy is a React Webapp with a Laravel Backend, that can display educational Videos with interactive questions. The Progress of the Users can be stored and the users can unlock prizes. The Videos a stored on a third party Platform.
+HOWHY is a web application that displays educational videos and lets the user answer interactive questions. It is
+intended to add playful elements to learning and thus increase th students' motivation to do so. Through a ranking
+system, users can collect points and win prizes for certain promotions.
 
-## Instructions to run this project
+The educational videos are stored on a third party
+platform and is not maintained by the developers of this project.
 
-There are two ways to run this project. Either locally or with Docker in combination with the CLI "Sail"
+## Used Technologies
 
-### Docker
+The HOWHY backend is built with the Laravel framework. The database consists of a MariaDB database and can be managed
+via MySQL. 
 
-- run `cp .env.example .env.`
-- set the database password and the admin password in the .env file
-- add the laravel sail alias `alias sail='[ -f sail ] && sh sail || sh vendor/bin/sail'`
-- add the line to  ~/.zshrc or ~/.bashrc
-- `sail up` to run the project
+The backend is built as a REST API and provides endpoints for the frontend to interact with.
 
-The first time you run the project:
+## Installation
 
-- Run `sail artisan migrate` to create all nessecary database tables
-- run `sail artisan db:seed` to make the first user with admin rights
-- If you run the [frontend](https://github.com/HOWHY-HTWK/howhy-frontend/tree/development) you can log in there with '<admin@admin.net>' and your previously created admin password
+### Prerequisites
 
-### locally
+- Make sure you have `Docker` installed on your machine.
+- Make sure you have `MySQL` installed on your machine.
+- Make sure you have `composer` installed on your machine.
 
-- Run `composer install`
-- run `cp .env.example .env.`
-- set the database password in the .env file and in the docker compose file
-- start the database with `docker compose up`
-- Run `php artisan key:generate`
-- Run `php artisan migrate`
-- set the admin password in the .env file
-- Run `php artisan db:seed` to generate the admin user
-- Run `php artisan serve`
+### Initial Setup
 
-- If you run the [frontend](https://github.com/HOWHY-HTWK/howhy-frontend/tree/development) you can log in there with '<admin@admin.net>' and your admin password
+- Set up the environment file `.env` with the necessary information.
+    - Run `cp .env.example .env` to copy the example environment file.
+    - In the `.env` file set a database password.
+    - In the `.env` file set a password for the admin user.
+- Run `composer install` to install all dependencies.
 
-### Deploy with Docker
+There are two ways to run this project. Either manually via Docker and Artisan CLI or with the Sail CLI.
 
-- run `cp .env.example .env.`
-- set the database password, the admin password and other properties in the .env file
-- change the uid in the docker-compose-prod.yml file to the uid of the current user in the host system
-- `docker compose -f docker-compose-prod.yml up` to run the project
-- Run `docker exec howhy-backend-app-1 composer install` to install all dependencies
-- Run `docker exec howhy-backend-app-1 php artisan key:generate`
-- Run `docker exec howhy-backend-app-1 php artisan migrate` to create all nessecary database tables
-- run `docker exec howhy-backend-app-1 artisan db:seed` to make the first user with admin rights
+### Sail
+
+- Add the laravel sail alias `alias sail='[ -f sail ] && sh sail || sh vendor/bin/sail'`.
+- Add the line to your export file (e.g. ~/.zshrc or ~/.bashrc) to make sail globally accessible.
+- Run `sail artisan key:generate` to generate an access key.
+- Run `sail artisan migrate` to create all necessary database tables.
+- run `sail artisan db:seed` to create an initial user with admin rights.
+- run `sail up` to start the server.
+
+### Manual Setup
+
+- Set your initially chosen database password in the `docker-compose.yml` file.
+- Start the database with `docker compose up`.
+- Run `php artisan key:generate` to generate an access key.
+- Run `php artisan migrate` to create all necessary database tables.
+- Run `php artisan db:seed` to create an initial user with admin rights.
+- Run `php artisan serve` to start the server.
+
+## Usage
+
+When starting the [HOWHY frontend](https://github.com/HOWHY-HTWK/howhy-frontend/tree/development) you can log in to the
+UI with the user `admin@admin.net` and your previously set admin password.
+
+## Deployment with Docker
+
+- Go through the initial setup (see above).
+- change the uid in the `docker-compose-prod.yml` file to the uid of the current user in the host system
+- Run `docker compose -f docker-compose-prod.yml up` to start the server in production mode.
+- Run `docker exec howhy-backend-app-1 composer install` to install all dependencies.
+- Run `docker exec howhy-backend-app-1 php artisan key:generate` to generate an access key.
+- Run `docker exec howhy-backend-app-1 php artisan migrate` to create all necessary database tables.
+- run `docker exec howhy-backend-app-1 artisan db:seed` to create an initial user with admin rights.
 
 ### Server Configuration
 
-To run both Frontend and Backend on a production Server an additional reverse-proxy is needed. The Imprint and Privacy Statement must also be provided seperatly. The Configuration must look something like this:
+To run both th HOHWY Frontend and HOWHY Backend on a production server an additional reverse-proxy is needed. The
+Imprint and Privacy
+Statement must also be provided separately. The configuration must look something like this:
 
 ```
 server {
@@ -113,8 +135,6 @@ server {
 
 ```
 
-## misc
+## Trademark
 
-### Trademark
-
-"HOWHY" is a registered Trademark in Germany. Please beware of that if you are using this Project.
+"HOWHY" is a registered Trademark in Germany. Please beware of that if you are make use of this project.
