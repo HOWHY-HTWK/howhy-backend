@@ -56,9 +56,9 @@ There are two ways to run this project. Either manually via Docker or with the S
 
 ### Windows
 If you are using Windows with WSL and Ubuntu there are some specifics that can resolve in several problems.
-- Sometimes it can be necessary to install additional packages so that composer creates the vendor directory: 'sudo apt-get install php-xml'. After that continue with 'composer install'
-- The pathstructure in Windows is different: './vendor/bin/sail'
-- Look out for possible port clashes. Stop all running servers that may be in the way. In the worst case scenario you can manually change the ports in the '.env' files in the front- and backend.
+- Sometimes it can be necessary to install additional packages so that composer creates the vendor directory: `sudo apt-get install php-xml`. After that continue with `composer install`
+- The pathstructure in Windows is different: `./vendor/bin/sail`
+- Look out for possible port clashes. Stop all running servers that may be in the way. In the worst case scenario you can manually change the ports in the `.env` files in the front- and backend.
 
 ## Usage
 
